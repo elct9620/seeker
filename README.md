@@ -5,10 +5,12 @@ The 2D ADV Game framework written in C++ and mruby.
 
 Create a build directory for cmake
 
-`mkdir build && cd build`
+`> mkdir build && cd build`
 
 And run cmake to generate `Makefile`
-`cmake ..`
 
-And ruby `make` to create the binary
-`make`
+`> cmake ..`
+
+And run make to create the binary
+
+`> make`
