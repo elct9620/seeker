@@ -1,0 +1,28 @@
+require "magica/build"
+
+# Define default toolchain
+toolchain :gcc
+
+# Define Build Task
+# build :main, {clean: true}
+build :debug do
+  define :debug
+  dynamic_library :sdl2
+
+  dependency :mruby do
+    source "git@github.com:mruby/mruby.git"
+    version "1.2.0"
+    command "./minirake"
+
+    install_dir "#{@dir}/build/host/lib"
+    static_library "libmruby.a", "libmruby_core.a"
+  end
+
+  exe_name "Debug"
+end
+
+task :run => "build:debug" do
+  # Execute last build file
+  sh exefile
+end
+

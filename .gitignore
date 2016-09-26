@@ -30,4 +30,5 @@
 
 build/
 tmp/
+bin/
 .ycm_extra_conf.pyc
