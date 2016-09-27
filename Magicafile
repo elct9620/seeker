@@ -1,5 +1,7 @@
 require "magica/build"
 
+VERSION = "0.1.0"
+
 # Define default toolchain
 toolchain :gcc
 
@@ -7,6 +9,8 @@ toolchain :gcc
 # build :main, {clean: true}
 build :debug do
   define :debug
+  define 'VERSION=\"%{version}\"' % {version: VERSION}
+
   dynamic_library :sdl2
 
   flag "-lstdc++"
