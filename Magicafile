@@ -9,6 +9,8 @@ build :debug do
   define :debug
   dynamic_library :sdl2
 
+  flag "-lstdc++"
+
   dependency :mruby do
     source "git@github.com:mruby/mruby.git"
     version "1.2.0"
@@ -23,6 +25,6 @@ end
 
 task :run => "build:debug" do
   # Execute last build file
-  sh exefile
+  sh exefile, verbose: false
 end
 
