@@ -1,15 +1,20 @@
 #include <SDL2/SDL.h>
 
+#include "framework.h"
+
 int main(int, char**) {
-  if( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
+
+  // Bootstrap SDL
+  if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0 ) {
     return 1;
   }
 
-  SDL_Window *win = SDL_CreateWindow("Seeker", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
-  if(win == NULL) {
-    SDL_DestroyWindow(win);
+  Window window;
+
+  if(window.create("Seeker") == false) {
+    window.destroy();
     SDL_Quit();
-    return 1;
+     return 1;
   }
 
   bool quit = false;

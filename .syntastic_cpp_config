@@ -1,0 +1,5 @@
+-Iinclude
+-I../include
+
+-DDEBUG
+-DVERSION="1.0.0"
