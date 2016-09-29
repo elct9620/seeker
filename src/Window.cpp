@@ -41,7 +41,7 @@ bool Window::create(string title, bool hide) {
     return false;
   }
 
-  Logger::Debug("Initialize window with %dx%dpx resolution.", getDisplayWidth(), getDisplayHeight());
+  Logger::Info("Initialize window with %dx%dpx resolution.", getDisplayWidth(), getDisplayHeight());
 
   return true;
 }
