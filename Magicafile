@@ -12,6 +12,7 @@ build :debug do
   define 'VERSION=\"%{version}\"' % {version: VERSION}
 
   dynamic_library :sdl2
+  dynamic_library :SDL2_image
 
   flag "-lstdc++"
 

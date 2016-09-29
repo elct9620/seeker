@@ -10,6 +10,7 @@
 
 using std::string;
 
+class Renderer;
 class Window {
 
   public:
@@ -28,7 +29,6 @@ class Window {
     void destroy();
 
     Renderer* getRenderer();
-
 
   private:
     static SDL_DisplayMode displayMode;

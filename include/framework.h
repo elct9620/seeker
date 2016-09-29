@@ -3,10 +3,12 @@
 #pragma once
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "renderer.h"
 #include "logger.h"
 #include "window.h"
+#include "texture.h"
 
 #ifndef FRAMEWORK_H_
 #define FRAMEWORK_H_

@@ -17,6 +17,13 @@ int main(int, char**) {
      return 1;
   }
 
+  Renderer* renderer = window.getRenderer();
+  Texture texture("../data/avatar.jpg", renderer);
+
+  renderer->clear();
+  texture.draw(100, 100);
+  renderer->render();
+
   bool quit = false;
   SDL_Event ev;
   while(!quit) {
@@ -30,6 +37,8 @@ int main(int, char**) {
       }
     }
   }
+
+  window.destroy();
 
   return 0;
 }

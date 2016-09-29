@@ -7,12 +7,18 @@
 
 #include "framework.h"
 
+class Texture;
 class Renderer {
   public:
     Renderer(SDL_Window* window);
     ~Renderer();
 
-    static int  DEFAULT_RENDERER_DRIVER;
+    static int DEFAULT_RENDERER_DRIVER;
+
+    void createTexture(Texture* texture);
+    void draw(SDL_Texture* texture, int width, int height, int x, int y);
+    void render();
+    void clear();
 
   private:
     SDL_Renderer* renderer;
