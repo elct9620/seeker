@@ -1,6 +1,12 @@
 // Copyright 2016 Zheng Xian Qiu
 
+#pragma once
+
+#ifndef WINDOW_H_
+#define WINDOW_H_
+
 #include <string>
+#include "framework.h"
 
 using std::string;
 
@@ -8,6 +14,7 @@ class Window {
 
   public:
     Window();
+    ~Window();
 
     // Display Information
     static int DISPLAY_INDEX;
@@ -20,8 +27,14 @@ class Window {
     bool create(string title, bool hide = false);
     void destroy();
 
+    Renderer* getRenderer();
+
+
   private:
     static SDL_DisplayMode displayMode;
     static bool displayModeLoaded;
     SDL_Window *currentWindow;
+    Renderer* renderer;
 };
+
+#endif

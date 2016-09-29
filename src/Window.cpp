@@ -1,8 +1,14 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "framework.h"
+#include "window.h"
 
 Window::Window() {
+}
+
+Window::~Window() {
+  SDL_DestroyWindow(currentWindow);
+
+  free(renderer);
 }
 
 // Display Information
@@ -48,4 +54,12 @@ bool Window::create(string title, bool hide) {
 
 void Window::destroy() {
   SDL_DestroyWindow(currentWindow);
+}
+
+Renderer* Window::getRenderer() {
+  if(renderer == NULL) {
+    renderer = new Renderer(currentWindow);
+  }
+
+  return renderer;
 }

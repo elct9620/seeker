@@ -1,7 +1,12 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include <SDL2/SDL_log.h>
+#pragma once
+
+#ifndef LOGGER_H_
+#define LOGGER_H_
+
 #include<string>
+#include "framework.h"
 
 using std::string;
 
@@ -24,3 +29,4 @@ class Logger {
     static void Critical(string format, ...);
 };
 
+#endif
