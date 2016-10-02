@@ -24,7 +24,7 @@ namespace Seeker {
   // Framework API
 
 #ifdef VERSION
-  string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework ";
+  string Framework::DEFAULT_WINDOW_NAME = CONCAT("Seeker Framework ", VERSION);
 #else
   string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework";
 #endif
