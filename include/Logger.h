@@ -19,14 +19,16 @@ using std::string;
                   args);                        \
   va_end(args);
 
-class Logger {
-  public:
-    static void Verbose(string format, ...);
-    static void Debug(string format, ...);
-    static void Info(string format, ...);
-    static void Warn(string format, ...);
-    static void Error(string format, ...);
-    static void Critical(string format, ...);
-};
+namespace Seeker {
+  class Logger {
+    public:
+      static void Verbose(string format, ...);
+      static void Debug(string format, ...);
+      static void Info(string format, ...);
+      static void Warn(string format, ...);
+      static void Error(string format, ...);
+      static void Critical(string format, ...);
+  };
+}
 
 #endif

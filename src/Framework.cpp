@@ -2,6 +2,7 @@
 
 #include "Framework.h"
 
+/*
 Framework::Framework() {
 #ifdef DEBUG
   SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
@@ -14,3 +15,4 @@ Framework* Framework::getInstance() {
 }
 
 Framework* Framework::instance = Framework::getInstance();
+*/

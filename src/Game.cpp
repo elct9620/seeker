@@ -2,6 +2,8 @@
 
 #include "Framework.h"
 
+using namespace Seeker;
+
 int main(int, char**) {
 
   // Bootstrap SDL

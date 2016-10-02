@@ -9,17 +9,3 @@
 #include "Logger.h"
 #include "Window.h"
 #include "Texture.h"
-
-#ifndef FRAMEWORK_H_
-#define FRAMEWORK_H_
-
-class Framework {
-  public:
-    static Framework* getInstance();
-
-  private:
-    Framework();
-    static Framework *instance;
-};
-
-#endif
