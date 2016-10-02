@@ -2,17 +2,56 @@
 
 #include "Framework.h"
 
-/*
-Framework::Framework() {
+namespace Seeker {
+  Framework::Framework() : currentWindow(NULL), currentRenderer(NULL) {
 #ifdef DEBUG
-  SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
+    SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
 #endif
-}
+  }
 
-Framework* Framework::getInstance() {
-  if(instance != NULL) return instance;
-  return new Framework();
-}
+  Framework::~Framework() {
+    free(currentWindow);
+    free(currentRenderer);
+  }
 
-Framework* Framework::instance = Framework::getInstance();
-*/
+  Framework* Framework::getInstance() {
+    if(instance != NULL) return instance;
+    return new Framework();
+  }
+
+  Framework* Framework::instance = Framework::getInstance();
+
+  // Framework API
+
+#ifdef VERSION
+  string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework ";
+#else
+  string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework";
+#endif
+
+  void Framework::bootstrap() {
+    Window* window = new Window;
+    if(window->create(DEFAULT_WINDOW_NAME) == false) {
+      // TODO: Must return exception to alert developer
+      Logger::Error("Bootstrap framework failed!");
+      return;
+    }
+
+    use(window);
+    use(window->getRenderer());
+
+    Logger::Info("Framework is ready!");
+  }
+
+  void Framework::quit() {
+    free(instance);
+  }
+
+  Renderer* Framework::getRenderer() {
+    return currentRenderer;
+  }
+
+  Window* Framework::getWindow() {
+    return currentWindow;
+  }
+}

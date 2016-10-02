@@ -5,7 +5,7 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
-#include "Framework.h"
+#include "Seeker.h"
 
 namespace Seeker {
   class Texture;

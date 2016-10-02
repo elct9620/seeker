@@ -11,20 +11,13 @@ int main(int, char**) {
     return 1;
   }
 
-  Window window;
+  Framework::getInstance()->bootstrap();
 
-  if(window.create("Seeker") == false) {
-    window.destroy();
-    SDL_Quit();
-     return 1;
-  }
+  Texture texture("../data/avatar.jpg");
 
-  Renderer* renderer = window.getRenderer();
-  Texture texture("../data/avatar.jpg", renderer);
-
-  renderer->clear();
+  Framework::getInstance()->getRenderer()->clear();
   texture.draw(100, 100);
-  renderer->render();
+  Framework::getInstance()->getRenderer()->render();
 
   bool quit = false;
   SDL_Event ev;
@@ -40,7 +33,7 @@ int main(int, char**) {
     }
   }
 
-  window.destroy();
+  Framework::quit();
 
   return 0;
 }

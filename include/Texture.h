@@ -6,7 +6,7 @@
 #define TEXTURE_H_
 
 #include <string>
-#include "Framework.h"
+#include "Seeker.h"
 
 using std::string;
 

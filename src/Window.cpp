@@ -3,7 +3,7 @@
 #include "Window.h"
 
 namespace Seeker {
-  Window::Window() {
+  Window::Window() : currentWindow(NULL), renderer(NULL) {
   }
 
   Window::~Window() {

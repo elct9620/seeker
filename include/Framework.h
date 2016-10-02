@@ -2,10 +2,39 @@
 
 #pragma once
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#ifndef FRAMEWORK_H_
+#define FRAMEWORK_H_
 
-#include "Renderer.h"
-#include "Logger.h"
-#include "Window.h"
-#include "Texture.h"
+#include "Seeker.h"
+
+namespace Seeker {
+  class Window;
+  class Renderer;
+
+  class Framework {
+    public:
+      static Framework* getInstance();
+      static void quit();
+
+      static string DEFAULT_WINDOW_NAME;
+
+      inline void use(Window* window) { currentWindow = window; };
+      inline void use(Renderer* renderer) { currentRenderer = renderer; };
+
+      Renderer* getRenderer();
+      Window* getWindow();
+
+      void bootstrap();
+
+    private:
+      static Framework* instance;
+
+      Framework();
+      ~Framework();
+
+      Window* currentWindow;
+      Renderer* currentRenderer;
+  };
+}
+
+#endif

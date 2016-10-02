@@ -3,8 +3,8 @@
 #include "Texture.h"
 
 namespace Seeker {
-  Texture::Texture(string path, Renderer* _renderer) {
-    renderer = _renderer;
+  Texture::Texture(string path, Renderer* _renderer) : texture(NULL), surface(NULL) {
+    renderer = _renderer == NULL ? Framework::getInstance()->getRenderer() : _renderer;
 
     surface = IMG_Load(path.c_str());
 
@@ -15,7 +15,7 @@ namespace Seeker {
       Logger::Error("Failed to load texture, %s", IMG_GetError());
     }
 
-    if(renderer) renderer->createTexture(this);
+    renderer->createTexture(this);
   }
 
   Texture::~Texture() {
