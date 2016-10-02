@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "window.h"
+#include "Window.h"
 
 Window::Window() {
 }

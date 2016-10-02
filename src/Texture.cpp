@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "texture.h"
+#include "Texture.h"
 
 Texture::Texture(string path, Renderer* _renderer) {
   renderer = _renderer;

@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 
-#include "framework.h"
+#include "Framework.h"
 
 int main(int, char**) {
 

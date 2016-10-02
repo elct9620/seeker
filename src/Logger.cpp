@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "logger.h"
+#include "Logger.h"
 
 void Logger::Verbose(string format, ...) {
 	LOG(VERBOSE, format)

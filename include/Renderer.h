@@ -5,7 +5,7 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
-#include "framework.h"
+#include "Framework.h"
 
 class Texture;
 class Renderer {

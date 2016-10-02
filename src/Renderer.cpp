@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "renderer.h"
+#include "Renderer.h"
 
 int Renderer::DEFAULT_RENDERER_DRIVER = -1;
 

@@ -6,7 +6,7 @@
 #define WINDOW_H_
 
 #include <string>
-#include "framework.h"
+#include "Framework.h"
 
 using std::string;
 

@@ -5,10 +5,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "renderer.h"
-#include "logger.h"
-#include "window.h"
-#include "texture.h"
+#include "Renderer.h"
+#include "Logger.h"
+#include "Window.h"
+#include "Texture.h"
 
 #ifndef FRAMEWORK_H_
 #define FRAMEWORK_H_
