@@ -1,16 +1,21 @@
-# seeker
-The 2D ADV Game framework written in C++ and mruby.
+# Seeker
+The 2D ADV Game Framework written in C++ and mruby.
 
-# How to build
+## Requirements
 
-Create a build directory for cmake
+* C++
+* SDL2
+  * SDL Image
+* Ruby ( `gem install magica` )
 
-`> mkdir build && cd build`
+## Usage
 
-And run cmake to generate `Makefile`
+To compile the source code, just run
 
-`> cmake ..`
+>  $ magica
 
-And run make to create the binary
+Compile and run the Game Framework
 
-`> make`
+>  $ magica run
+
+
