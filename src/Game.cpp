@@ -1,16 +1,23 @@
 #include <SDL2/SDL.h>
 
+#include "Framework.h"
+
+using namespace Seeker;
+
 int main(int, char**) {
-  if( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
+
+  // Bootstrap SDL
+  if( SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0 ) {
     return 1;
   }
 
-  SDL_Window *win = SDL_CreateWindow("Seeker", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
-  if(win == NULL) {
-    SDL_DestroyWindow(win);
-    SDL_Quit();
-    return 1;
-  }
+  Framework::getInstance()->bootstrap();
+
+  Texture texture("../data/avatar.jpg");
+
+  Framework::getInstance()->getRenderer()->clear();
+  texture.draw(100, 100);
+  Framework::getInstance()->getRenderer()->render();
 
   bool quit = false;
   SDL_Event ev;
@@ -25,6 +32,8 @@ int main(int, char**) {
       }
     }
   }
+
+  Framework::quit();
 
   return 0;
 }
