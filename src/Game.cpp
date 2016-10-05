@@ -24,19 +24,7 @@ int main(int, char**) {
   texture.draw(100, 100);
   instance->getRenderer()->render();
 
-  bool quit = false;
-  SDL_Event ev;
-  while(!quit) {
-    while(SDL_PollEvent(&ev)) {
-      switch(ev.type) {
-        case SDL_QUIT:
-        case SDL_KEYDOWN:
-        case SDL_MOUSEBUTTONDOWN:
-          quit = true;
-          break;
-      }
-    }
-  }
+  instance->run();
 
   Framework::quit();
 

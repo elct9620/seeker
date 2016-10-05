@@ -7,6 +7,7 @@
 
 #include "StringUtils.h"
 
+#include "Event.h"
 #include "Renderer.h"
 #include "Logger.h"
 #include "Window.h"
