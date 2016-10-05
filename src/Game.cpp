@@ -11,13 +11,18 @@ int main(int, char**) {
     return 1;
   }
 
-  Framework::getInstance()->bootstrap();
+  Instance* instance = Framework::getInstance()->createGameInstance();
+
+  if(instance == NULL) {
+    Framework::quit();
+    return 1;
+  }
 
   Texture texture("../data/avatar.jpg");
 
-  Framework::getInstance()->getRenderer()->clear();
+  instance->getRenderer()->clear();
   texture.draw(100, 100);
-  Framework::getInstance()->getRenderer()->render();
+  instance->getRenderer()->render();
 
   bool quit = false;
   SDL_Event ev;

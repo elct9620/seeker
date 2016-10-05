@@ -11,4 +11,5 @@
 #include "Logger.h"
 #include "Window.h"
 #include "Texture.h"
+#include "Instance.h"
 #include "Framework.h"
