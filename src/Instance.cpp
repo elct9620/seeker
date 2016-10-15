@@ -30,7 +30,7 @@ namespace Seeker {
     // TODO: Run update
   }
 
-  // IEvent interface
+  // ISubscriber implement
   void Instance::onEvent(const EventType type) {
     switch(type) {
       case EventType::Key:

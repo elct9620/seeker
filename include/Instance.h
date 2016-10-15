@@ -12,7 +12,7 @@ namespace Seeker {
   class Window;
   class Renderer;
 
-  class Instance : public IEvent {
+  class Instance : public ISubscriber {
     public:
       Instance();
       ~Instance();

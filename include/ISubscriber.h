@@ -8,7 +8,7 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  class  IEvent {
+  class  ISubscriber {
     public:
       virtual void onEvent(const EventType event) = 0;
   };

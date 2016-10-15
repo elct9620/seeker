@@ -4,7 +4,7 @@
 
 namespace Seeker {
 
-  vector<IEvent*> Event::events;
+  vector<ISubscriber*> Event::subscribers;
 
   void Event::refresh() {
     SDL_Event ev;
@@ -23,19 +23,19 @@ namespace Seeker {
     }
   }
 
-  void Event::on(IEvent* event) {
+  void Event::on(ISubscriber* event) {
     if(exists(event)) return;
-    events.push_back(event);
+    subscribers.push_back(event);
   }
 
-  void Event::off(IEvent* event) {
+  void Event::off(ISubscriber* event) {
     if(exists(event)) {
-      events.erase(std::remove(events.begin(), events.end(), event), events.end());
+      subscribers.erase(std::remove(subscribers.begin(), subscribers.end(), event), subscribers.end());
     }
   }
 
-  bool Event::exists(IEvent* event) {
-    for(auto &current : events) {
+  bool Event::exists(ISubscriber* event) {
+    for(auto &current : subscribers) {
       if(current == event) {
         return true;
       }
@@ -44,7 +44,7 @@ namespace Seeker {
   }
 
   void Event::dispatch(const EventType type) {
-    for(auto &current : events) {
+    for(auto &current : subscribers) {
       current->onEvent(type);
     }
   }

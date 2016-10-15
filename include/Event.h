@@ -10,7 +10,7 @@
 #include "Seeker.h"
 
 #include "EventType.h"
-#include "IEvent.h"
+#include "ISubscriber.h"
 
 using std::vector;
 
@@ -20,13 +20,13 @@ namespace Seeker {
     public:
       static void refresh();
 
-      static void on(IEvent* event);
-      static void off(IEvent* event);
-      static bool exists(IEvent* event);
+      static void on(ISubscriber* event);
+      static void off(ISubscriber* event);
+      static bool exists(ISubscriber* event);
       static void dispatch(const EventType type);
 
     private:
-      static vector<IEvent*> events;
+      static vector<ISubscriber*> subscribers;
   };
 }
 
