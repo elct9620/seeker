@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Texture.h"
+#include "Seeker.h"
 
 namespace Seeker {
   Texture::Texture(string path, Renderer* _renderer) : texture(NULL), surface(NULL) {

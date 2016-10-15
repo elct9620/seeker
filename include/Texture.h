@@ -2,17 +2,17 @@
 
 #pragma once
 
-#ifndef TEXTURE_H_
-#define TEXTURE_H_
-
 #include <string>
 #include "Seeker.h"
+
+#ifndef TEXTURE_H_
+#define TEXTURE_H_
 
 using std::string;
 
 namespace Seeker {
   class Renderer;
-  class Texture {
+  class Texture : public IResource {
     public:
       Texture(string path, Renderer* _renderer = NULL);
       ~Texture();

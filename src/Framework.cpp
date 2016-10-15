@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Framework.h"
+#include "Seeker.h"
 
 namespace Seeker {
   Framework::Framework() : currentWindow(NULL), currentRenderer(NULL) {

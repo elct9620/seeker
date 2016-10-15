@@ -7,8 +7,9 @@
 
 #include "StringUtils.h"
 
-#include "Renderer.h"
 #include "Logger.h"
+#include "Resource.h"
+#include "Renderer.h"
 #include "Window.h"
 #include "Texture.h"
 #include "Framework.h"

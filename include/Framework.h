@@ -2,10 +2,10 @@
 
 #pragma once
 
+#include "Seeker.h"
+
 #ifndef FRAMEWORK_H_
 #define FRAMEWORK_H_
-
-#include "Seeker.h"
 
 namespace Seeker {
   class Window;

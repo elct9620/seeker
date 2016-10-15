@@ -2,10 +2,10 @@
 
 #pragma once
 
+#include "Seeker.h"
+
 #ifndef RENDERER_H_
 #define RENDERER_H_
-
-#include "Seeker.h"
 
 namespace Seeker {
   class Texture;

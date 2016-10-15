@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Renderer.h"
+#include "Seeker.h"
 
 namespace Seeker {
   int Renderer::DEFAULT_RENDERER_DRIVER = -1;
