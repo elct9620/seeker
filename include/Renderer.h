@@ -2,13 +2,13 @@
 
 #pragma once
 
+#include "Seeker.h"
+
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
-#include "Seeker.h"
-
 namespace Seeker {
-  class Texture;
+  class Sprite;
   class Renderer {
     public:
       Renderer(SDL_Window* window);
@@ -16,7 +16,7 @@ namespace Seeker {
 
       static int DEFAULT_RENDERER_DRIVER;
 
-      void createTexture(Texture* texture);
+      void createSprite(Sprite* sprite);
       void draw(SDL_Texture* texture, int width, int height, int x, int y);
       void render();
       void clear();

@@ -2,11 +2,11 @@
 
 #pragma once
 
-#ifndef WINDOW_H_
-#define WINDOW_H_
-
 #include <string>
 #include "Seeker.h"
+
+#ifndef WINDOW_H_
+#define WINDOW_H_
 
 using std::string;
 
