@@ -7,6 +7,7 @@
 
 #include "StringUtils.h"
 
+#include "Errors.h"
 #include "Logger.h"
 #include "Resource.h"
 #include "Renderer.h"

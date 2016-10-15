@@ -22,8 +22,7 @@ namespace Seeker {
         static_assert(std::is_base_of<IResource, T>::value, "Load resource should implement IResource interface.");
 
         if(filename.empty()) {
-          // TODO: Throw empty filename exception
-          Logger::Error("The resource name cannot be empty.");
+          throw ResouceError("The resource file name cannot be empty.");
           return nullptr;
         }
 
