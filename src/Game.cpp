@@ -13,10 +13,10 @@ int main(int, char**) {
 
   Framework::getInstance()->bootstrap();
 
-  Texture* texture = Resource<Texture>::load("../data/avatar.jpg");
+  Sprite* sprite = Resource<Sprite>::load("../data/avatar.jpg");
 
   Framework::getInstance()->getRenderer()->clear();
-  texture->draw(100, 100);
+  sprite->draw(100, 100);
   Framework::getInstance()->getRenderer()->render();
 
   bool quit = false;
@@ -33,7 +33,7 @@ int main(int, char**) {
     }
   }
 
-  Resource<Texture>::unload("../data/avatar.jpg");
+  Resource<Sprite>::unload("../data/avatar.jpg");
 
   Framework::quit();
 

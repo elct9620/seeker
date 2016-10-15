@@ -12,10 +12,10 @@ using std::string;
 
 namespace Seeker {
   class Renderer;
-  class Texture : public IResource {
+  class Sprite : public IResource {
     public:
-      Texture(string path, Renderer* _renderer = NULL);
-      ~Texture();
+      Sprite(string path, Renderer* _renderer = NULL);
+      ~Sprite();
 
       int width;
       int height;

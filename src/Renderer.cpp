@@ -13,8 +13,8 @@ namespace Seeker {
     SDL_DestroyRenderer(renderer);
   }
 
-  void Renderer::createTexture(Texture* texture) {
-    texture->prepare(renderer);
+  void Renderer::createSprite(Sprite* sprite) {
+    sprite->prepare(renderer);
   }
 
   void Renderer::draw(SDL_Texture* texture, int width, int height, int x, int y) {
