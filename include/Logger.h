@@ -2,11 +2,11 @@
 
 #pragma once
 
-#ifndef LOGGER_H_
-#define LOGGER_H_
-
 #include<string>
 #include "Seeker.h"
+
+#ifndef LOGGER_H_
+#define LOGGER_H_
 
 using std::string;
 

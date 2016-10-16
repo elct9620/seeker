@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 
-#include "Framework.h"
+#include "Seeker.h"
 
 using namespace Seeker;
 
@@ -18,13 +18,15 @@ int main(int, char**) {
     return 1;
   }
 
-  Texture texture("../data/avatar.jpg");
+  Sprite* sprite = Resource<Sprite>::load("../data/avatar.jpg");
 
   instance->getRenderer()->clear();
-  texture.draw(100, 100);
+  sprite->draw(100, 100);
   instance->getRenderer()->render();
 
   instance->run();
+
+  Resource<Sprite>::unload("../data/avatar.jpg");
 
   Framework::quit();
 

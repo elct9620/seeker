@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Window.h"
+#include "Seeker.h"
 
 namespace Seeker {
   Window::Window() : currentWindow(NULL), renderer(NULL) {

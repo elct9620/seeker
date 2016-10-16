@@ -8,9 +8,11 @@
 #include "StringUtils.h"
 
 #include "Event.h"
-#include "Renderer.h"
+#include "Errors.h"
 #include "Logger.h"
+#include "Resource.h"
+#include "Renderer.h"
 #include "Window.h"
-#include "Texture.h"
 #include "Instance.h"
+#include "Sprite.h"
 #include "Framework.h"

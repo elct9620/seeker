@@ -1,9 +1,9 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Texture.h"
+#include "Seeker.h"
 
 namespace Seeker {
-  Texture::Texture(string path, Renderer* _renderer) : texture(NULL), surface(NULL) {
+  Sprite::Sprite(string path, Renderer* _renderer) : texture(NULL), surface(NULL) {
     renderer = _renderer == NULL ? Framework::getInstance()->getRenderer() : _renderer;
 
     surface = IMG_Load(path.c_str());
@@ -15,15 +15,15 @@ namespace Seeker {
       Logger::Error("Failed to load texture, %s", IMG_GetError());
     }
 
-    renderer->createTexture(this);
+    renderer->createSprite(this);
   }
 
-  Texture::~Texture() {
+  Sprite::~Sprite() {
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
   }
 
-  bool Texture::prepare(SDL_Renderer* renderer) {
+  bool Sprite::prepare(SDL_Renderer* renderer) {
     if(texture) return true;
 
     texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -37,7 +37,7 @@ namespace Seeker {
     return true;
   }
 
-  void Texture::draw(int x, int y) {
+  void Sprite::draw(int x, int y) {
     renderer->draw(texture, width, height, x, y);
   }
 }

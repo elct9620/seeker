@@ -1,6 +1,6 @@
 // Copyright 2016 Zheng Xian Qiu
 
-#include "Logger.h"
+#include "Seeker.h"
 
 namespace Seeker {
   void Logger::Verbose(string format, ...) {
