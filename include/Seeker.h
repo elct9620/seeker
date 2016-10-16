@@ -15,4 +15,5 @@
 #include "Window.h"
 #include "Instance.h"
 #include "Sprite.h"
+#include "GameObject.h"
 #include "Framework.h"
