@@ -39,4 +39,22 @@ namespace Seeker {
     child->parent = nullptr;
     children.erase(it);
   }
+
+  int GameObject::setX(int _x) {
+    x = _x;
+    return x;
+  }
+
+  int GameObject::setY(int _y) {
+    y = _y;
+    return y;
+  }
+
+  int GameObject::getX() {
+    return x;
+  }
+
+  int GameObject::getY() {
+    return y;
+  }
 }

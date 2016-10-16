@@ -16,4 +16,5 @@
 #include "Instance.h"
 #include "Sprite.h"
 #include "GameObject.h"
+#include "Actor.h"
 #include "Framework.h"

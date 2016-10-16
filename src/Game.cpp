@@ -18,15 +18,13 @@ int main(int, char**) {
     return 1;
   }
 
-  Sprite* sprite = Resource<Sprite>::load("../data/avatar.jpg");
+  Actor actor("../data/avatar.jpg", 100, 100);
 
   instance->getRenderer()->clear();
-  sprite->draw(100, 100);
+  actor.update(0);
   instance->getRenderer()->render();
 
   instance->run();
-
-  Resource<Sprite>::unload("../data/avatar.jpg");
 
   Framework::quit();
 

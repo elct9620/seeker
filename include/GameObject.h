@@ -12,24 +12,31 @@ using std::vector;
 
 namespace Seeker {
   class GameObject {
-    GameObject();
-    ~GameObject();
+    public:
+      GameObject();
+      GameObject(int x, int y) : x(x), y(y) {} ;
+      ~GameObject();
 
-    virtual void update(int delta);
-    virtual void draw() = 0;
+      virtual void update(int delta);
+      virtual void draw() = 0;
 
-    void addChild(GameObject* child);
-    void removeChild(GameObject* child);
+      void addChild(GameObject* child);
+      void removeChild(GameObject* child);
+
+      int setX(int _x);
+      int setY(int _y);
+      int getX();
+      int getY();
 
     protected:
-    GameObject* parent;
+      GameObject* parent;
 
-    int x = 0;
-    int y = 0;
-    bool visible = true;
+      int x = 0;
+      int y = 0;
+      bool visible = true;
 
     private:
-    vector<GameObject*> children;
+      vector<GameObject*> children;
   };
 }
 
