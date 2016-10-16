@@ -2,18 +2,28 @@
 
 #pragma once
 
+#include <chrono>
+#include "Seeker.h"
+
 #ifndef INSTANCE_H_
 #define INSTANCE_H_
 
-#include "Seeker.h"
+using std::chrono::high_resolution_clock;
+using std::chrono::time_point_cast;
+using std::chrono::milliseconds;
+using std::chrono::duration_cast;
 
 namespace Seeker {
 
   class Window;
   class Renderer;
+  class Scene;
 
   class Instance : public ISubscriber {
     public:
+      static const int FPS;
+      static const int FIXED_DELTA_TIME;
+
       Instance();
       ~Instance();
 
@@ -23,13 +33,20 @@ namespace Seeker {
       void run();
       void update();
 
+      long currentTime();
+
       virtual void onEvent(const EventType evnet);
+
+      void setScene(Scene* scene);
 
     private:
       Window* window;
       Renderer* renderer;
 
-      bool stop;
+      Scene* currentScene;
+
+      int lastTime = 0;
+      bool stop = false;
   };
 }
 

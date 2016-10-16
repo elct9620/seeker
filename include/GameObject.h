@@ -17,7 +17,9 @@ namespace Seeker {
       GameObject(int x, int y) : x(x), y(y) {} ;
       ~GameObject();
 
-      virtual void update(int delta);
+      virtual void update(long delta);
+      virtual void render();
+
       virtual void draw() = 0;
 
       void addChild(GameObject* child);

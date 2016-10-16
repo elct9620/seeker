@@ -3,6 +3,10 @@
 #include "Instance.h"
 
 namespace Seeker {
+
+  const int Instance::FPS = 60;
+  const int Instance::FIXED_DELTA_TIME = 1000/60;
+
   Instance::Instance() : stop(false) {
     window = new Window;
     if(window->create(Framework::DEFAULT_WINDOW_NAME) == false) {
@@ -13,6 +17,8 @@ namespace Seeker {
     renderer = window->getRenderer();
 
     Event::on(this);
+
+    lastTime = currentTime();
   }
 
   Instance::~Instance() {
@@ -23,11 +29,32 @@ namespace Seeker {
   void Instance::run() {
     while(!stop) {
       Event::refresh();
+      update();
     }
   }
 
   void Instance::update() {
-    // TODO: Run update
+    long realTime = currentTime();
+
+    while(lastTime < realTime) {
+      lastTime += FIXED_DELTA_TIME;
+      // TODO: Modify to use "GameState"
+      if(currentScene) {
+        currentScene->update(FIXED_DELTA_TIME);
+      }
+    }
+
+    renderer->clear();
+    currentScene->render();
+    renderer->render();
+  }
+
+  long Instance::currentTime() {
+    auto now = high_resolution_clock::now();
+    auto nowInMillisecond = time_point_cast<milliseconds>(now);
+    auto epoch = nowInMillisecond.time_since_epoch();
+    auto value = duration_cast<milliseconds>(epoch);
+    return value.count();
   }
 
   // ISubscriber implement
@@ -39,5 +66,9 @@ namespace Seeker {
         stop = true;
         break;
     }
+  }
+
+  void Instance::setScene(Scene* scene) {
+    currentScene = scene;
   }
 }
