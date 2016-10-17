@@ -3,15 +3,14 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  Framework::Framework() : currentWindow(NULL), currentRenderer(NULL) {
+  Framework::Framework() : currentGameInstance(NULL) {
 #ifdef DEBUG
     SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
 #endif
   }
 
   Framework::~Framework() {
-    free(currentWindow);
-    free(currentRenderer);
+    free(currentGameInstance);
   }
 
   Framework* Framework::getInstance() {
@@ -29,29 +28,27 @@ namespace Seeker {
   string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework";
 #endif
 
-  void Framework::bootstrap() {
-    Window* window = new Window;
-    if(window->create(DEFAULT_WINDOW_NAME) == false) {
-      // TODO: Must return exception to alert developer
-      Logger::Error("Bootstrap framework failed!");
-      return;
-    }
-
-    use(window);
-    use(window->getRenderer());
-
-    Logger::Info("Framework is ready!");
-  }
 
   void Framework::quit() {
     free(instance);
   }
 
-  Renderer* Framework::getRenderer() {
-    return currentRenderer;
+  Instance* Framework::createGameInstance() {
+    try {
+      currentGameInstance = new Instance;
+      return currentGameInstance;
+    } catch (bool) {
+      Logger::Error("Create game instance failed.");
+    }
+    return NULL;
   }
 
   Window* Framework::getWindow() {
-    return currentWindow;
+    return currentGameInstance->getWindow();
   }
+
+  Renderer* Framework::getRenderer() {
+    return currentGameInstance->getRenderer();
+  }
+
 }

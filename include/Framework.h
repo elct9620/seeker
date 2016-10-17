@@ -8,8 +8,10 @@
 #define FRAMEWORK_H_
 
 namespace Seeker {
+
   class Window;
   class Renderer;
+  class Instance;
 
   class Framework {
     public:
@@ -18,13 +20,10 @@ namespace Seeker {
 
       static string DEFAULT_WINDOW_NAME;
 
-      inline void use(Window* window) { currentWindow = window; };
-      inline void use(Renderer* renderer) { currentRenderer = renderer; };
+      Instance* createGameInstance();
 
+      Window*  getWindow();
       Renderer* getRenderer();
-      Window* getWindow();
-
-      void bootstrap();
 
     private:
       static Framework* instance;
@@ -32,8 +31,8 @@ namespace Seeker {
       Framework();
       ~Framework();
 
-      Window* currentWindow;
-      Renderer* currentRenderer;
+      Instance* currentGameInstance;
+
   };
 }
 

@@ -11,29 +11,18 @@ int main(int, char**) {
     return 1;
   }
 
-  Framework::getInstance()->bootstrap();
+  Instance* instance = Framework::getInstance()->createGameInstance();
 
-  Sprite* sprite = Resource<Sprite>::load("../data/avatar.jpg");
-
-  Framework::getInstance()->getRenderer()->clear();
-  sprite->draw(100, 100);
-  Framework::getInstance()->getRenderer()->render();
-
-  bool quit = false;
-  SDL_Event ev;
-  while(!quit) {
-    while(SDL_PollEvent(&ev)) {
-      switch(ev.type) {
-        case SDL_QUIT:
-        case SDL_KEYDOWN:
-        case SDL_MOUSEBUTTONDOWN:
-          quit = true;
-          break;
-      }
-    }
+  if(instance == NULL) {
+    Framework::quit();
+    return 1;
   }
 
-  Resource<Sprite>::unload("../data/avatar.jpg");
+  Scene* scene = instance->getCurrentScene();
+  Actor actor("../data/avatar.jpg", 100, 100);
+  scene->addChild(&actor);
+
+  instance->run();
 
   Framework::quit();
 
