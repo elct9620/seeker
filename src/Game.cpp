@@ -18,11 +18,10 @@ int main(int, char**) {
     return 1;
   }
 
-  Scene scene;
+  Scene* scene = instance->getCurrentScene();
   Actor actor("../data/avatar.jpg", 100, 100);
-  scene.addChild(&actor);
+  scene->addChild(&actor);
 
-  instance->setScene(&scene);
   instance->run();
 
   Framework::quit();

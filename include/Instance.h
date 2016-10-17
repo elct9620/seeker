@@ -17,6 +17,7 @@ namespace Seeker {
 
   class Window;
   class Renderer;
+  class GameState;
   class Scene;
 
   class Instance : public ISubscriber {
@@ -25,6 +26,7 @@ namespace Seeker {
       static const int FIXED_DELTA_TIME;
 
       Instance();
+      Instance(GameState* state);
       ~Instance();
 
       Window* getWindow() { return window; }
@@ -37,13 +39,15 @@ namespace Seeker {
 
       virtual void onEvent(const EventType evnet);
 
-      void setScene(Scene* scene);
+      GameState* getState();
+      GameState* setState(GameState* _state);
+      Scene* getCurrentScene();
 
     private:
       Window* window;
       Renderer* renderer;
 
-      Scene* currentScene;
+      GameState* state;
 
       int lastTime = 0;
       bool stop = false;

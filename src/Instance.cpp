@@ -7,7 +7,10 @@ namespace Seeker {
   const int Instance::FPS = 60;
   const int Instance::FIXED_DELTA_TIME = 1000/60;
 
-  Instance::Instance() : stop(false) {
+  Instance::Instance() : Instance(new GameState(new Scene())) {
+  }
+
+  Instance::Instance(GameState* state) : state(state), stop(false) {
     window = new Window;
     if(window->create(Framework::DEFAULT_WINDOW_NAME) == false) {
       // TODO: Use custom exception instead it.
@@ -39,13 +42,13 @@ namespace Seeker {
     while(lastTime < realTime) {
       lastTime += FIXED_DELTA_TIME;
       // TODO: Modify to use "GameState"
-      if(currentScene) {
-        currentScene->update(FIXED_DELTA_TIME);
+      if(state) {
+        state->update(FIXED_DELTA_TIME);
       }
     }
 
     renderer->clear();
-    currentScene->render();
+    state->render();
     renderer->render();
   }
 
@@ -68,7 +71,16 @@ namespace Seeker {
     }
   }
 
-  void Instance::setScene(Scene* scene) {
-    currentScene = scene;
+  GameState* Instance::getState() {
+    return state;
+  }
+
+  GameState* Instance::setState(GameState* _state) {
+    state = _state;
+    return state;
+  }
+
+  Scene* Instance::getCurrentScene() {
+    return state->getCurrentScene();
   }
 }
