@@ -1,5 +1,6 @@
 -Iinclude
 -I../include
+-Ilib/mruby/include
 
 -DDEBUG
 -DVERSION="1.0.0"

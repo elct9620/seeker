@@ -26,3 +26,6 @@
 #include "GameObject.h"
 #include "Actor.h"
 #include "Scene.h"
+
+// Script Engine
+#include "Script/Engine.h"
