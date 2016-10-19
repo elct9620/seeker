@@ -18,6 +18,8 @@ int main(int, char**) {
     return 1;
   }
 
+  instance->getScriptEngine()->loadScript("../data/main.rb");
+
   Scene* scene = instance->getCurrentScene();
   Actor actor("../data/avatar.jpg", 100, 100);
   scene->addChild(&actor);

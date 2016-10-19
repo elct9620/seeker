@@ -20,6 +20,10 @@ namespace Seeker {
   class GameState;
   class Scene;
 
+  namespace Script {
+    class Engine;
+  }
+
   class Instance : public ISubscriber {
     public:
       static const int FPS;
@@ -42,6 +46,8 @@ namespace Seeker {
       GameState* getState();
       GameState* setState(GameState* _state);
       Scene* getCurrentScene();
+
+      Script::Engine* getScriptEngine();
 
     private:
       Window* window;

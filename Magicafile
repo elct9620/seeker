@@ -11,6 +11,9 @@ build :debug do
   define :debug
   define 'VERSION=\"%{version}\"' % {version: VERSION}
 
+  # TODO: improve this to use automatic include
+  include_path "lib/mruby/include"
+
   dynamic_library :sdl2
   dynamic_library :SDL2_image
 
