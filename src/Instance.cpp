@@ -12,7 +12,7 @@ namespace Seeker {
 
   Instance::Instance(GameState* state) : state(state), stop(false) {
     window = new Window;
-    if(window->create(Framework::DEFAULT_WINDOW_NAME) == false) {
+    if(window->create(Config::Window.name, Config::Window.width, Config::Window.height) == false) {
       // TODO: Use custom exception instead it.
       free(window);
       throw false;

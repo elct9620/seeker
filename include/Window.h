@@ -27,6 +27,7 @@ namespace Seeker {
 
       // Window Manager
       bool create(string title, bool hide = false);
+      bool create(string title, int _width, int _height, bool hide = false);
       void destroy();
 
       Renderer* getRenderer();

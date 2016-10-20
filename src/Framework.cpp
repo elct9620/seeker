@@ -28,7 +28,6 @@ namespace Seeker {
   string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework";
 #endif
 
-
   void Framework::quit() {
     free(instance);
   }

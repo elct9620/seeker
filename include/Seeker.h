@@ -15,6 +15,7 @@
 #include "Resource.h"
 #include "Window.h"
 #include "Renderer.h"
+#include "Config.h"
 #include "Instance.h"
 #include "Framework.h"
 

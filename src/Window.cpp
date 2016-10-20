@@ -39,10 +39,19 @@ namespace Seeker {
 
   // Window Manager
   bool Window::create(string title, bool hide) {
+    return create(title, getDisplayWidth(), getDisplayHeight(), hide);
+  }
+
+  bool Window::create(string title, int _width, int _height, bool hide) {
     uint flags = hide ? 0 : SDL_WINDOW_SHOWN;
     flags = flags | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_INPUT_GRABBED;
 
-    currentWindow = SDL_CreateWindow(title.c_str(), 0, 0, getDisplayWidth(), getDisplayHeight(), flags);
+    // Ensure get correct window resolution
+    loadDisplayMode(true);
+    _width  = _width  > 0 ? _width  : getDisplayWidth();
+    _height = _height > 0 ? _height : getDisplayHeight();
+
+    currentWindow = SDL_CreateWindow(title.c_str(), 0, 0, _width, _height, flags);
     if(currentWindow == NULL) {
       SDL_DestroyWindow(currentWindow);
       return false;

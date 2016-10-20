@@ -18,7 +18,7 @@ int main(int, char**) {
     return 1;
   }
 
-  instance->getScriptEngine()->loadScript("../data/main.rb");
+  instance->getScriptEngine()->loadScript("../data/config.rb");
 
   Scene* scene = instance->getCurrentScene();
   Actor actor("../data/avatar.jpg", 100, 100);
