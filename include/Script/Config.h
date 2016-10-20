@@ -8,6 +8,12 @@
 namespace Seeker {
   namespace Script {
     class Config {
+      public:
+        static void init(RClass*);
+
+        static mrb_value setName(mrb_state* mrb, mrb_value self);
+        static mrb_value setWidth(mrb_state* mrb, mrb_value self);
+        static mrb_value setHeight(mrb_state* mrb, mrb_value self);
     };
   }
 }

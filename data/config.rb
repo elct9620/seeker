@@ -2,8 +2,8 @@
 # Game Settings
 ###
 
-Game.config do |config|
-  config.name = "Seeker #{VERSION}"
-  config.width = 1280
-  config.height = 720
+Game.config do
+  name   "Seeker 1.0"
+  width  640
+  height 480
 end

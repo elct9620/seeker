@@ -42,6 +42,10 @@ namespace Seeker {
     return NULL;
   }
 
+  Instance* Framework::getGameInstance() {
+    return currentGameInstance;
+  }
+
   Window* Framework::getWindow() {
     return currentGameInstance->getWindow();
   }

@@ -11,6 +11,12 @@ int main(int, char**) {
     return 1;
   }
 
+  // TODO: Put int one file to specify all script/core should be load
+  Script::Engine::instance()->defineModule<Script::Config>("Config", &Script::Config::init);
+  Script::Engine::instance()->defineModule<Script::Game>("Game", &Script::Game::init);
+
+  Script::Engine::instance()->loadScript("../data/config.rb");
+
   Instance* instance = Framework::getInstance()->createGameInstance();
 
   if(instance == NULL) {
@@ -18,13 +24,7 @@ int main(int, char**) {
     return 1;
   }
 
-  instance->getScriptEngine()->defineModule("Game", [](RClass*){});
-  instance->getScriptEngine()->loadScript("../data/config.rb");
-
-  Scene* scene = instance->getCurrentScene();
-  Actor actor("../data/avatar.jpg", 100, 100);
-  scene->addChild(&actor);
-
+  // TODO: Run before load all script
   instance->run();
 
   Framework::quit();

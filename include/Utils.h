@@ -3,6 +3,7 @@
 #pragma once
 
 #include <string>
+#include <type_traits>
 
 #ifndef _UTILS_H
 #define _UTILS_H

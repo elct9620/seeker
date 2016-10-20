@@ -8,6 +8,10 @@
 namespace Seeker {
   namespace Script {
     class Game {
+      public:
+        static void init(RClass*);
+
+        static mrb_value config(mrb_state* mrb, mrb_value self);
     };
   }
 }

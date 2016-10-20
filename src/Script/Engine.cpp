@@ -2,6 +2,7 @@
 
 #include "Seeker.h"
 
+// MRB_API mrb_get_backtrace
 namespace Seeker {
   namespace Script {
     string Engine::basePath = string(SDL_GetBasePath());
@@ -65,7 +66,10 @@ namespace Seeker {
         return;
       }
 
-      mrb_load_file(mrb, file);
+      mrbc_context* cxt = mrbc_context_new(mrb);
+      mrbc_filename(mrb, cxt, filename.c_str());
+      mrb_load_file_cxt(mrb, file, cxt);
+
       Logger::Info("Script %s is loaded.", filename.c_str());
 
       fclose(file);
@@ -80,22 +84,21 @@ namespace Seeker {
 
     void Engine::captureException() {
       if(mrb->exc) {
-        mrb_value exception = mrb_obj_value(mrb->exc);
-        Logger::Error("Script => %s", mrb_string_value_ptr(mrb, exception));
+        mrb_value exc = mrb_obj_value(mrb->exc);
+        Logger::Error(mrb_str_to_cstr(mrb, mrb_inspect(mrb, exc)));
       }
     }
 
-    void Engine::defineModule(string name, void(*callback)(RClass*)) {
-      RClass* klass = getModule(name);
+    void Engine::defineMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+      mrb_define_method(mrb, klass, name.c_str(), func, aspec);
+    }
 
-      if(klass == nullptr) {
-        klass = mrb_define_module(mrb, name.c_str());
-        definedModule.insert(std::pair<string, RClass*>(name, klass));
-      }
+    void Engine::defineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+      mrb_define_class_method(mrb, klass, name.c_str(), func, aspec);
+    }
 
-      if(callback) {
-        callback(klass);
-      }
+    void Engine::defineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+      mrb_define_module_function(mrb, klass, name.c_str(), func, aspec);
     }
 
     RClass* Engine::createClass(string name, RClass* parent) {

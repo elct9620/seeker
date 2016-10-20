@@ -25,6 +25,7 @@ namespace Seeker {
       static string DEFAULT_WINDOW_NAME;
 
       Instance* createGameInstance();
+      Instance* getGameInstance();
 
       Window*  getWindow();
       Renderer* getRenderer();

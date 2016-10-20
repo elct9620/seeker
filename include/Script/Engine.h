@@ -12,6 +12,7 @@
 #include "mruby/class.h"
 #include "mruby/string.h"
 #include "mruby/compile.h"
+#include "mruby/value.h"
 
 #ifndef _SCRIPT_ENGINE_H
 #define _SCRIPT_ENGINE_H
@@ -33,12 +34,12 @@ namespace Seeker {
         void captureException();
 
         template<class T>
-        inline void defineClass(string name, void (*callback)(RClass*)) {
+        void defineClass(string name, void (*callback)(RClass*)) {
             defineClass<T>(name, callback, mrb->object_class);
-        };
+        }
 
         template<class T>
-        inline void defineClass(string name, void (*callback)(RClass*), RClass* parent) {
+        void defineClass(string name, void (*callback)(RClass*), RClass* parent) {
           RClass* klass = createClass(name, parent);
 
           // TODO: Provide custom initializer options
@@ -47,11 +48,26 @@ namespace Seeker {
           if(callback) {
             callback(klass);
           }
-        };
+        }
 
-        void defineModule(string name, void (*callback)(RClass*));
+        template<class T>
+        void defineModule(string name, void (*callback)(RClass*)) {
+          RClass* klass = getModule(name);
+
+          if(klass == nullptr) {
+            klass = mrb_define_module(mrb, name.c_str());
+            definedModule.insert(std::pair<string, RClass*>(name, klass));
+          }
+
+          if(callback) {
+            callback(klass);
+          }
+        }
 
         void defineMethod(RClass* klass, string name,  mrb_func_t func, mrb_aspec aspec);
+        void defineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
+        void defineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
+
 
       private:
         Engine();
