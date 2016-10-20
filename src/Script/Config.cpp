@@ -8,13 +8,8 @@ namespace Seeker {
       Engine* engine = Engine::instance();
 
       engine->defineModuleMethod(klass, "name", &Config::setName, MRB_ARGS_REQ(1));
-      engine->defineModuleMethod(klass, "name=", &Config::setName, MRB_ARGS_REQ(1));
-
       engine->defineModuleMethod(klass, "width", &Config::setWidth, MRB_ARGS_REQ(1));
-      engine->defineModuleMethod(klass, "width=", &Config::setWidth, MRB_ARGS_REQ(1));
-
       engine->defineModuleMethod(klass, "height", &Config::setHeight, MRB_ARGS_REQ(1));
-      engine->defineModuleMethod(klass, "height=", &Config::setHeight, MRB_ARGS_REQ(1));
     }
 
     mrb_value Config::setName(mrb_state* mrb, mrb_value self) {
