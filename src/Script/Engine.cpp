@@ -7,6 +7,7 @@ namespace Seeker {
     string Engine::basePath = string(SDL_GetBasePath());
     unordered_map<string, RClass*> Engine::definedClass = {};
     unordered_map<string, mrb_data_type> Engine::definedType = {};
+    unordered_map<string, RClass*> Engine::definedModule = {};
 
     Engine::Engine() {
       mrb = mrb_open();
@@ -35,6 +36,15 @@ namespace Seeker {
     RClass* Engine::getClass(string name) {
       auto it = definedClass.find(name);
       if(it != definedClass.end()) {
+        return (*it).second;
+      }
+
+      return nullptr;
+    }
+
+    RClass* Engine::getModule(string name) {
+      auto it = definedModule.find(name);
+      if(it != definedModule.end()) {
         return (*it).second;
       }
 
@@ -75,18 +85,13 @@ namespace Seeker {
       }
     }
 
-    template<class T>
-    void Engine::defineClass(void(*body)(RClass*)) {
-      defineClass<T>(body, mrb->object_class);
-    }
+    void Engine::defineModule(string name, void(*callback)(RClass*)) {
+      RClass* klass = getModule(name);
 
-    template<class T>
-    void Engine::defineClass(void(*callback)(RClass*), RClass* parent) {
-      string className(typeid(T).name());
-      RClass* klass = createClass(className, parent);
-
-      // TODO: Provide custom initializer options
-      mrb_define_method(mrb, klass, "initialize", &Engine::classInitializer<T>, MRB_ARGS_NONE());
+      if(klass == nullptr) {
+        klass = mrb_define_module(mrb, name.c_str());
+        definedModule.insert(std::pair<string, RClass*>(name, klass));
+      }
 
       if(callback) {
         callback(klass);
@@ -115,30 +120,6 @@ namespace Seeker {
 
       // Redo to get the pointer saved in unorederd map
       return createDataType(name);
-    }
-
-    template<class T>
-    mrb_value Engine::classInitializer(mrb_state* mrb, mrb_value self) {
-      T* application;
-      application = (T*) DATA_PTR(self);
-
-      if(application != NULL) {
-        delete application;
-      }
-
-      string className(typeid(T).name());
-      mrb_data_type* dataType = getDataType(className) ;
-      if(dataType) {
-        DATA_TYPE(self) = dataType;
-      }
-
-      DATA_PTR(self) = NULL;
-
-      application = (T*) mrb_alloca(mrb, sizeof(T));
-
-      DATA_PTR(self) = application;
-
-      return self;
     }
   }
 }

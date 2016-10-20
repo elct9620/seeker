@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 
 // Utils
+#include "Utils.h"
 #include "StringUtils.h"
 
 // Core
@@ -30,3 +31,5 @@
 
 // Script Engine
 #include "Script/Engine.h"
+#include "Script/Config.h"
+#include "Script/Game.h"

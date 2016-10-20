@@ -18,6 +18,7 @@ int main(int, char**) {
     return 1;
   }
 
+  instance->getScriptEngine()->defineModule("Game", [](RClass*){});
   instance->getScriptEngine()->loadScript("../data/config.rb");
 
   Scene* scene = instance->getCurrentScene();
