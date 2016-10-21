@@ -9,6 +9,9 @@
 #include "Utils.h"
 #include "StringUtils.h"
 
+// Interfaces
+#include "IScript.h"
+
 // Core
 #include "Event.h"
 #include "Errors.h"
@@ -28,6 +31,9 @@
 #include "GameObject.h"
 #include "Actor.h"
 #include "Scene.h"
+
+// Game Script
+#include "Ruby.h"
 
 // Script Engine
 #include "Script/Engine.h"

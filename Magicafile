@@ -17,7 +17,7 @@ build :debug do
   dynamic_library :sdl2
   dynamic_library :SDL2_image
 
-  flag "-lstdc++"
+  library "stdc++"
   flag "-std=c++11"
 
   dependency :mruby do

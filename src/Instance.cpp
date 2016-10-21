@@ -44,11 +44,13 @@ namespace Seeker {
       // TODO: Modify to use "GameState"
       if(state) {
         state->update(FIXED_DELTA_TIME);
+        IScript::updateAll(FIXED_DELTA_TIME);
       }
     }
 
     renderer->clear();
     state->render();
+    IScript::renderAll();
     renderer->render();
   }
 

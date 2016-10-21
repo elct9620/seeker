@@ -11,12 +11,8 @@ int main(int, char**) {
     return 1;
   }
 
-  // TODO: Put int one file to specify all script/core should be load
-  Script::Engine::instance()->defineModule<Script::Config>("Config", &Script::Config::init);
-  Script::Engine::instance()->defineModule<Script::Game>("Game", &Script::Game::init);
-
-  Script::Engine::instance()->loadScript("../data/config.rb");
-
+  // Initialize Game
+  IScript::init<Ruby>();
   Instance* instance = Framework::getInstance()->createGameInstance();
 
   if(instance == NULL) {
@@ -24,9 +20,11 @@ int main(int, char**) {
     return 1;
   }
 
-  // TODO: Run before load all script
+  // Setup Game and Run
+  IScript::setup<Ruby>();
   instance->run();
 
+  // Exit Game
   Framework::quit();
 
   return 0;
