@@ -21,6 +21,7 @@ namespace Seeker {
       virtual void render();
 
       void add(GameObject* object);
+      void to(Scene* scene);
 
     private:
       vector<GameObject*> objects = {};

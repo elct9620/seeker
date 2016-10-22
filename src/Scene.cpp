@@ -22,4 +22,8 @@ namespace Seeker {
     objects.push_back(object);
   }
 
+  void Scene::to(Scene* scene) {
+    Framework::getInstance()->getGameInstance()->getState()->transitionTo(scene);
+  }
+
 }

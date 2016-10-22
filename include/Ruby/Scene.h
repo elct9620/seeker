@@ -23,6 +23,7 @@ namespace Seeker {
         static void init(RClass* klass);
         static mrb_value mrb_initialize(mrb_state* mrb, mrb_value self);
         static mrb_value mrb_add(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_to(mrb_state* mrb, mrb_value self);
 
       private:
         string name;

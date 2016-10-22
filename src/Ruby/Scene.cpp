@@ -10,6 +10,7 @@ namespace Seeker {
 
       engine->defineMethod(klass, "initialize", &Scene::mrb_initialize, MRB_ARGS_REQ(1));
       engine->defineMethod(klass, "add", &Scene::mrb_add, MRB_ARGS_REQ(1));
+      engine->defineMethod(klass, "to", &Scene::mrb_to, MRB_ARGS_REQ(1));
     }
 
     mrb_value Scene::mrb_initialize(mrb_state* mrb, mrb_value self) {
@@ -43,6 +44,23 @@ namespace Seeker {
       } else {
         // TODO: create ruby error
         Logger::Error("Cannot add non GameObject into Scene.");
+      }
+
+      return self;
+    }
+
+    mrb_value Scene::mrb_to(mrb_state* mrb, mrb_value self) {
+      Scene* scene = static_cast<Scene*>(DATA_PTR(self));
+
+      mrb_value nextScene;
+      mrb_get_args(mrb, "o", &nextScene);
+
+      Scene* _nextScene = static_cast<Scene*>(DATA_PTR(nextScene));
+      if(_nextScene) {
+        scene->to(_nextScene);
+      } else {
+        // TODO: create ruby error
+        Logger::Error("Cannot transition to non Scene object");
       }
 
       return self;
