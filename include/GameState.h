@@ -21,10 +21,13 @@ namespace Seeker {
       virtual void render();
 
       Scene* getCurrentScene();
+      bool transitionTo(Scene* nextScene);
 
 
     private:
       Scene* currentScene;
+      Scene* prevScene;
+      Scene* nextScene;
   };
 }
 

@@ -13,7 +13,7 @@ namespace Seeker {
 
   }
 
-  void GameObject::update(long delta) {
+  void GameObject::update(int delta) {
     for(const auto &child : children) {
       child->update(delta);
     }

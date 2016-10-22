@@ -29,4 +29,17 @@ namespace Seeker {
   Scene* GameState::getCurrentScene() {
     return currentScene;
   }
+
+  bool GameState::transitionTo(Scene* _next) {
+    if(nextScene) delete nextScene;
+    if(prevScene) delete prevScene;
+
+    prevScene = currentScene;
+
+    // TODO: Let scene transition wait scene resource loaded
+    nextScene = _next;
+    currentScene = nextScene;
+
+    return true;
+  }
 }

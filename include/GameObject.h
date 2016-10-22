@@ -11,13 +11,14 @@
 using std::vector;
 
 namespace Seeker {
+  // TODO: Refactor the update/render method to drawable interface
   class GameObject {
     public:
       GameObject();
       GameObject(int x, int y) : x(x), y(y) {} ;
-      ~GameObject();
+      virtual ~GameObject();
 
-      virtual void update(long delta);
+      virtual void update(int delta);
       virtual void render();
 
       virtual void draw() = 0;
