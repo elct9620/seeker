@@ -13,6 +13,7 @@ namespace Seeker {
       instance->defineModule<R::Game>("Game", &R::Game::init);
 
       instance->defineClass<R::Scene>("Scene", &R::Scene::init);
+      instance->defineClass<R::Actor>("Actor", &R::Actor::init);
 
       // Load Config Ruby
       instance->loadScript("../data/config.rb");

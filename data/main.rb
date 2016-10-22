@@ -1,3 +1,4 @@
 puts "Hello World"
 
-Scene.new "Test Scene"
+scene = Scene.new "Test Scene"
+scene.add Actor.new("../data/avatar.jpg", 10, 10)
