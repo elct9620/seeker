@@ -36,6 +36,6 @@
 #include "Ruby.h"
 
 // Script Engine
-#include "Script/Engine.h"
-#include "Script/Config.h"
-#include "Script/Game.h"
+#include "Ruby/Engine.h"
+#include "Ruby/Config.h"
+#include "Ruby/Game.h"

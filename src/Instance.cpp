@@ -85,8 +85,4 @@ namespace Seeker {
   Scene* Instance::getCurrentScene() {
     return state->getCurrentScene();
   }
-
-  Script::Engine* Instance::getScriptEngine() {
-    return Script::Engine::instance();
-  }
 }

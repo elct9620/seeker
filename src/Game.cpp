@@ -12,7 +12,7 @@ int main(int, char**) {
   }
 
   // Initialize Game
-  IScript::init<Ruby>();
+  IScript::init<Script::Ruby>();
   Instance* instance = Framework::getInstance()->createGameInstance();
 
   if(instance == NULL) {
@@ -21,7 +21,7 @@ int main(int, char**) {
   }
 
   // Setup Game and Run
-  IScript::setup<Ruby>();
+  IScript::setup<Script::Ruby>();
   instance->run();
 
   // Exit Game

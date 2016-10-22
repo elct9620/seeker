@@ -2,11 +2,11 @@
 
 #include "Seeker.h"
 
-#ifndef _SCRIPT_GAME_H
-#define _SCRIPT_GAME_H
+#ifndef _RUBY_GAME_H
+#define _RUBY_GAME_H
 
 namespace Seeker {
-  namespace Script {
+  namespace Ruby {
     class Game {
       public:
         static void init(RClass*);

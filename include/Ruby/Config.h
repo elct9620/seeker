@@ -2,11 +2,11 @@
 
 #include "Seeker.h"
 
-#ifndef _SCRIPT_CONFIG_H
-#define _SCRIPT_CONFIG_H
+#ifndef _RUBY_CONFIG_H
+#define _RUBY_CONFIG_H
 
 namespace Seeker {
-  namespace Script {
+  namespace Ruby {
     class Config {
       public:
         static void init(RClass*);

@@ -3,7 +3,7 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  namespace Script {
+  namespace Ruby {
     void Config::init(RClass* klass) {
       Engine* engine = Engine::instance();
 

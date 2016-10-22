@@ -3,15 +3,21 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  void Ruby::loadCore() {
-    Script::Engine::instance()->defineModule<Script::Config>("Config", &Script::Config::init);
-    Script::Engine::instance()->defineModule<Script::Game>("Game", &Script::Game::init);
+  namespace Script {
+    void Ruby::loadCore() {
+      namespace R = ::Seeker::Ruby;
 
-    // Load Config Script
-    Script::Engine::instance()->loadScript("../data/config.rb");
-  }
+      R::Engine* instance = R::Engine::instance();
 
-  void Ruby::loadScript() {
-    // TODO: Load all game script
+      instance->defineModule<R::Config>("Config", &R::Config::init);
+      instance->defineModule<R::Game>("Game", &R::Game::init);
+
+      // Load Config Ruby
+      instance->loadScript("../data/config.rb");
+    }
+
+    void Ruby::loadScript() {
+      // TODO: Load all game script
+    }
   }
 }

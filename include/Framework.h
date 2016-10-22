@@ -13,10 +13,6 @@ namespace Seeker {
   class Renderer;
   class Instance;
 
-  namespace Script {
-    class Engine;
-  }
-
   class Framework {
     public:
       static Framework* getInstance();
@@ -30,7 +26,9 @@ namespace Seeker {
       Window*  getWindow();
       Renderer* getRenderer();
 
-      Script::Engine* getScriptEngine();
+      template<class T> T* getScriptEngine() {
+        return T::instance();
+      }
 
     private:
       static Framework* instance;

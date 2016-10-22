@@ -53,9 +53,4 @@ namespace Seeker {
   Renderer* Framework::getRenderer() {
     return currentGameInstance->getRenderer();
   }
-
-  Script::Engine* Framework::getScriptEngine() {
-    return Script::Engine::instance();
-  }
-
 }

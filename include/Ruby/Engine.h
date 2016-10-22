@@ -14,13 +14,13 @@
 #include "mruby/compile.h"
 #include "mruby/value.h"
 
-#ifndef _SCRIPT_ENGINE_H
-#define _SCRIPT_ENGINE_H
+#ifndef _RUBY_ENGINE_H
+#define _RUBY_ENGINE_H
 
 using std::string;
 
 namespace Seeker {
-  namespace Script {
+  namespace Ruby {
     class Engine {
       public:
         static Engine* instance();

@@ -8,17 +8,13 @@
 #define _RUBY_H
 
 namespace Seeker {
-  class Ruby : public IScript {
-    public:
-      void loadCore();
-      void loadScript();
-  };
-
-  class FRuby : public IScript {
-    public:
-      void loadCore() {};
-      void loadScript() {};
-  };
+  namespace Script {
+    class Ruby : public IScript {
+      public:
+        void loadCore();
+        void loadScript();
+    };
+  }
 }
 
 #endif

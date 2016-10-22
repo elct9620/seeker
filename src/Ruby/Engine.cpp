@@ -4,7 +4,7 @@
 
 // MRB_API mrb_get_backtrace
 namespace Seeker {
-  namespace Script {
+  namespace Ruby {
     string Engine::basePath = string(SDL_GetBasePath());
     unordered_map<string, RClass*> Engine::definedClass = {};
     unordered_map<string, mrb_data_type> Engine::definedType = {};
