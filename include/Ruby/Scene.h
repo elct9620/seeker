@@ -17,6 +17,8 @@ namespace Seeker {
           Logger::Info("Scene %s is created.", name.c_str());
         };
 
+        string getName() { return name; }
+
         // mruby methods
         static void init(RClass* klass);
         static mrb_value mrb_initialize(mrb_state* mrb, mrb_value self);

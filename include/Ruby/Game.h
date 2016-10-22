@@ -12,6 +12,7 @@ namespace Seeker {
         static void init(RClass*);
 
         static mrb_value config(mrb_state* mrb, mrb_value self);
+        static mrb_value setScene(mrb_state* mrb, mrb_value self);
     };
   }
 }
