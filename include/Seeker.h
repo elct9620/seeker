@@ -39,3 +39,5 @@
 #include "Ruby/Engine.h"
 #include "Ruby/Config.h"
 #include "Ruby/Game.h"
+#include "Ruby/Scene.h"
+#include "Ruby/Actor.h"

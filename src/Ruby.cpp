@@ -12,12 +12,17 @@ namespace Seeker {
       instance->defineModule<R::Config>("Config", &R::Config::init);
       instance->defineModule<R::Game>("Game", &R::Game::init);
 
+      instance->defineClass<R::Scene>("Scene", &R::Scene::init);
+
       // Load Config Ruby
       instance->loadScript("../data/config.rb");
     }
 
     void Ruby::loadScript() {
       // TODO: Load all game script
+      ::Seeker::Ruby::Engine* instance = ::Seeker::Ruby::Engine::instance();
+
+      instance->loadScript("../data/main.rb");
     }
   }
 }

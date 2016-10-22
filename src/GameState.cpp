@@ -31,6 +31,7 @@ namespace Seeker {
   }
 
   bool GameState::transitionTo(Scene* _next) {
+    // TODO: Prevent delete script's scene
     if(nextScene) delete nextScene;
     if(prevScene) delete prevScene;
 
