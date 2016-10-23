@@ -35,8 +35,8 @@ namespace Seeker {
     private:
       static SDL_DisplayMode displayMode;
       static bool displayModeLoaded;
-      SDL_Window *currentWindow;
-      Renderer* renderer;
+      SDL_Window *currentWindow = nullptr;
+      Renderer* renderer = nullptr;
   };
 }
 

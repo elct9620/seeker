@@ -14,7 +14,7 @@ namespace Seeker {
       void decReference() { _references--; };
       int getReferenceCount() { return _references; }
 
-      int _references;
+      int _references = 0;
   };
 }
 

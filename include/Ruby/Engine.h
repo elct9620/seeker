@@ -81,7 +81,7 @@ namespace Seeker {
           T* application;
           application = (T*) DATA_PTR(self);
 
-          if(application != NULL) {
+          if(application) {
             delete application;
           }
 

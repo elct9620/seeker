@@ -22,7 +22,7 @@ namespace Seeker {
       mrb_get_args(mrb, "S|ii", &filename, &x, &y);
 
       string _filename(mrb_str_to_cstr(mrb, filename));
-      actor = new (mrb_alloca(mrb, sizeof(Actor))) Actor(_filename, x, y);
+      actor = new (mrb_alloca(mrb, sizeof(Actor))) Actor(_filename, int(x), int(y));
 
       DATA_PTR(self) = actor;
 

@@ -25,9 +25,9 @@ namespace Seeker {
 
 
     private:
-      Scene* currentScene;
-      Scene* prevScene;
-      Scene* nextScene;
+      Scene* currentScene = nullptr;
+      Scene* prevScene = nullptr;
+      Scene* nextScene = nullptr;
   };
 }
 

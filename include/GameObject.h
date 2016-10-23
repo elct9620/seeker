@@ -32,14 +32,14 @@ namespace Seeker {
       int getY();
 
     protected:
-      GameObject* parent;
+      GameObject* parent = nullptr;
 
       int x = 0;
       int y = 0;
       bool visible = true;
 
     private:
-      vector<GameObject*> children;
+      vector<GameObject*> children = {};
   };
 }
 

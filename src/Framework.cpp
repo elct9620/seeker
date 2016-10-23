@@ -14,7 +14,7 @@ namespace Seeker {
   }
 
   Framework* Framework::getInstance() {
-    if(instance != NULL) return instance;
+    if(instance) return instance;
     return new Framework();
   }
 

@@ -22,7 +22,7 @@ namespace Seeker {
       void clear();
 
     private:
-      SDL_Renderer* renderer;
+      SDL_Renderer* renderer = nullptr;
   };
 }
 

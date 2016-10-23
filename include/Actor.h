@@ -19,7 +19,7 @@ namespace Seeker {
       virtual void draw();
 
     private:
-      Sprite* sprite;
+      Sprite* sprite = nullptr;
   };
 }
 

@@ -24,9 +24,9 @@ namespace Seeker {
       void draw(int x, int y);
 
     private:
-      SDL_Texture* texture;
-      SDL_Surface* surface;
-      Renderer* renderer;
+      SDL_Texture* texture = nullptr;
+      SDL_Surface* surface = nullptr;
+      Renderer* renderer = nullptr;
   };
 }
 

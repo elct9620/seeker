@@ -14,7 +14,7 @@ namespace Seeker {
   void Actor::draw() {
     int drawX = 0, drawY = 0;
 
-    if(parent != NULL) {
+    if(parent) {
       drawX = parent->getX();
       drawY = parent->getY();
     }

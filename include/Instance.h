@@ -48,10 +48,10 @@ namespace Seeker {
       }
 
     private:
-      Window* window;
-      Renderer* renderer;
+      Window* window = nullptr;
+      Renderer* renderer = nullptr;
 
-      GameState* state;
+      GameState* state = nullptr;
 
       int lastTime = 0;
       bool stop = false;
