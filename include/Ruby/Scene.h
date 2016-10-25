@@ -11,22 +11,26 @@
 
 namespace Seeker {
   namespace Ruby {
-    class Scene : public ::Seeker::Scene {
+    class Scene {
       public:
-        Scene(string name) : name(name) {
-          Logger::Info("Scene %s is created.", name.c_str());
+
+        struct RScene {
+          string sceneName;
+          Seeker::Scene* get() {
+            return Seeker::Scene::get(sceneName);
+          }
         };
 
-        string getName() { return name; }
-
         // mruby methods
+        static struct mrb_data_type Type;
         static void init(RClass* klass);
+        static void mrb_free_scene(mrb_state* mrb, void* ptr);
         static mrb_value mrb_initialize(mrb_state* mrb, mrb_value self);
         static mrb_value mrb_add(mrb_state* mrb, mrb_value self);
         static mrb_value mrb_to(mrb_state* mrb, mrb_value self);
 
       private:
-        string name;
+        ~Scene();
     };
   }
 }

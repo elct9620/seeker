@@ -10,7 +10,10 @@ namespace Seeker {
   }
 
   GameObject::~GameObject() {
-
+    for(auto it : children) {
+      delete it;
+    }
+    children.clear();
   }
 
   void GameObject::update(int delta) {

@@ -7,7 +7,7 @@ namespace Seeker {
   const int Instance::FPS = 60;
   const int Instance::FIXED_DELTA_TIME = 1000/60;
 
-  Instance::Instance() : Instance(new GameState(new Scene())) {
+  Instance::Instance() : Instance(new GameState()) {
   }
 
   Instance::Instance(GameState* state) : state(state), stop(false) {

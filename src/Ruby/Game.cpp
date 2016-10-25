@@ -32,7 +32,8 @@ namespace Seeker {
       mrb_value scene;
       mrb_get_args(mrb, "o", &scene);
 
-      Scene* _scene = static_cast<Scene*>(DATA_PTR(scene));
+      Scene::RScene* _rscene = static_cast<Scene::RScene*>(DATA_PTR(scene));
+      Seeker::Scene* _scene = _rscene->get();
       if(_scene) {
         // TODO: implement alias for get game state
         Logger::Info("Set current scene to %s", _scene->getName().c_str());

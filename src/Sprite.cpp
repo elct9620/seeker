@@ -3,7 +3,7 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  Sprite::Sprite(string path, Renderer* _renderer) : texture(NULL), surface(NULL) {
+  Sprite::Sprite(string path, Renderer* _renderer) : texture(NULL), surface(NULL), filename(path) {
     renderer = _renderer == NULL ? Framework::getInstance()->getRenderer() : _renderer;
 
     surface = IMG_Load(path.c_str());
@@ -39,5 +39,9 @@ namespace Seeker {
 
   void Sprite::draw(int x, int y) {
     renderer->draw(texture, width, height, x, y);
+  }
+
+  void Sprite::release() {
+    Resource<Sprite>::unload(filename);
   }
 }

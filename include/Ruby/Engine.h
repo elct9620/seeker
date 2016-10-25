@@ -42,9 +42,6 @@ namespace Seeker {
         void defineClass(string name, void (*callback)(RClass*), RClass* parent) {
           RClass* klass = createClass(name, parent);
 
-          // TODO: Provide custom initializer options
-          mrb_define_method(mrb, klass, "initialize", &Engine::classInitializer<T>, MRB_ARGS_NONE());
-
           if(callback) {
             callback(klass);
           }
@@ -75,30 +72,6 @@ namespace Seeker {
 
         RClass* createClass(string name, RClass* parent);
         mrb_data_type* createDataType(string name);
-
-        template<class T>
-        inline static mrb_value classInitializer(mrb_state* mrb, mrb_value self) {
-          T* application;
-          application = (T*) DATA_PTR(self);
-
-          if(application) {
-            delete application;
-          }
-
-          string className(typeid(T).name());
-          mrb_data_type* dataType = getDataType(className) ;
-          if(dataType) {
-            DATA_TYPE(self) = dataType;
-          }
-
-          DATA_PTR(self) = NULL;
-
-          application = (T*) mrb_alloca(mrb, sizeof(T));
-
-          DATA_PTR(self) = application;
-
-          return self;
-        };
 
       private:
         static Engine* _instance;

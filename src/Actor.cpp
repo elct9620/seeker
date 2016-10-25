@@ -11,6 +11,10 @@ namespace Seeker {
     sprite = Resource<Sprite>::load(filename);
   }
 
+  Actor::~Actor() {
+    sprite->release();
+  }
+
   void Actor::draw() {
     int drawX = 0, drawY = 0;
 

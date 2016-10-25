@@ -14,7 +14,7 @@ namespace Seeker {
       Actor(Sprite* sprite, int x, int y) : GameObject(x, y), sprite(sprite) {};
       Actor(const string &filename);
       Actor(const string &filename, int x, int y);
-      ~Actor() { delete sprite; };
+      virtual ~Actor();
 
       virtual void draw();
 

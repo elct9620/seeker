@@ -15,7 +15,7 @@ namespace Seeker {
       GameState();
       GameState(Scene* scene);
 
-      ~GameState();
+      virtual ~GameState();
 
       virtual void update(long delta);
       virtual void render();
@@ -23,11 +23,9 @@ namespace Seeker {
       Scene* getCurrentScene();
       bool transitionTo(Scene* nextScene);
 
-
     private:
       Scene* currentScene = nullptr;
       Scene* prevScene = nullptr;
-      Scene* nextScene = nullptr;
   };
 }
 

@@ -106,6 +106,7 @@ namespace Seeker {
 
       if(klass == nullptr) {
         klass = mrb_define_class(mrb, name.c_str(), parent);
+        MRB_SET_INSTANCE_TT(klass, MRB_TT_DATA);
         definedClass.insert(std::pair<string, RClass*>(name, klass));
       }
 

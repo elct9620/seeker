@@ -10,11 +10,15 @@ namespace Seeker {
       engine->defineMethod(klass, "initialize", &Actor::mrb_initialize, MRB_ARGS_REQ(1) | MRB_ARGS_OPT(2));
     }
 
+    mrb_data_type Actor::Type = {"Actor", &Actor::mrb_free_actor};
+
+    void Actor::mrb_free_actor(mrb_state*, void*) {}
+
     mrb_value Actor::mrb_initialize(mrb_state* mrb, mrb_value self) {
-      Actor* actor = static_cast<Actor*>(DATA_PTR(self));
+      RActor* actor = static_cast<RActor*>(DATA_PTR(self));
 
       if(actor) {
-        delete actor;
+        mrb_free(mrb, actor);
       }
 
       mrb_value filename;
@@ -22,9 +26,12 @@ namespace Seeker {
       mrb_get_args(mrb, "S|ii", &filename, &x, &y);
 
       string _filename(mrb_str_to_cstr(mrb, filename));
-      actor = new (mrb_alloca(mrb, sizeof(Actor))) Actor(_filename, int(x), int(y));
+      actor = (RActor*)mrb_malloc(mrb, sizeof(RActor));
+
+      actor->p = new Seeker::Actor(_filename, x, y);
 
       DATA_PTR(self) = actor;
+      DATA_TYPE(self) = &Type;
 
       return self;
     }

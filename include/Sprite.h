@@ -22,11 +22,13 @@ namespace Seeker {
 
       bool prepare(SDL_Renderer* renderer);
       void draw(int x, int y);
+      void release();
 
     private:
       SDL_Texture* texture = nullptr;
       SDL_Surface* surface = nullptr;
       Renderer* renderer = nullptr;
+      string filename;
   };
 }
 
