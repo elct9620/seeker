@@ -32,11 +32,9 @@ namespace Seeker {
       mrb_value scene;
       mrb_get_args(mrb, "o", &scene);
 
-      Scene::RScene* _rscene = static_cast<Scene::RScene*>(DATA_PTR(scene));
-      Seeker::Scene* _scene = _rscene->get();
+      Scene* _scene = static_cast<Scene*>(mrb_get_datatype(mrb, scene, &Scene::Type));
       if(_scene) {
         // TODO: implement alias for get game state
-        Logger::Info("Set current scene to %s", _scene->getName().c_str());
         ::Seeker::Framework::getInstance()->getGameInstance()->getState()->transitionTo(_scene);
       } else {
         // TODO: create ruby error

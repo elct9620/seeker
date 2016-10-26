@@ -17,7 +17,9 @@ scene3.to scene4
 p scene.nil?
 p scene
 p scene.class
-#scene4.to scene
+scene4.to scene
+
+GC.start
 
 p ObjectSpace.count_objects
 
@@ -28,6 +30,8 @@ prev = scene4
   prev.to curr
   prev = curr
 end
+
+GC.start
 
 p ObjectSpace.count_objects
 

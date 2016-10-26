@@ -11,15 +11,10 @@
 
 namespace Seeker {
   namespace Ruby {
-    class Scene {
+    class Scene : public Seeker::Scene, public RubyObject {
       public:
-
-        struct RScene {
-          string sceneName;
-          Seeker::Scene* get() {
-            return Seeker::Scene::get(sceneName);
-          }
-        };
+        Scene(RObject* object, string name) : RubyObject(object), name(name) {};
+        ~Scene();
 
         // mruby methods
         static struct mrb_data_type Type;
@@ -30,7 +25,7 @@ namespace Seeker {
         static mrb_value mrb_to(mrb_state* mrb, mrb_value self);
 
       private:
-        ~Scene();
+        string name;
     };
   }
 }

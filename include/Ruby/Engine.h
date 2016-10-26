@@ -33,6 +33,9 @@ namespace Seeker {
         void executeScript(const string &script);
         void captureException();
 
+        void freezeObject(mrb_value object);
+        void releaseObject(mrb_value object);
+
         template<class T>
         void defineClass(string name, void (*callback)(RClass*)) {
             defineClass<T>(name, callback, mrb->object_class);

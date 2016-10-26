@@ -9,13 +9,10 @@
 
 namespace Seeker {
   namespace Ruby {
-    class Actor {
+    class Actor : public Seeker::Actor, public RubyObject {
       public:
-        Actor(const string &filename, int x, int y);
-
-        struct RActor {
-          Seeker::Actor* p;
-        };
+        Actor(RObject* _object, const string &filename, int x, int y);
+        ~Actor();
 
         // Ruby DSL
         static void init(RClass* klass);

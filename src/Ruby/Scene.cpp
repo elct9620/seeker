@@ -15,45 +15,47 @@ namespace Seeker {
       engine->defineMethod(klass, "to", &Scene::mrb_to, MRB_ARGS_REQ(1));
     }
 
-    void Scene::mrb_free_scene(mrb_state*, void*) {
+    void Scene::mrb_free_scene(mrb_state* mrb, void* ptr) {
+      Scene* scene = static_cast<Scene*>(ptr);
+      if(scene) {
+        // Object didn't move into C++ world, free it by Ruby
+        scene->~Scene();
+        mrb_free(mrb, ptr);
+      }
     }
 
     mrb_value Scene::mrb_initialize(mrb_state* mrb, mrb_value self) {
-      RScene* rscene = static_cast<RScene*>(DATA_PTR(self));
+      Scene* scene = static_cast<Scene*>(DATA_PTR(self));
 
-      if(rscene) {
-        mrb_free(mrb, rscene);
+      if(scene) {
+        delete scene;
       }
 
       mrb_value name;
       mrb_get_args(mrb, "S", &name);
 
       string sceneName(mrb_str_to_cstr(mrb, name));
-      rscene  = (RScene*)mrb_malloc(mrb, sizeof(RScene));
-      rscene->sceneName = sceneName;
+      void* p  = mrb_malloc(mrb, sizeof(Scene));
+      scene = new (p) Scene(mrb_obj_ptr(self), sceneName);
 
-      // Initialize Game Scene
-      Seeker::Scene::create(sceneName);
-
-      DATA_PTR(self) = rscene;
+      DATA_PTR(self) = scene;
       DATA_TYPE(self) = &Type;
 
       return self;
     }
 
     mrb_value Scene::mrb_add(mrb_state* mrb, mrb_value self) {
-      RScene* rscene = static_cast<RScene*>(mrb_get_datatype(mrb, self, &Type));
+      Scene* scene = static_cast<Scene*>(mrb_get_datatype(mrb, self, &Type));
 
       mrb_value object;
       mrb_get_args(mrb, "o", &object);
 
       // TODO: Define GameObject data type
-      Actor::RActor *actor = (Actor::RActor*)DATA_PTR(object);
-      Seeker::GameObject* gameObject = static_cast<Seeker::GameObject*>(actor->p);
-      Seeker::Scene* scene = rscene->get();
+      Actor* actor = static_cast<Actor*>(mrb_get_datatype(mrb, object, &Actor::Type));
 
-      if(gameObject && scene) {
-        scene->add(gameObject);
+      if(actor && scene) {
+        scene->add(actor);
+        mrb_gc_register(mrb, object);
       } else {
         // TODO: create ruby error
         Logger::Error("Cannot add non GameObject into Scene.");
@@ -63,22 +65,26 @@ namespace Seeker {
     }
 
     mrb_value Scene::mrb_to(mrb_state* mrb, mrb_value self) {
-      RScene* rscene = static_cast<RScene*>(mrb_get_datatype(mrb, self, &Type));
-      Seeker::Scene* scene = rscene->get();
+      Scene* scene = static_cast<Scene*>(mrb_get_datatype(mrb, self, &Type));
 
       mrb_value nextScene;
       mrb_get_args(mrb, "o", &nextScene);
 
-      RScene* _nextRScene = static_cast<RScene*>(mrb_get_datatype(mrb, nextScene, &Type));
-      Seeker::Scene* _nextScene = _nextRScene->get();
+      Scene* _nextScene = static_cast<Scene*>(mrb_get_datatype(mrb, nextScene, &Type));
       if(_nextScene) {
         scene->to(_nextScene);
+        // Move GC controller into C++
+        mrb_gc_register(mrb, nextScene);
       } else {
         // TODO: create ruby error
         Logger::Error("Cannot transition to non Scene object");
       }
 
       return self;
+    }
+
+    // Instance Method
+    Scene::~Scene() {
     }
 
   }

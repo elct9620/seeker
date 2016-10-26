@@ -89,6 +89,14 @@ namespace Seeker {
       }
     }
 
+    void Engine::freezeObject(mrb_value object) {
+      mrb_gc_register(mrb, object);
+    }
+
+    void Engine::releaseObject(mrb_value object) {
+      mrb_gc_unregister(mrb, object);
+    }
+
     void Engine::defineMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
       mrb_define_method(mrb, klass, name.c_str(), func, aspec);
     }

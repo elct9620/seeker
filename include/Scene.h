@@ -15,11 +15,8 @@ using std::unordered_map;
 namespace Seeker {
   class Scene {
     public:
+      Scene();
       virtual ~Scene();
-
-      static Scene* create(const string& name);
-      static Scene* get(const string& name);
-      static int count();
 
       virtual void update(int delta);
       virtual void render();
@@ -27,15 +24,9 @@ namespace Seeker {
       void add(GameObject* object);
       void to(Scene* scene);
       bool loaded();
-      string getName();
 
     private:
-      Scene(const string& name);
-
-      static unordered_map<string, Scene*> scenes;
-
       vector<GameObject*> objects = {};
-      string name = "";
   };
 }
 
