@@ -33,6 +33,20 @@ namespace Seeker {
     delete instance;
   }
 
+  // Alias Method
+  Instance* Framework::Game() {
+    return Instance()->GetGame();
+  }
+
+  Window* Framework::Window() {
+    return Instance()->GetWindow();
+  }
+
+  Renderer* Framework::Renderer() {
+    return Instance()->GetRenderer();
+  }
+
+  // Instance Method
   Instance* Framework::createGame() {
     try {
       if(currentGame) {
@@ -48,15 +62,15 @@ namespace Seeker {
     return NULL;
   }
 
-  Instance* Framework::Game() {
+  Instance* Framework::GetGame() {
     return currentGame;
   }
 
-  Window* Framework::Window() {
+  Window* Framework::GetWindow() {
     return currentGame->Window();
   }
 
-  Renderer* Framework::Renderer() {
+  Renderer* Framework::GetRenderer() {
     return currentGame->Renderer();
   }
 }

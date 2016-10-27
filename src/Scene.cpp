@@ -35,7 +35,7 @@ namespace Seeker {
   }
 
   void Scene::To(Scene* scene) {
-    Framework::Instance()->Game()->State()->TransitionTo(scene);
+    Framework::Game()->State()->TransitionTo(scene);
   }
 
 }

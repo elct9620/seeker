@@ -18,13 +18,18 @@ namespace Seeker {
       static Framework* Instance();
       static void Quit();
 
+      // Alias
+      static class Instance* Game();
+      static class Window* Window();
+      static class Renderer* Renderer();
+
       static string DEFAULT_WINDOW_NAME;
 
       class Instance* createGame();
-      class Instance* Game();
+      class Instance* GetGame();
 
-      Window*  Window();
-      Renderer* Renderer();
+      class Window*  GetWindow();
+      class Renderer* GetRenderer();
 
       template<class T> T* Script() {
         return T::instance();

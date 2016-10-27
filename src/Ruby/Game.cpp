@@ -35,7 +35,7 @@ namespace Seeker {
       Scene* _scene = static_cast<Scene*>(mrb_get_datatype(mrb, scene, &Scene::Type));
       if(_scene) {
         // TODO: implement alias for get game state
-        Seeker::Framework::Instance()->Game()->State()->TransitionTo(_scene);
+        Seeker::Framework::Game()->State()->TransitionTo(_scene);
         Engine::Instance()->FreezeObject(scene);
       } else {
         // TODO: create ruby error

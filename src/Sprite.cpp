@@ -13,7 +13,7 @@ namespace Seeker {
       Logger::Error("Failed to load texture, %s", IMG_GetError());
     }
 
-    Renderer* renderer = Framework::Instance()->Renderer();
+    Renderer* renderer = Framework::Renderer();
     renderer->CreateSprite(this);
   }
 
@@ -37,7 +37,7 @@ namespace Seeker {
   }
 
   void Sprite::Draw(int x, int y) {
-    Renderer* renderer = Framework::Instance()->Renderer();
+    Renderer* renderer = Framework::Renderer();
     renderer->Draw(texture, Width, Height, x, y);
   }
 
