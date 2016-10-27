@@ -18,12 +18,12 @@ namespace Seeker {
 
   class Event {
     public:
-      static void refresh();
+      static void Refresh();
 
-      static void on(ISubscriber* event);
-      static void off(ISubscriber* event);
-      static bool exists(ISubscriber* event);
-      static void dispatch(const EventType type);
+      static void On(ISubscriber* event);
+      static void Off(ISubscriber* event);
+      static bool Exists(ISubscriber* event);
+      static void Dispatch(const EventType type);
 
     private:
       static vector<ISubscriber*> subscribers;

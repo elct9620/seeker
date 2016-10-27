@@ -10,9 +10,9 @@ namespace Seeker {
     template<class T> friend class Resource;
 
     private:
-      void incReference() { _references++; };
-      void decReference() { _references--; };
-      int getReferenceCount() { return _references; }
+      void IncReference() { _references++; };
+      void DecReference() { _references--; };
+      int ReferenceCount() { return _references; }
 
       int _references = 0;
   };

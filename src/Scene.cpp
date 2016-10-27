@@ -13,29 +13,29 @@ namespace Seeker {
     objects.clear();
   }
   // Instance Method
-  void Scene::update(int delta) {
+  void Scene::Update(int delta) {
     for(auto it : objects) {
-      it->update(delta);
+      it->Update(delta);
     }
   }
 
-  void Scene::render() {
+  void Scene::Render() {
     for(auto it : objects) {
-      it->render();
+      it->Render();
     }
   }
 
-  void Scene::add(GameObject* object) {
+  void Scene::Add(GameObject* object) {
     objects.push_back(object);
   }
 
-  bool Scene::loaded() {
+  bool Scene::Loaded() {
     // TODO: Check all children assets is loaded
     return true;
   }
 
-  void Scene::to(Scene* scene) {
-    Framework::getInstance()->getGameInstance()->getState()->transitionTo(scene);
+  void Scene::To(Scene* scene) {
+    Framework::Instance()->Game()->State()->TransitionTo(scene);
   }
 
 }

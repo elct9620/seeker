@@ -11,8 +11,8 @@ namespace Seeker {
       public:
         static void init(RClass*);
 
-        static mrb_value config(mrb_state* mrb, mrb_value self);
-        static mrb_value setScene(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_config(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_set_scene(mrb_state* mrb, mrb_value self);
     };
   }
 }

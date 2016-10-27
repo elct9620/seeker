@@ -18,14 +18,14 @@ namespace Seeker {
       mrb_close(mrb);
     }
 
-    Engine* Engine::instance() {
+    Engine* Engine::Instance() {
       if(_instance == NULL) {
         _instance = new Engine;
       }
       return _instance;
     }
 
-    mrb_data_type* Engine::getDataType(string name) {
+    mrb_data_type* Engine::DataType(string name) {
       auto it = definedType.find(name);
       if(it != definedType.end()) {
         return &(*it).second;
@@ -34,7 +34,7 @@ namespace Seeker {
       return nullptr;
     }
 
-    RClass* Engine::getClass(string name) {
+    RClass* Engine::Class(string name) {
       auto it = definedClass.find(name);
       if(it != definedClass.end()) {
         return (*it).second;
@@ -43,7 +43,7 @@ namespace Seeker {
       return nullptr;
     }
 
-    RClass* Engine::getModule(string name) {
+    RClass* Engine::Module(string name) {
       auto it = definedModule.find(name);
       if(it != definedModule.end()) {
         return (*it).second;
@@ -52,10 +52,10 @@ namespace Seeker {
       return nullptr;
     }
 
-    Engine* Engine::_instance = Engine::instance();
+    Engine* Engine::_instance = Engine::Instance();
 
     // Engine Core
-    void Engine::loadScript(const string &filename) {
+    void Engine::LoadScript(const string &filename) {
       string fullPath = (basePath + filename);
 
       FILE *file;
@@ -74,43 +74,43 @@ namespace Seeker {
 
       fclose(file);
 
-      captureException();
+      CaptureException();
     }
 
-    void Engine::executeScript(const string &script) {
+    void Engine::ExecuteScript(const string &script) {
       mrb_load_string(mrb, script.c_str());
-      captureException();
+      CaptureException();
     }
 
-    void Engine::captureException() {
+    void Engine::CaptureException() {
       if(mrb->exc) {
         mrb_value exc = mrb_obj_value(mrb->exc);
         Logger::Error(mrb_str_to_cstr(mrb, mrb_inspect(mrb, exc)));
       }
     }
 
-    void Engine::freezeObject(mrb_value object) {
+    void Engine::FreezeObject(mrb_value object) {
       mrb_gc_register(mrb, object);
     }
 
-    void Engine::releaseObject(mrb_value object) {
+    void Engine::ReleaseObject(mrb_value object) {
       mrb_gc_unregister(mrb, object);
     }
 
-    void Engine::defineMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+    void Engine::DefineMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
       mrb_define_method(mrb, klass, name.c_str(), func, aspec);
     }
 
-    void Engine::defineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+    void Engine::DefineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
       mrb_define_class_method(mrb, klass, name.c_str(), func, aspec);
     }
 
-    void Engine::defineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
+    void Engine::DefineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
       mrb_define_module_function(mrb, klass, name.c_str(), func, aspec);
     }
 
-    RClass* Engine::createClass(string name, RClass* parent) {
-      RClass* klass = getClass(name);
+    RClass* Engine::CreateClass(string name, RClass* parent) {
+      RClass* klass = Class(name);
 
       if(klass == nullptr) {
         klass = mrb_define_class(mrb, name.c_str(), parent);
@@ -121,8 +121,8 @@ namespace Seeker {
       return klass;
     }
 
-    mrb_data_type* Engine::createDataType(string name) {
-      mrb_data_type* dataType = getDataType(name);
+    mrb_data_type* Engine::CreateDataType(string name) {
+      mrb_data_type* dataType = DataType(name);
       if(dataType) {
         return dataType;
       }
@@ -131,7 +131,7 @@ namespace Seeker {
       definedType.insert(std::pair<string, mrb_data_type>(name, newType));
 
       // Redo to get the pointer saved in unorederd map
-      return createDataType(name);
+      return DataType(name);
     }
   }
 }

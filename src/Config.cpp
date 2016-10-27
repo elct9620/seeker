@@ -7,8 +7,8 @@ namespace Seeker {
     // Name
     Framework::DEFAULT_WINDOW_NAME,
     // Width
-    Window::getDisplayWidth(),
+    Window::DisplayWidth(),
     // Height
-    Window::getDisplayHeight()
+    Window::DisplayHeight()
   };
 }

@@ -4,28 +4,28 @@
 
 namespace Seeker {
   Actor::Actor(const string &filename) {
-    sprite = Resource<Sprite>::load(filename);
+    sprite = Resource<Sprite>::Load(filename);
   }
 
   Actor::Actor(const string &filename, int x, int y) : GameObject(x, y) {
-    sprite = Resource<Sprite>::load(filename);
+    sprite = Resource<Sprite>::Load(filename);
   }
 
   Actor::~Actor() {
-    sprite->release();
+    sprite->Destroy();
   }
 
-  void Actor::draw() {
+  void Actor::Draw() {
     int drawX = 0, drawY = 0;
 
     if(parent) {
-      drawX = parent->getX();
-      drawY = parent->getY();
+      drawX = parent->X();
+      drawY = parent->Y();
     }
 
     drawX += x;
     drawY += y;
 
-    sprite->draw(x, y);
+    sprite->Draw(x, y);
   }
 }

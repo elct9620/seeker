@@ -27,29 +27,29 @@ namespace Seeker {
 
       Instance();
       Instance(GameState* state);
-      ~Instance();
+      virtual ~Instance();
 
-      Window* getWindow() { return window; }
-      Renderer* getRenderer() { return renderer; }
+      Window* Window() { return window; }
+      Renderer* Renderer() { return renderer; }
 
-      void run();
-      void update();
+      void Run();
+      void Update();
 
-      long currentTime();
+      long CurrentTime();
 
-      virtual void onEvent(const EventType evnet);
+      virtual void OnEvent(const EventType evnet);
 
-      GameState* getState();
-      GameState* setState(GameState* _state);
-      Scene* getCurrentScene();
+      GameState* State();
+      GameState* SetState(GameState* _state);
+      Scene* CurrentScene();
 
-      template<class T> T* getScriptEngine() {
+      template<class T> T* Script() {
         return T::instance();
       }
 
     private:
-      Window* window = nullptr;
-      Renderer* renderer = nullptr;
+      class Window* window = nullptr;
+      class Renderer* renderer = nullptr;
 
       GameState* state = nullptr;
 

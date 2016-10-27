@@ -11,50 +11,49 @@ namespace Seeker {
   }
 
   Instance::Instance(GameState* state) : state(state), stop(false) {
-    window = new Window;
-    if(window->create(Config::Window.name, Config::Window.width, Config::Window.height) == false) {
+    window = new class Window;
+    if(window->Create(Config::Window.Name, Config::Window.Width, Config::Window.Height) == false) {
       // TODO: Use custom exception instead it.
-      free(window);
+      delete window;
       throw false;
     }
-    renderer = window->getRenderer();
+    renderer = window->Renderer();
 
-    Event::on(this);
+    Event::On(this);
 
-    lastTime = currentTime();
+    lastTime = CurrentTime();
   }
 
   Instance::~Instance() {
-    free(window);
-    free(renderer);
+    delete window;
   }
 
-  void Instance::run() {
+  void Instance::Run() {
     while(!stop) {
-      Event::refresh();
-      update();
+      Event::Refresh();
+      Update();
     }
   }
 
-  void Instance::update() {
-    long realTime = currentTime();
+  void Instance::Update() {
+    long realTime = CurrentTime();
 
     while(lastTime < realTime) {
       lastTime += FIXED_DELTA_TIME;
       // TODO: Modify to use "GameState"
       if(state) {
-        state->update(FIXED_DELTA_TIME);
-        IScript::updateAll(FIXED_DELTA_TIME);
+        state->Update(FIXED_DELTA_TIME);
+        IScript::UpdateAll(FIXED_DELTA_TIME);
       }
     }
 
-    renderer->clear();
-    state->render();
-    IScript::renderAll();
-    renderer->render();
+    renderer->Clear();
+    state->Render();
+    IScript::RenderAll();
+    renderer->Render();
   }
 
-  long Instance::currentTime() {
+  long Instance::CurrentTime() {
     auto now = high_resolution_clock::now();
     auto nowInMillisecond = time_point_cast<milliseconds>(now);
     auto epoch = nowInMillisecond.time_since_epoch();
@@ -63,7 +62,7 @@ namespace Seeker {
   }
 
   // ISubscriber implement
-  void Instance::onEvent(const EventType type) {
+  void Instance::OnEvent(const EventType type) {
     switch(type) {
       case EventType::Key:
       case EventType::Quit:
@@ -73,16 +72,16 @@ namespace Seeker {
     }
   }
 
-  GameState* Instance::getState() {
+  GameState* Instance::State() {
     return state;
   }
 
-  GameState* Instance::setState(GameState* _state) {
+  GameState* Instance::SetState(GameState* _state) {
     state = _state;
     return state;
   }
 
-  Scene* Instance::getCurrentScene() {
-    return state->getCurrentScene();
+  Scene* Instance::CurrentScene() {
+    return state->CurrentScene();
   }
 }

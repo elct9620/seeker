@@ -13,12 +13,12 @@ using std::unordered_map;
 namespace Seeker {
   class IScript {
     public:
-      virtual void loadCore() = 0;
-      virtual void loadScript() = 0;
-      virtual void render() {};
-      virtual void update(int) {};
+      virtual void LoadCore() = 0;
+      virtual void LoadScript() = 0;
+      virtual void Render() {};
+      virtual void Update(int) {};
 
-      template<class T> static IScript* getEngine() {
+      template<class T> static IScript* Engine() {
         const char* name(typeid(T).name());
         auto it = engines.find(name);
         if(it != engines.end()) {
@@ -30,25 +30,25 @@ namespace Seeker {
         return engine;
       }
 
-      template<class T> static void init() {
+      template<class T> static void Init() {
         static_assert(std::is_base_of<IScript, T>::value, "The script engine loader should implement IScript.");
-        getEngine<T>()->loadCore();
+        Engine<T>()->LoadCore();
       }
 
-      template<class T> static void setup() {
+      template<class T> static void Setup() {
         static_assert(std::is_base_of<IScript, T>::value, "The script engine loader should implement IScript.");
-        getEngine<T>()->loadScript();
+        Engine<T>()->LoadScript();
       }
 
-      static void renderAll() {
+      static void RenderAll() {
         for(auto it : engines) {
-          it.second->render();
+          it.second->Render();
         }
       }
 
-      static void updateAll(int delta) {
+      static void UpdateAll(int delta) {
         for(auto it : engines) {
-          it.second->update(delta);
+          it.second->Update(delta);
         }
       }
 

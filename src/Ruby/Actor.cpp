@@ -5,9 +5,9 @@
 namespace Seeker {
   namespace Ruby {
     void Actor::init(RClass* klass) {
-      Engine* engine = Engine::instance();
+      Engine* engine = Engine::Instance();
 
-      engine->defineMethod(klass, "initialize", &Actor::mrb_initialize, MRB_ARGS_REQ(1) | MRB_ARGS_OPT(2));
+      engine->DefineMethod(klass, "initialize", &Actor::mrb_initialize, MRB_ARGS_REQ(1) | MRB_ARGS_OPT(2));
     }
 
     mrb_data_type Actor::Type = {"Actor", &Actor::mrb_free_actor};

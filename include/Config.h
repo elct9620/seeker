@@ -15,9 +15,9 @@ namespace Seeker {
   class Config {
     public:
       static struct WindowSetting {
-        string name;
-        int width;
-        int height;
+        string Name;
+        int Width;
+        int Height;
       } Window;
 
     private:

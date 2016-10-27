@@ -8,11 +8,11 @@ namespace Seeker {
     struct mrb_data_type Scene::Type = { "Scene", &Scene::mrb_free_scene };
 
     void Scene::init(RClass* klass) {
-      Engine* engine = Engine::instance();
+      Engine* engine = Engine::Instance();
 
-      engine->defineMethod(klass, "initialize", &Scene::mrb_initialize, MRB_ARGS_REQ(1));
-      engine->defineMethod(klass, "add", &Scene::mrb_add, MRB_ARGS_REQ(1));
-      engine->defineMethod(klass, "to", &Scene::mrb_to, MRB_ARGS_REQ(1));
+      engine->DefineMethod(klass, "initialize", &Scene::mrb_initialize, MRB_ARGS_REQ(1));
+      engine->DefineMethod(klass, "add", &Scene::mrb_add, MRB_ARGS_REQ(1));
+      engine->DefineMethod(klass, "to", &Scene::mrb_to, MRB_ARGS_REQ(1));
     }
 
     void Scene::mrb_free_scene(mrb_state* mrb, void* ptr) {
@@ -54,8 +54,8 @@ namespace Seeker {
       Actor* actor = static_cast<Actor*>(mrb_get_datatype(mrb, object, &Actor::Type));
 
       if(actor && scene) {
-        scene->add(actor);
-        mrb_gc_register(mrb, object);
+        scene->Add(actor);
+        Engine::Instance()->FreezeObject(object);
       } else {
         // TODO: create ruby error
         Logger::Error("Cannot add non GameObject into Scene.");
@@ -72,9 +72,9 @@ namespace Seeker {
 
       Scene* _nextScene = static_cast<Scene*>(mrb_get_datatype(mrb, nextScene, &Type));
       if(_nextScene) {
-        scene->to(_nextScene);
+        scene->To(_nextScene);
         // Move GC controller into C++
-        mrb_gc_register(mrb, nextScene);
+        Engine::Instance()->FreezeObject(nextScene);
       } else {
         // TODO: create ruby error
         Logger::Error("Cannot transition to non Scene object");

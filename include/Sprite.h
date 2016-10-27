@@ -16,12 +16,12 @@ namespace Seeker {
       Sprite(string path);
       ~Sprite();
 
-      int width;
-      int height;
+      int Width;
+      int Height;
 
-      bool prepare(SDL_Renderer* renderer);
-      void draw(int x, int y);
-      void release();
+      bool Prepare(SDL_Renderer* renderer);
+      void Draw(int x, int y);
+      void Destroy();
 
     private:
       SDL_Texture* texture = nullptr;

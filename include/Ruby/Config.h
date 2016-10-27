@@ -11,9 +11,9 @@ namespace Seeker {
       public:
         static void init(RClass*);
 
-        static mrb_value setName(mrb_state* mrb, mrb_value self);
-        static mrb_value setWidth(mrb_state* mrb, mrb_value self);
-        static mrb_value setHeight(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_set_name(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_set_width(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_set_height(mrb_state* mrb, mrb_value self);
     };
   }
 }

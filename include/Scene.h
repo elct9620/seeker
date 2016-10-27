@@ -18,12 +18,12 @@ namespace Seeker {
       Scene();
       virtual ~Scene();
 
-      virtual void update(int delta);
-      virtual void render();
+      virtual void Update(int delta);
+      virtual void Render();
 
-      void add(GameObject* object);
-      void to(Scene* scene);
-      bool loaded();
+      void Add(GameObject* object);
+      void To(Scene* scene);
+      bool Loaded();
 
     private:
       vector<GameObject*> objects = {};

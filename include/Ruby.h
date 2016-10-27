@@ -11,8 +11,8 @@ namespace Seeker {
   namespace Script {
     class Ruby : public IScript {
       public:
-        void loadCore();
-        void loadScript();
+        void LoadCore();
+        void LoadScript();
     };
   }
 }

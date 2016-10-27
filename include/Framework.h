@@ -15,18 +15,18 @@ namespace Seeker {
 
   class Framework {
     public:
-      static Framework* getInstance();
-      static void quit();
+      static Framework* Instance();
+      static void Quit();
 
       static string DEFAULT_WINDOW_NAME;
 
-      Instance* createGameInstance();
-      Instance* getGameInstance();
+      class Instance* createGame();
+      class Instance* Game();
 
-      Window*  getWindow();
-      Renderer* getRenderer();
+      Window*  Window();
+      Renderer* Renderer();
 
-      template<class T> T* getScriptEngine() {
+      template<class T> T* Script() {
         return T::instance();
       }
 
@@ -36,7 +36,7 @@ namespace Seeker {
       Framework();
       ~Framework();
 
-      Instance* currentGameInstance;
+      class Instance* currentGame;
 
   };
 }

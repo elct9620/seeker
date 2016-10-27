@@ -16,7 +16,7 @@ namespace Seeker {
       Actor(const string &filename, int x, int y);
       virtual ~Actor();
 
-      virtual void draw();
+      virtual void Draw();
 
     private:
       Sprite* sprite = nullptr;

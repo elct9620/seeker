@@ -15,7 +15,7 @@ namespace Seeker {
 
         virtual ~RubyObject() {
           mrb_value object = mrb_obj_value(_object);
-          Engine::instance()->releaseObject(object);
+          Engine::Instance()->ReleaseObject(object);
           DATA_PTR(object) = NULL;
         };
 

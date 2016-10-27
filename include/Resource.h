@@ -18,7 +18,7 @@ namespace Seeker {
   template<class T>
   class Resource {
     public:
-      inline static T* load(const string &filename) {
+      inline static T* Load(const string &filename) {
         static_assert(std::is_base_of<IResource, T>::value, "Load resource should implement IResource interface.");
 
         if(filename.empty()) {
@@ -28,12 +28,12 @@ namespace Seeker {
 
         auto it = resources.find(filename); // NOTE: Find why cannot use unordered_map<string, T*>::iterator
         if(it != resources.end()) {
-          (*it).second->incReference();
+          (*it).second->IncReference();
           return (*it).second;
         }
 
         T* resource = new T(filename);
-        resource->incReference();
+        resource->IncReference();
 
         resources.insert(std::pair<string, T*>(filename, resource));
 
@@ -42,7 +42,7 @@ namespace Seeker {
         return resource;
       }
 
-      inline static bool unload(const string &filename) {
+      inline static bool Unload(const string &filename) {
         if(filename.empty()) {
           Logger::Error("The resource name cannot be empty.");
           return false;
@@ -50,8 +50,8 @@ namespace Seeker {
 
         auto it = resources.find(filename);
         if(it != resources.end()) {
-          (*it).second->decReference();
-          if( (*it).second->getReferenceCount() == 0) {
+          (*it).second->DecReference();
+          if( (*it).second->ReferenceCount() == 0) {
             delete (*it).second;
             resources.erase(it);
             Logger::Debug("Resource %s is unloaded.", filename.c_str());

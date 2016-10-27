@@ -12,20 +12,20 @@ int main(int, char**) {
   }
 
   // Initialize Game
-  IScript::init<Script::Ruby>();
-  Instance* instance = Framework::getInstance()->createGameInstance();
+  IScript::Init<Script::Ruby>();
+  Instance* instance = Framework::Instance()->createGame();
 
   if(instance == NULL) {
-    Framework::quit();
+    Framework::Quit();
     return 1;
   }
 
   // Setup Game and Run
-  IScript::setup<Script::Ruby>();
-  instance->run();
+  IScript::Setup<Script::Ruby>();
+  instance->Run();
 
   // Exit Game
-  Framework::quit();
+  Framework::Quit();
 
   return 0;
 }

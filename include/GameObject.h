@@ -18,18 +18,18 @@ namespace Seeker {
       GameObject(int x, int y) : x(x), y(y) {} ;
       virtual ~GameObject();
 
-      virtual void update(int delta);
-      virtual void render();
+      virtual void Update(int delta);
+      virtual void Render();
 
-      virtual void draw() = 0;
+      virtual void Draw() = 0;
 
-      void addChild(GameObject* child);
-      void removeChild(GameObject* child);
+      void AddChild(GameObject* child);
+      void RemoveChild(GameObject* child);
 
-      int setX(int _x);
-      int setY(int _y);
-      int getX();
-      int getY();
+      int SetX(int _x);
+      int SetY(int _y);
+      int X();
+      int Y();
 
     protected:
       GameObject* parent = nullptr;

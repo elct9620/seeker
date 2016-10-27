@@ -4,26 +4,26 @@
 
 namespace Seeker {
   namespace Script {
-    void Ruby::loadCore() {
-      namespace R = ::Seeker::Ruby;
+    void Ruby::LoadCore() {
+      namespace R = Seeker::Ruby;
 
-      R::Engine* instance = R::Engine::instance();
+      R::Engine* instance = R::Engine::Instance();
 
-      instance->defineModule<R::Config>("Config", &R::Config::init);
-      instance->defineModule<R::Game>("Game", &R::Game::init);
+      instance->DefineModule<R::Config>("Config", &R::Config::init);
+      instance->DefineModule<R::Game>("Game", &R::Game::init);
 
-      instance->defineClass<R::Scene>("Scene", &R::Scene::init);
-      instance->defineClass<R::Actor>("Actor", &R::Actor::init);
+      instance->DefineClass<R::Scene>("Scene", &R::Scene::init);
+      instance->DefineClass<R::Actor>("Actor", &R::Actor::init);
 
       // Load Config Ruby
-      instance->loadScript("../data/config.rb");
+      instance->LoadScript("../data/config.rb");
     }
 
-    void Ruby::loadScript() {
+    void Ruby::LoadScript() {
       // TODO: Load all game script
-      ::Seeker::Ruby::Engine* instance = ::Seeker::Ruby::Engine::instance();
+      Seeker::Ruby::Engine* instance = Seeker::Ruby::Engine::Instance();
 
-      instance->loadScript("../data/main.rb");
+      instance->LoadScript("../data/main.rb");
     }
   }
 }

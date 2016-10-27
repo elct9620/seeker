@@ -23,27 +23,27 @@ namespace Seeker {
   namespace Ruby {
     class Engine {
       public:
-        static Engine* instance();
+        static Engine* Instance();
 
-        static mrb_data_type* getDataType(string name);
-        static RClass* getClass(string name);
-        static RClass* getModule(string name);
+        static mrb_data_type* DataType(string name);
+        static RClass* Class(string name);
+        static RClass* Module(string name);
 
-        void loadScript(const string &filename);
-        void executeScript(const string &script);
-        void captureException();
+        void LoadScript(const string &filename);
+        void ExecuteScript(const string &script);
+        void CaptureException();
 
-        void freezeObject(mrb_value object);
-        void releaseObject(mrb_value object);
+        void FreezeObject(mrb_value object);
+        void ReleaseObject(mrb_value object);
 
         template<class T>
-        void defineClass(string name, void (*callback)(RClass*)) {
-            defineClass<T>(name, callback, mrb->object_class);
+        void DefineClass(string name, void (*callback)(RClass*)) {
+            DefineClass<T>(name, callback, mrb->object_class);
         }
 
         template<class T>
-        void defineClass(string name, void (*callback)(RClass*), RClass* parent) {
-          RClass* klass = createClass(name, parent);
+        void DefineClass(string name, void (*callback)(RClass*), RClass* parent) {
+          RClass* klass = CreateClass(name, parent);
 
           if(callback) {
             callback(klass);
@@ -51,8 +51,8 @@ namespace Seeker {
         }
 
         template<class T>
-        void defineModule(string name, void (*callback)(RClass*)) {
-          RClass* klass = getModule(name);
+        void DefineModule(string name, void (*callback)(RClass*)) {
+          RClass* klass = Module(name);
 
           if(klass == nullptr) {
             klass = mrb_define_module(mrb, name.c_str());
@@ -64,17 +64,17 @@ namespace Seeker {
           }
         }
 
-        void defineMethod(RClass* klass, string name,  mrb_func_t func, mrb_aspec aspec);
-        void defineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
-        void defineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
+        void DefineMethod(RClass* klass, string name,  mrb_func_t func, mrb_aspec aspec);
+        void DefineClassMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
+        void DefineModuleMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec);
 
 
       private:
         Engine();
         ~Engine();
 
-        RClass* createClass(string name, RClass* parent);
-        mrb_data_type* createDataType(string name);
+        RClass* CreateClass(string name, RClass* parent);
+        mrb_data_type* CreateDataType(string name);
 
       private:
         static Engine* _instance;

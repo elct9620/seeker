@@ -6,15 +6,15 @@ namespace Seeker {
   Sprite::Sprite(string path) : texture(NULL), surface(NULL), filename(path) {
     surface = IMG_Load(path.c_str());
 
-    width = 0;
-    height = 0;
+    Width = 0;
+    Height = 0;
 
     if(surface == NULL) {
       Logger::Error("Failed to load texture, %s", IMG_GetError());
     }
 
-    Renderer* renderer = Framework::getInstance()->getRenderer();
-    renderer->createSprite(this);
+    Renderer* renderer = Framework::Instance()->Renderer();
+    renderer->CreateSprite(this);
   }
 
   Sprite::~Sprite() {
@@ -22,7 +22,7 @@ namespace Seeker {
     SDL_DestroyTexture(texture);
   }
 
-  bool Sprite::prepare(SDL_Renderer* renderer) {
+  bool Sprite::Prepare(SDL_Renderer* renderer) {
     if(texture) return true;
 
     texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -31,17 +31,17 @@ namespace Seeker {
       return false;
     }
 
-    SDL_QueryTexture(texture, NULL, NULL, &width, &height);
+    SDL_QueryTexture(texture, NULL, NULL, &Width, &Height);
 
     return true;
   }
 
-  void Sprite::draw(int x, int y) {
-    Renderer* renderer = Framework::getInstance()->getRenderer();
-    renderer->draw(texture, width, height, x, y);
+  void Sprite::Draw(int x, int y) {
+    Renderer* renderer = Framework::Instance()->Renderer();
+    renderer->Draw(texture, Width, Height, x, y);
   }
 
-  void Sprite::release() {
-    Resource<Sprite>::unload(filename);
+  void Sprite::Destroy() {
+    Resource<Sprite>::Unload(filename);
   }
 }

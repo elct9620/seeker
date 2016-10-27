@@ -16,21 +16,21 @@ namespace Seeker {
     children.clear();
   }
 
-  void GameObject::update(int delta) {
+  void GameObject::Update(int delta) {
     for(const auto &child : children) {
-      child->update(delta);
+      child->Update(delta);
     }
   }
 
-  void GameObject::render() {
+  void GameObject::Render() {
     for(const auto &child : children) {
-      child->render();
+      child->Render();
     }
 
-    draw();
+    Draw();
   }
 
-  void GameObject::addChild(GameObject* child) {
+  void GameObject::AddChild(GameObject* child) {
     if(std::find(children.begin(), children.end(), child) != children.end()) {
       return;
     }
@@ -39,7 +39,7 @@ namespace Seeker {
     children.push_back(child);
   }
 
-  void GameObject::removeChild(GameObject* child) {
+  void GameObject::RemoveChild(GameObject* child) {
     vector<GameObject*>::iterator it = std::find(children.begin(), children.end(), child);
     if(it == children.end()) {
       return;
@@ -49,21 +49,21 @@ namespace Seeker {
     children.erase(it);
   }
 
-  int GameObject::setX(int _x) {
+  int GameObject::SetX(int _x) {
     x = _x;
     return x;
   }
 
-  int GameObject::setY(int _y) {
+  int GameObject::SetY(int _y) {
     y = _y;
     return y;
   }
 
-  int GameObject::getX() {
+  int GameObject::X() {
     return x;
   }
 
-  int GameObject::getY() {
+  int GameObject::Y() {
     return y;
   }
 }
