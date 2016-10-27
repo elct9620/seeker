@@ -4,15 +4,15 @@
 
 namespace Seeker {
   Actor::Actor(const string &filename) {
-    sprite = Resource<Sprite>::Load(filename);
+    Actor(filename, 0, 0);
   }
 
   Actor::Actor(const string &filename, int x, int y) : GameObject(x, y) {
-    sprite = Resource<Sprite>::Load(filename);
+    sprite = new Sprite(filename);
   }
 
   Actor::~Actor() {
-    sprite->Destroy();
+    delete sprite;
   }
 
   void Actor::Draw() {

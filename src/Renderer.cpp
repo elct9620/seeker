@@ -13,11 +13,6 @@ namespace Seeker {
     SDL_DestroyRenderer(renderer);
   }
 
-  // TODO: prevent specify class
-  void Renderer::CreateSprite(Sprite* sprite) {
-    sprite->Prepare(renderer);
-  }
-
   void Renderer::Draw(SDL_Texture* texture, int width, int height, int x, int y) {
     SDL_Rect distance;
     distance.w = width;

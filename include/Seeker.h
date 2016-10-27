@@ -24,6 +24,7 @@
 #include "Framework.h"
 
 // Game - Assets
+#include "Texture.h"
 #include "Sprite.h"
 
 // Game - Croe

@@ -11,7 +11,7 @@
 using std::string;
 
 namespace Seeker {
-  class Sprite : public IResource {
+  class Sprite {
     public:
       Sprite(string path);
       ~Sprite();
@@ -19,13 +19,11 @@ namespace Seeker {
       int Width;
       int Height;
 
-      bool Prepare(SDL_Renderer* renderer);
       void Draw(int x, int y);
       void Destroy();
 
     private:
-      SDL_Texture* texture = nullptr;
-      SDL_Surface* surface = nullptr;
+      Texture* texture;
       string filename;
   };
 }

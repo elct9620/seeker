@@ -16,7 +16,9 @@ namespace Seeker {
 
       static int DEFAULT_RENDERER_DRIVER;
 
-      void CreateSprite(Sprite* sprite);
+      template<class T> void Prepare(T* klass) {
+        klass->Prepare(renderer);
+      };
       void Draw(SDL_Texture* texture, int width, int height, int x, int y);
       void Render();
       void Clear();
