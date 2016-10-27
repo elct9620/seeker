@@ -11,10 +11,9 @@
 using std::string;
 
 namespace Seeker {
-  class Renderer;
   class Sprite : public IResource {
     public:
-      Sprite(string path, Renderer* _renderer = NULL);
+      Sprite(string path);
       ~Sprite();
 
       int width;
@@ -27,7 +26,6 @@ namespace Seeker {
     private:
       SDL_Texture* texture = nullptr;
       SDL_Surface* surface = nullptr;
-      Renderer* renderer = nullptr;
       string filename;
   };
 }
