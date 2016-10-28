@@ -3,10 +3,12 @@ sudo: required
 dist: trusty
 compiler:
   - gcc
+os:
+  - osx
 ruby: 2.2.0
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y libsdl2-dev libsdl2-image-dev
+  - brew install SDL2
+  - brew install SDL2_Image
 before_script:
   - gem install magica
 script:
