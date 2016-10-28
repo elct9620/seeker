@@ -21,6 +21,7 @@ build :debug do
 
   library "stdc++"
   library "m"
+  library "pthread"
   flag "-std=c++11"
   flag "-g"
 
@@ -50,6 +51,7 @@ build :test do
 
   library "stdc++"
   library "m"
+  library "pthread"
   flag "-std=c++11"
   flag "-g"
 
