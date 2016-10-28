@@ -89,7 +89,9 @@ flags = [
 '-I',
 os.getcwd() + '/include',
 '-I',
-'lib/mruby/include'
+'lib/mruby/include',
+'-I',
+'lib/googletest/googletest/include'
 ]
 
 

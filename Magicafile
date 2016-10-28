@@ -11,6 +11,8 @@ build :debug do
   define :debug
   define 'VERSION=\"%{version}\"' % {version: VERSION}
 
+  exclude "src/tests/**/*.cpp" # Don't load test code
+
   # TODO: improve this to use automatic include
   include_path "lib/mruby/include"
 
@@ -33,8 +35,48 @@ build :debug do
   exe_name "Debug"
 end
 
+build :test do
+  define 'VERSION=\"%{version}\"' % {version: VERSION}
+
+  exclude "src/Game.cpp" # Exclude Game.cpp to use tests main function
+
+  # TODO: improve this to use automatic include
+  include_path "lib/mruby/include"
+  include_path "lib/googletest/googletest/include"
+
+  dynamic_library :sdl2
+  dynamic_library :SDL2_image
+
+  library "stdc++"
+  flag "-std=c++11"
+  flag "-g"
+
+  dependency :mruby do
+    source "git@github.com:mruby/mruby.git"
+    version "1.2.0"
+    command "./minirake"
+
+    install_dir "#{@dir}/build/host/lib"
+    static_library "libmruby.a", "libmruby_core.a"
+  end
+
+  dependency :googletest do
+    source "git@github.com:google/googletest.git"
+    version "release-1.8.0"
+    command "mkdir build && cd build && cmake ../googletest && make"
+
+    install_dir "#{@dir}/build"
+    static_library "libgtest.a"
+  end
+
+  exe_name "Test"
+end
+
 task :run => "build:debug" do
   # Execute last build file
   sh exefile, verbose: false
 end
 
+task :test => "build:test" do
+  sh exefile, verbose: false
+end

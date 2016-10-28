@@ -1,0 +1,13 @@
+language: cpp
+sudo: required
+compiler:
+  - clang
+  - gcc
+ruby: 2.2.0
+before_install:
+  - apt-get install -y libsdl2-dev libsdl2-image-dev
+before_script:
+  - gem install magica
+script:
+  - magica run
+
