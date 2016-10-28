@@ -20,9 +20,9 @@ build :debug do
   dynamic_library :SDL2_image
 
   library "stdc++"
+  library "m"
   flag "-std=c++11"
   flag "-g"
-  flag "-lm"
 
   dependency :mruby do
     source "https://github.com/mruby/mruby.git"
@@ -49,9 +49,9 @@ build :test do
   dynamic_library :SDL2_image
 
   library "stdc++"
+  library "m"
   flag "-std=c++11"
   flag "-g"
-  flag "-lm"
 
   dependency :mruby do
     source "https://github.com/mruby/mruby.git"
