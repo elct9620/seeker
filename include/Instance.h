@@ -29,8 +29,8 @@ namespace Seeker {
       Instance(GameState* state);
       virtual ~Instance();
 
-      Window* Window() { return window; }
-      Renderer* Renderer() { return renderer; }
+      Seeker::Window* Window() { return window; }
+      Seeker::Renderer* Renderer() { return renderer; }
 
       void Run();
       void Update();

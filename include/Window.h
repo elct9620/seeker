@@ -30,7 +30,7 @@ namespace Seeker {
       bool Create(string title, int _width, int _height, bool hide = false);
       void Destroy();
 
-      Renderer* Renderer();
+      Seeker::Renderer* Renderer();
 
     private:
       static SDL_DisplayMode displayMode;
