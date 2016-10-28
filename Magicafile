@@ -1,4 +1,5 @@
 require "magica/build"
+require "magica/target"
 
 VERSION = "0.1.0"
 
@@ -7,7 +8,7 @@ toolchain :gcc
 
 # Define Build Task
 # build :main, {clean: true}
-build :debug do
+build :seeker do
   define :debug
   define :version, VERSION
 
@@ -34,53 +35,29 @@ build :debug do
     static_library "libmruby.a", "libmruby_core.a"
   end
 
+  target :test do
+    exclude "src/Game.cpp"
+
+    include_path "lib/googletest/googletest/include"
+
+    dependency :googletest do
+      source "https://github.com/google/googletest.git"
+      version "release-1.8.0"
+      command "mkdir build && cd build && cmake ../googletest && make"
+
+      install_dir "#{@dir}/build"
+      static_library "libgtest.a"
+    end
+  end
+
   exe_name "Debug"
 end
 
-build :test do
-  define :version, VERSION
-
-  exclude "src/Game.cpp" # Exclude Game.cpp to use tests main function
-
-  # TODO: improve this to use automatic include
-  include_path "lib/mruby/include"
-  include_path "lib/googletest/googletest/include"
-
-  dynamic_library :sdl2
-  dynamic_library :SDL2_image
-
-  library "stdc++"
-  library "m"
-  library "pthread"
-  flag "-std=c++11"
-  flag "-g"
-
-  dependency :mruby do
-    source "https://github.com/mruby/mruby.git"
-    version "1.2.0"
-    command "./minirake"
-
-    install_dir "#{@dir}/build/host/lib"
-    static_library "libmruby.a", "libmruby_core.a"
-  end
-
-  dependency :googletest do
-    source "https://github.com/google/googletest.git"
-    version "release-1.8.0"
-    command "mkdir build && cd build && cmake ../googletest && make"
-
-    install_dir "#{@dir}/build"
-    static_library "libgtest.a"
-  end
-
-  exe_name "Test"
-end
-
-task :run => "build:debug" do
+task :run => "seeker" do
   # Execute last build file
   sh exefile
 end
 
-task :test => "build:test" do
+task :test => "seeker:test" do
   sh exefile
 end
