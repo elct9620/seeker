@@ -2,6 +2,8 @@
 
 #include "Seeker.h"
 
+#include<algorithm> // Prevent use C++17 std::remove
+
 namespace Seeker {
 
   vector<GameObject*> children;
