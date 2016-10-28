@@ -86,6 +86,7 @@ flags = [
 './tests/gmock/include',
 '-I',
 '/usr/local/include',
+'-DVERSION',
 '-I',
 os.getcwd() + '/include',
 '-I',

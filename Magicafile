@@ -9,7 +9,7 @@ toolchain :gcc
 # build :main, {clean: true}
 build :debug do
   define :debug
-  define 'VERSION=\"%{version}\"' % {version: VERSION}
+  define :version, VERSION
 
   exclude "src/tests/**/*.cpp" # Don't load test code
 
@@ -38,7 +38,7 @@ build :debug do
 end
 
 build :test do
-  define 'VERSION=\"%{version}\"' % {version: VERSION}
+  define :version, VERSION
 
   exclude "src/Game.cpp" # Exclude Game.cpp to use tests main function
 
