@@ -22,6 +22,7 @@ build :debug do
   library "stdc++"
   flag "-std=c++11"
   flag "-g"
+  flag "-lm"
 
   dependency :mruby do
     source "https://github.com/mruby/mruby.git"
@@ -50,6 +51,7 @@ build :test do
   library "stdc++"
   flag "-std=c++11"
   flag "-g"
+  flag "-lm"
 
   dependency :mruby do
     source "https://github.com/mruby/mruby.git"
@@ -74,9 +76,9 @@ end
 
 task :run => "build:debug" do
   # Execute last build file
-  sh exefile, verbose: false
+  sh exefile
 end
 
 task :test => "build:test" do
-  sh exefile, verbose: false
+  sh exefile
 end
