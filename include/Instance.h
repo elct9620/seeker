@@ -36,6 +36,7 @@ namespace Seeker {
       void Update();
 
       long CurrentTime();
+      float getFPS() { return realFPS; }
 
       virtual void OnEvent(const EventType evnet);
 
@@ -54,6 +55,8 @@ namespace Seeker {
       GameState* state = nullptr;
 
       int lastTime = 0;
+      int nextTime = 0;
+      float realFPS = 0;
       bool stop = false;
   };
 }

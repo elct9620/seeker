@@ -21,7 +21,7 @@ namespace Seeker {
 
     Event::On(this);
 
-    lastTime = CurrentTime();
+    nextTime = CurrentTime();
   }
 
   Instance::~Instance() {
@@ -38,19 +38,23 @@ namespace Seeker {
   void Instance::Update() {
     long realTime = CurrentTime();
 
-    while(lastTime < realTime) {
-      lastTime += FIXED_DELTA_TIME;
+    while(nextTime < realTime) {
+      int deltaTime = realTime - lastTime;
+      nextTime += FIXED_DELTA_TIME;
       // TODO: Modify to use "GameState"
       if(state) {
-        state->Update(FIXED_DELTA_TIME);
-        IScript::UpdateAll(FIXED_DELTA_TIME);
-      }
-    }
+        state->Update(deltaTime);
+        IScript::UpdateAll(deltaTime);
 
-    renderer->Clear();
-    state->Render();
-    IScript::RenderAll();
-    renderer->Render();
+        renderer->Clear();
+        state->Render();
+        IScript::RenderAll();
+        renderer->Render();
+      }
+
+      realFPS = 1 / ((float) deltaTime / 1000);
+      lastTime = realTime;
+    }
   }
 
   long Instance::CurrentTime() {
