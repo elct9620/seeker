@@ -13,11 +13,7 @@ namespace Seeker {
     SDL_DestroyRenderer(renderer);
   }
 
-  void Renderer::createSprite(Sprite* sprite) {
-    sprite->prepare(renderer);
-  }
-
-  void Renderer::draw(SDL_Texture* texture, int width, int height, int x, int y) {
+  void Renderer::Draw(SDL_Texture* texture, int width, int height, int x, int y) {
     SDL_Rect distance;
     distance.w = width;
     distance.h = height;
@@ -27,12 +23,12 @@ namespace Seeker {
     SDL_RenderCopy(renderer, texture, NULL, &distance);
   }
 
-  void Renderer::clear() {
+  void Renderer::Clear() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
   }
 
-  void Renderer::render() {
+  void Renderer::Render() {
     SDL_RenderPresent(renderer);
   }
 }

@@ -3,22 +3,23 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  Framework::Framework() : currentGameInstance(NULL) {
+  Framework::Framework() : currentGame(NULL) {
 #ifdef DEBUG
     SDL_LogSetAllPriority(SDL_LOG_PRIORITY_DEBUG);
 #endif
   }
 
   Framework::~Framework() {
-    free(currentGameInstance);
+    delete currentGame;
+    currentGame = NULL;
   }
 
-  Framework* Framework::getInstance() {
-    if(instance != NULL) return instance;
+  Framework* Framework::Instance() {
+    if(instance) return instance;
     return new Framework();
   }
 
-  Framework* Framework::instance = Framework::getInstance();
+  Framework* Framework::instance = Framework::Instance();
 
   // Framework API
 
@@ -28,27 +29,48 @@ namespace Seeker {
   string Framework::DEFAULT_WINDOW_NAME = "Seeker Framework";
 #endif
 
-
-  void Framework::quit() {
-    free(instance);
+  void Framework::Quit() {
+    delete instance;
   }
 
-  Instance* Framework::createGameInstance() {
+  // Alias Method
+  Instance* Framework::Game() {
+    return Instance()->GetGame();
+  }
+
+  Window* Framework::Window() {
+    return Instance()->GetWindow();
+  }
+
+  Renderer* Framework::Renderer() {
+    return Instance()->GetRenderer();
+  }
+
+  // Instance Method
+  Instance* Framework::createGame() {
     try {
-      currentGameInstance = new Instance;
-      return currentGameInstance;
+      if(currentGame) {
+        delete currentGame;
+      }
+
+      currentGame = new class Instance;
+      return currentGame;
+
     } catch (bool) {
       Logger::Error("Create game instance failed.");
     }
     return NULL;
   }
 
-  Window* Framework::getWindow() {
-    return currentGameInstance->getWindow();
+  Instance* Framework::GetGame() {
+    return currentGame;
   }
 
-  Renderer* Framework::getRenderer() {
-    return currentGameInstance->getRenderer();
+  Window* Framework::GetWindow() {
+    return currentGame->Window();
   }
 
+  Renderer* Framework::GetRenderer() {
+    return currentGame->Renderer();
+  }
 }

@@ -9,7 +9,7 @@ namespace Seeker {
   Window::~Window() {
     SDL_DestroyWindow(currentWindow);
 
-    free(renderer);
+    delete renderer;
   }
 
   // Display Information
@@ -18,17 +18,17 @@ namespace Seeker {
   bool Window::displayModeLoaded = false;
   SDL_DisplayMode Window::displayMode;
 
-  int Window::getDisplayWidth() {
-    loadDisplayMode();
+  int Window::DisplayWidth() {
+    LoadDisplayMode();
     return displayMode.w;
   }
 
-  int Window::getDisplayHeight() {
-    loadDisplayMode();
+  int Window::DisplayHeight() {
+    LoadDisplayMode();
     return displayMode.h;
   }
 
-  void Window::loadDisplayMode(bool reload) {
+  void Window::LoadDisplayMode(bool reload) {
     if(!displayModeLoaded || reload) {
       if(SDL_GetCurrentDisplayMode(DISPLAY_INDEX, &displayMode) != 0) {
         displayModeLoaded = false;
@@ -38,28 +38,37 @@ namespace Seeker {
   }
 
   // Window Manager
-  bool Window::create(string title, bool hide) {
+  bool Window::Create(string title, bool hide) {
+    return Create(title, DisplayWidth(), DisplayHeight(), hide);
+  }
+
+  bool Window::Create(string title, int _width, int _height, bool hide) {
     uint flags = hide ? 0 : SDL_WINDOW_SHOWN;
     flags = flags | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_INPUT_GRABBED;
 
-    currentWindow = SDL_CreateWindow(title.c_str(), 0, 0, getDisplayWidth(), getDisplayHeight(), flags);
+    // Ensure get correct window resolution
+    LoadDisplayMode(true);
+    _width  = _width  > 0 ? _width  : DisplayWidth();
+    _height = _height > 0 ? _height : DisplayHeight();
+
+    currentWindow = SDL_CreateWindow(title.c_str(), 0, 0, _width, _height, flags);
     if(currentWindow == NULL) {
       SDL_DestroyWindow(currentWindow);
       return false;
     }
 
-    Logger::Info("Initialize window with %dx%dpx resolution.", getDisplayWidth(), getDisplayHeight());
+    Logger::Info("Initialize window with %dx%dpx resolution.", DisplayWidth(), DisplayHeight());
 
     return true;
   }
 
-  void Window::destroy() {
+  void Window::Destroy() {
     SDL_DestroyWindow(currentWindow);
   }
 
-  Renderer* Window::getRenderer() {
+  Renderer* Window::Renderer() {
     if(renderer == NULL) {
-      renderer = new Renderer(currentWindow);
+      renderer = new class Renderer(currentWindow);
     }
 
     return renderer;

@@ -10,7 +10,7 @@
 namespace Seeker {
   class  ISubscriber {
     public:
-      virtual void onEvent(const EventType event) = 0;
+      virtual void OnEvent(const EventType event) = 0;
   };
 }
 

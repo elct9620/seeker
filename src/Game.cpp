@@ -11,20 +11,21 @@ int main(int, char**) {
     return 1;
   }
 
-  Instance* instance = Framework::getInstance()->createGameInstance();
+  // Initialize Game
+  IScript::Init<Script::Ruby>();
+  Instance* instance = Framework::Instance()->createGame();
 
   if(instance == NULL) {
-    Framework::quit();
+    Framework::Quit();
     return 1;
   }
 
-  Scene* scene = instance->getCurrentScene();
-  Actor actor("../data/avatar.jpg", 100, 100);
-  scene->addChild(&actor);
+  // Setup Game and Run
+  IScript::Setup<Script::Ruby>();
+  instance->Run();
 
-  instance->run();
-
-  Framework::quit();
+  // Exit Game
+  Framework::Quit();
 
   return 0;
 }

@@ -4,7 +4,6 @@
 
 namespace Seeker {
   GameState::GameState() {
-
   }
 
   GameState::GameState(Scene* scene) : currentScene(scene) {
@@ -12,21 +11,44 @@ namespace Seeker {
 
   GameState::~GameState() {
     // TODO: release "currentScene"
+    delete prevScene;
+    delete currentScene;
+    delete prevScene;
   }
 
-  void GameState::update(long delta) {
+  void GameState::Update(long delta) {
     if(currentScene) {
-      currentScene->update(delta);
+      currentScene->Update(delta);
     }
   }
 
-  void GameState::render() {
+  void GameState::Render() {
     if(currentScene) {
-      currentScene->render();
+      currentScene->Render();
     }
   }
 
-  Scene* GameState::getCurrentScene() {
+  Scene* GameState::CurrentScene() {
     return currentScene;
+  }
+
+  bool GameState::TransitionTo(Scene* _next) {
+    if(!_next) {
+      return false;
+      Logger::Error("Next scene is not exists!");
+    }
+
+    if(prevScene) {
+      delete prevScene;
+      prevScene = NULL;
+    }
+
+    while(!_next->Loaded()) {
+      // Wait resource loaded
+    }
+    prevScene = currentScene;
+    currentScene = _next;
+
+    return true;
   }
 }

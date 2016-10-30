@@ -11,22 +11,20 @@
 using std::string;
 
 namespace Seeker {
-  class Renderer;
-  class Sprite : public IResource {
+  class Sprite {
     public:
-      Sprite(string path, Renderer* _renderer = NULL);
+      Sprite(string path);
       ~Sprite();
 
-      int width;
-      int height;
+      int Width;
+      int Height;
 
-      bool prepare(SDL_Renderer* renderer);
-      void draw(int x, int y);
+      void Draw(int x, int y);
+      void Destroy();
 
     private:
-      SDL_Texture* texture;
-      SDL_Surface* surface;
-      Renderer* renderer;
+      Texture* texture;
+      string filename;
   };
 }
 

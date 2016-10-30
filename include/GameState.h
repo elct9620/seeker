@@ -15,16 +15,17 @@ namespace Seeker {
       GameState();
       GameState(Scene* scene);
 
-      ~GameState();
+      virtual ~GameState();
 
-      virtual void update(long delta);
-      virtual void render();
+      virtual void Update(long delta);
+      virtual void Render();
 
-      Scene* getCurrentScene();
-
+      Scene* CurrentScene();
+      bool TransitionTo(Scene* nextScene);
 
     private:
-      Scene* currentScene;
+      Scene* currentScene = nullptr;
+      Scene* prevScene = nullptr;
   };
 }
 

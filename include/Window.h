@@ -20,22 +20,23 @@ namespace Seeker {
 
       // Display Information
       static int DISPLAY_INDEX;
-      static int getDisplayWidth();
-      static int getDisplayHeight();
+      static int DisplayWidth();
+      static int DisplayHeight();
 
-      static void loadDisplayMode(bool reload = false);
+      static void LoadDisplayMode(bool reload = false);
 
       // Window Manager
-      bool create(string title, bool hide = false);
-      void destroy();
+      bool Create(string title, bool hide = false);
+      bool Create(string title, int _width, int _height, bool hide = false);
+      void Destroy();
 
-      Renderer* getRenderer();
+      Seeker::Renderer* Renderer();
 
     private:
       static SDL_DisplayMode displayMode;
       static bool displayModeLoaded;
-      SDL_Window *currentWindow;
-      Renderer* renderer;
+      SDL_Window *currentWindow = nullptr;
+      class Renderer* renderer = nullptr;
   };
 }
 

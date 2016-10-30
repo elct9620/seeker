@@ -11,34 +11,35 @@
 using std::vector;
 
 namespace Seeker {
+  // TODO: Refactor the update/render method to drawable interface
   class GameObject {
     public:
       GameObject();
       GameObject(int x, int y) : x(x), y(y) {} ;
-      ~GameObject();
+      virtual ~GameObject();
 
-      virtual void update(long delta);
-      virtual void render();
+      virtual void Update(int delta);
+      virtual void Render();
 
-      virtual void draw() = 0;
+      virtual void Draw() = 0;
 
-      void addChild(GameObject* child);
-      void removeChild(GameObject* child);
+      void AddChild(GameObject* child);
+      void RemoveChild(GameObject* child);
 
-      int setX(int _x);
-      int setY(int _y);
-      int getX();
-      int getY();
+      int SetX(int _x);
+      int SetY(int _y);
+      int X();
+      int Y();
 
     protected:
-      GameObject* parent;
+      GameObject* parent = nullptr;
 
       int x = 0;
       int y = 0;
       bool visible = true;
 
     private:
-      vector<GameObject*> children;
+      vector<GameObject*> children = {};
   };
 }
 

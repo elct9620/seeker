@@ -2,39 +2,41 @@
 
 #include "Seeker.h"
 
+#include<algorithm> // Prevent use C++17 std::remove
+
 namespace Seeker {
 
   vector<ISubscriber*> Event::subscribers;
 
-  void Event::refresh() {
+  void Event::Refresh() {
     SDL_Event ev;
     while(SDL_PollEvent(&ev)) {
       switch(ev.type) {
         case SDL_KEYDOWN:
-          dispatch(EventType::Key);
+          Dispatch(EventType::Key);
           break;
         case SDL_QUIT:
-          dispatch(EventType::Quit);
+          Dispatch(EventType::Quit);
           break;
         case SDL_MOUSEBUTTONDOWN:
-          dispatch(EventType::Mouse);
+          Dispatch(EventType::Mouse);
           break;
       }
     }
   }
 
-  void Event::on(ISubscriber* event) {
-    if(exists(event)) return;
+  void Event::On(ISubscriber* event) {
+    if(Exists(event)) return;
     subscribers.push_back(event);
   }
 
-  void Event::off(ISubscriber* event) {
-    if(exists(event)) {
+  void Event::Off(ISubscriber* event) {
+    if(Exists(event)) {
       subscribers.erase(std::remove(subscribers.begin(), subscribers.end(), event), subscribers.end());
     }
   }
 
-  bool Event::exists(ISubscriber* event) {
+  bool Event::Exists(ISubscriber* event) {
     for(auto &current : subscribers) {
       if(current == event) {
         return true;
@@ -43,9 +45,9 @@ namespace Seeker {
     return false;
   }
 
-  void Event::dispatch(const EventType type) {
+  void Event::Dispatch(const EventType type) {
     for(auto &current : subscribers) {
-      current->onEvent(type);
+      current->OnEvent(type);
     }
   }
 }

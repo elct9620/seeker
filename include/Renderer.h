@@ -16,13 +16,15 @@ namespace Seeker {
 
       static int DEFAULT_RENDERER_DRIVER;
 
-      void createSprite(Sprite* sprite);
-      void draw(SDL_Texture* texture, int width, int height, int x, int y);
-      void render();
-      void clear();
+      template<class T> void Prepare(T* klass) {
+        klass->Prepare(renderer);
+      };
+      void Draw(SDL_Texture* texture, int width, int height, int x, int y);
+      void Render();
+      void Clear();
 
     private:
-      SDL_Renderer* renderer;
+      SDL_Renderer* renderer = nullptr;
   };
 }
 
