@@ -10,6 +10,7 @@ namespace Seeker {
 
       engine->DefineModuleMethod(klass, "config", &Game::mrb_config, MRB_ARGS_BLOCK());
       engine->DefineModuleMethod(klass, "set_scene", &Game::mrb_set_scene, MRB_ARGS_REQ(1));
+      engine->DefineModuleMethod(klass, "fps", &Game::mrb_fps, MRB_ARGS_NONE());
     }
 
     mrb_value Game::mrb_config(mrb_state* mrb, mrb_value self) {
@@ -43,6 +44,10 @@ namespace Seeker {
       }
 
       return self;
+    }
+
+    mrb_value Game::mrb_fps(mrb_state* mrb, mrb_value) {
+      return mrb_float_value(mrb, Framework::Instance()->Game()->GetFPS());
     }
   }
 }
