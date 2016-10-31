@@ -15,6 +15,7 @@ namespace Seeker {
         engine->DefineMethod(klass, "text=", &mrb_set_text, MRB_ARGS_REQ(1));
         engine->DefineMethod(klass, "x=", &mrb_set_x, MRB_ARGS_REQ(1));
         engine->DefineMethod(klass, "y=", &mrb_set_y, MRB_ARGS_REQ(1));
+        engine->DefineMethod(klass, "update", &mrb_update, MRB_ARGS_BLOCK());
       }
 
       void TextWidget::mrb_free_widget(mrb_state* mrb, void* ptr) {
@@ -88,8 +89,28 @@ namespace Seeker {
         return mrb_fixnum_value(y);
       }
 
+      mrb_value TextWidget::mrb_update(mrb_state* mrb, mrb_value self) {
+        TextWidget* widget = static_cast<TextWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        mrb_value proc;
+        mrb_get_args(mrb, "&", &proc);
+        if(widget) {
+          if(!mrb_nil_p(widget->_UpdateCB)) {
+            Engine::Instance()->ReleaseObject(widget->_UpdateCB);
+          }
+          widget->_UpdateCB = proc;
+          Engine::Instance()->FreezeObject(widget->_UpdateCB);
+        }
+
+        return self;
+      }
+
       // Instance Method
       TextWidget::~TextWidget() {
+      }
+
+      void TextWidget::Update() {
+        Engine::Instance()->CallWithBlock(RubyInstance(), "instance_eval", 0, NULL, _UpdateCB);
       }
     }
   }

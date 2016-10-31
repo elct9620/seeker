@@ -12,6 +12,8 @@ using std::vector;
 namespace Seeker {
   namespace UI {
     class Widget {
+      friend class Seeker::GameState;
+
       public:
         Widget();
         virtual ~Widget();

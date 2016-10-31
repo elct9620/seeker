@@ -1,8 +1,10 @@
 scene = Scene.new "Test Scene"
 scene.add Actor.new("../data/avatar.jpg", 10, 10)
 
-ui = TextWidget.new "Hello World", 0, 0
-ui.text = "HI?"
+ui = TextWidget.new "FPS: 0", (1280 - 100), 0
+ui.update do
+  self.text = "FPS: #{Game.fps.round(3)}"
+end
 
 Game.set_scene scene
 Game.ui = ui

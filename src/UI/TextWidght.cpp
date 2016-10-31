@@ -6,7 +6,6 @@ namespace Seeker {
   namespace UI {
     TextWidget::TextWidget(string text) {
       TextWidget(text, x, y);
-      Framework::Renderer()->Prepare<TextWidget>(this);
     }
 
     TextWidget::TextWidget(string text, int _x, int _y) : _text(text) {
@@ -16,6 +15,7 @@ namespace Seeker {
       // TODO: Provide custom font options
       // TODO: Prevent direct specify font path
       font = Resource<Font>::Load("../assets/fonts/OpenSans/OpenSans-Regular.ttf");
+      Framework::Renderer()->Prepare<TextWidget>(this);
     }
 
     TextWidget::~TextWidget() {
@@ -32,7 +32,11 @@ namespace Seeker {
       }
 
       texture = SDL_CreateTextureFromSurface(renderer, surface);
-      SDL_QueryTexture(texture, NULL, NULL, &_TextWidth, &_TextHeight);
+      if(!texture) {
+        Logger::Debug(SDL_GetError());
+      }
+      _TextWidth = surface->w;
+      _TextHeight = surface->h;
 
       SDL_FreeSurface(surface);
     }
@@ -51,7 +55,7 @@ namespace Seeker {
       drawX += x;
       drawY += y;
 
-      Framework::Renderer()->Draw(texture, _TextWidth, _TextWidth, drawX, drawY);
+      Framework::Renderer()->Draw(texture, _TextWidth, _TextHeight, drawX, drawY);
     }
 
     void TextWidget::SetText(string text) {

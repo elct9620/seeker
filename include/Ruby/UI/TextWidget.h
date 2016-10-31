@@ -18,6 +18,8 @@ namespace Seeker  {
           TextWidget(RObject* object, string text, int x, int y) : Seeker::UI::TextWidget(text, x, y), RubyObject(object) {};
           ~TextWidget();
 
+          virtual void Update();
+
           // mruby methods
           static struct mrb_data_type Type;
           static void init(RClass* klass);
@@ -26,6 +28,10 @@ namespace Seeker  {
           static mrb_value mrb_set_text(mrb_state* mrb, mrb_value self);
           static mrb_value mrb_set_x(mrb_state* mrb, mrb_value self);
           static mrb_value mrb_set_y(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_update(mrb_state* mrb, mrb_value self);
+
+        private:
+          mrb_value _UpdateCB;
       };
     }
   }

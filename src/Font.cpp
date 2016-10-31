@@ -5,7 +5,7 @@
 namespace Seeker {
   Font::Font(string filename) : filename(filename) {
     // TODO: Support provide dynamic font size
-    font = TTF_OpenFont(filename.c_str(), 12);
+    font = TTF_OpenFont(filename.c_str(), 16);
 
     if(!font) {
       Logger::Error("Load font failed, %s", TTF_GetError());

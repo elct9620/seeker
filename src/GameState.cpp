@@ -20,6 +20,9 @@ namespace Seeker {
     if(currentScene) {
       currentScene->Update(delta);
     }
+    if(UI) {
+      UI->_Update();
+    }
   }
 
   void GameState::Render() {
@@ -28,7 +31,7 @@ namespace Seeker {
     }
 
     if(UI) {
-      UI->Draw();
+      UI->_Render();
     }
   }
 

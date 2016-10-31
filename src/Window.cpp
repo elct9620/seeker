@@ -28,6 +28,12 @@ namespace Seeker {
     return displayMode.h;
   }
 
+  float Window::DPI() {
+    float ddpi;
+    SDL_GetDisplayDPI(DISPLAY_INDEX, &ddpi, NULL, NULL);
+    return ddpi;
+  }
+
   void Window::LoadDisplayMode(bool reload) {
     if(!displayModeLoaded || reload) {
       if(SDL_GetCurrentDisplayMode(DISPLAY_INDEX, &displayMode) != 0) {
