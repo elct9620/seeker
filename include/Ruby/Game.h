@@ -13,6 +13,7 @@ namespace Seeker {
 
         static mrb_value mrb_config(mrb_state* mrb, mrb_value self);
         static mrb_value mrb_fps(mrb_state* mrb, mrb_value self);
+        static mrb_value mrb_set_ui(mrb_state* mrb, mrb_value self);
         static mrb_value mrb_set_scene(mrb_state* mrb, mrb_value self);
     };
   }

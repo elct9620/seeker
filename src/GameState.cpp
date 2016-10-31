@@ -26,6 +26,10 @@ namespace Seeker {
     if(currentScene) {
       currentScene->Render();
     }
+
+    if(UI) {
+      UI->Draw();
+    }
   }
 
   Scene* GameState::CurrentScene() {
@@ -50,5 +54,12 @@ namespace Seeker {
     currentScene = _next;
 
     return true;
+  }
+
+  void GameState::SetUI(UI::Widget* widget) {
+    if(UI) {
+      delete UI;
+    }
+    UI = widget;
   }
 }

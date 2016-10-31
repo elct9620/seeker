@@ -23,9 +23,14 @@
 #include "Instance.h"
 #include "Framework.h"
 
+// UI
+#include "UI/Widget.h"
+#include "UI/TextWidget.h"
+
 // Game - Assets
 #include "Texture.h"
 #include "Sprite.h"
+#include "Font.h"
 
 // Game - Croe
 #include "GameState.h"
@@ -43,3 +48,4 @@
 #include "Ruby/RubyObject.h"
 #include "Ruby/Scene.h"
 #include "Ruby/Actor.h"
+#include "Ruby/UI/TextWidget.h"

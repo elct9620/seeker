@@ -15,6 +15,8 @@ namespace Seeker {
       instance->DefineClass<R::Scene>("Scene", &R::Scene::init);
       instance->DefineClass<R::Actor>("Actor", &R::Actor::init);
 
+      instance->DefineClass<R::UI::TextWidget>("TextWidget", &R::UI::TextWidget::init);
+
       // Load Config Ruby
       instance->LoadScript("../data/config.rb");
     }

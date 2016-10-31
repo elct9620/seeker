@@ -11,6 +11,10 @@ int main(int, char**) {
     return 1;
   }
 
+  if(TTF_Init() != 0) {
+    return 1;
+  }
+
   // Initialize Game
   IScript::Init<Script::Ruby>();
   Instance* instance = Framework::Instance()->createGame();
