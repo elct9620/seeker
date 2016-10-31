@@ -21,7 +21,9 @@ namespace Seeker {
   SDL_Surface* Font::Draw(string text) {
     // TODO: Support specify font color
     SDL_Color color = {255, 255, 255, 255};
-    return TTF_RenderUTF8_Solid(font, text.c_str(), color);
+
+    // NOTICE: Slow render, but with antialiasing
+    return TTF_RenderUTF8_Blended(font, text.c_str(), color);
   }
 
   void Font::Destroy() {
