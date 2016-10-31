@@ -10,6 +10,8 @@
 using std::vector;
 
 namespace Seeker {
+  class GameState;
+
   namespace UI {
     class Widget {
       friend class Seeker::GameState;
