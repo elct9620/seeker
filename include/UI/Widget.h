@@ -18,6 +18,7 @@ namespace Seeker {
 
       public:
         Widget();
+        Widget(int x, int y);
         virtual ~Widget();
 
         void AddChild(Widget* child);

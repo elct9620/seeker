@@ -5,13 +5,10 @@
 namespace Seeker {
   namespace UI {
     TextWidget::TextWidget(string text) {
-      TextWidget(text, x, y);
+      TextWidget(text, 0, 0);
     }
 
-    TextWidget::TextWidget(string text, int _x, int _y) : _text(text) {
-      x = _x;
-      y = _y;
-
+    TextWidget::TextWidget(string text, int x, int y) : Widget(x, y), _text(text) {
       // TODO: Provide custom font options
       // TODO: Prevent direct specify font path
       font = Resource<Font>::Load("../assets/fonts/OpenSans/OpenSans-Regular.ttf");
@@ -52,8 +49,8 @@ namespace Seeker {
         drawY = parent->Y();
       }
 
-      drawX += x;
-      drawY += y;
+      drawX += _x;
+      drawY += _y;
 
       Framework::Renderer()->Draw(texture, _TextWidth, _TextHeight, drawX, drawY);
     }

@@ -7,6 +7,9 @@ namespace Seeker {
     Widget::Widget() {
     }
 
+    Widget::Widget(int x, int y) : _x(x), _y(y) {
+    }
+
     Widget::~Widget() {
       for(auto widget : _widgets) {
         widget->Destroy();
