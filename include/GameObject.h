@@ -15,7 +15,7 @@ namespace Seeker {
   class GameObject {
     public:
       GameObject();
-      GameObject(int x, int y) : x(x), y(y) {} ;
+      GameObject(int x, int y) : _x(x), _y(y) {} ;
       virtual ~GameObject();
 
       virtual void Update(int delta);
@@ -28,15 +28,26 @@ namespace Seeker {
 
       int SetX(int _x);
       int SetY(int _y);
+      int SetZ(int _z);
       int X();
       int Y();
+      int Z();
 
+      int ZIndex();
+      int ZIndex(int _z);
+
+      static bool ZOrderCompare(GameObject* a, GameObject* b) {
+        return a->ZIndex() > b->ZIndex();
+      };
     protected:
       GameObject* parent = nullptr;
 
-      int x = 0;
-      int y = 0;
+      int _x = 0;
+      int _y = 0;
+      int _z = 0;
       bool visible = true;
+
+      void ReSortChildren();
 
     private:
       vector<GameObject*> children = {};
