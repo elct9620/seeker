@@ -24,19 +24,29 @@ namespace Seeker {
         void SetVisible(bool visible);
         void SetPosition(int x, int y);
 
-        int X() { return x; }
-        int Y() { return y; }
+        int X() { return _x; }
+        int Y() { return _y; }
+        int Z() { return _z; }
+        int ZIndex() { return Z(); }
+        int ZIndex(int _z);
 
         virtual void Update() = 0;
         virtual void Draw() = 0;
         virtual void Destroy() {};
 
+        static bool ZOrderCompare(Widget* a, Widget* b) {
+          return a->ZIndex() > b->ZIndex();
+        }
+
       protected:
-        int x = 0;
-        int y = 0;
+        int _x = 0;
+        int _y = 0;
+        int _z = 0;
         bool visible = true;
 
         Widget* parent = nullptr;
+
+        void ReSortChildren();
 
       private:
         void _Update();

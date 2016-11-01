@@ -17,15 +17,29 @@ namespace Seeker {
     void Widget::AddChild(Widget* widget) {
       widget->parent = this;
       _widgets.push_back(widget);
+
+      ReSortChildren();
     }
 
     void Widget::SetVisible(bool _visible) {
       visible = _visible;
     }
 
-    void Widget::SetPosition(int _x, int _y) {
-      x = _x;
-      y = _y;
+    void Widget::SetPosition(int x, int y) {
+      _x = x;
+      _y = y;
+    }
+
+    int Widget::ZIndex(int z) {
+      _z = z;
+      if(parent) {
+        parent->ReSortChildren();
+      }
+      return _z;
+    }
+
+    void Widget::ReSortChildren() {
+      std::sort(_widgets.begin(), _widgets.end(), ZOrderCompare);
     }
 
     void Widget::_Update() {
