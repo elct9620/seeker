@@ -34,6 +34,9 @@ namespace Seeker {
         int ZIndex() { return Z(); }
         int ZIndex(int z);
 
+        int Width() { return _width; }
+        int Height() { return _height; }
+
         virtual void Update() = 0;
         virtual void Draw() = 0;
         virtual void Destroy() {};
@@ -46,6 +49,8 @@ namespace Seeker {
         int _x = 0;
         int _y = 0;
         int _z = 0;
+        int _width = 0;
+        int _height = 0;
         bool visible = true;
 
         Widget* parent = nullptr;

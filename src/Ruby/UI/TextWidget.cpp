@@ -15,6 +15,10 @@ namespace Seeker {
         engine->DefineMethod(klass, "text=", &mrb_set_text, MRB_ARGS_REQ(1));
         engine->DefineMethod(klass, "x=", &mrb_set_x, MRB_ARGS_REQ(1));
         engine->DefineMethod(klass, "y=", &mrb_set_y, MRB_ARGS_REQ(1));
+        engine->DefineMethod(klass, "x", &mrb_x, MRB_ARGS_NONE());
+        engine->DefineMethod(klass, "y", &mrb_y, MRB_ARGS_NONE());
+        engine->DefineMethod(klass, "width", &mrb_width, MRB_ARGS_NONE());
+        engine->DefineMethod(klass, "height", &mrb_height, MRB_ARGS_NONE());
         engine->DefineMethod(klass, "update", &mrb_update, MRB_ARGS_BLOCK());
       }
 
@@ -87,6 +91,46 @@ namespace Seeker {
         }
 
         return mrb_fixnum_value(y);
+      }
+
+      mrb_value TextWidget::mrb_x(mrb_state* mrb, mrb_value self) {
+        TextWidget* widget = static_cast<TextWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        if(widget) {
+          return mrb_fixnum_value(widget->X());
+        }
+
+        return mrb_fixnum_value(0);
+      }
+
+      mrb_value TextWidget::mrb_y(mrb_state* mrb, mrb_value self) {
+        TextWidget* widget = static_cast<TextWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        if(widget) {
+          return mrb_fixnum_value(widget->Y());
+        }
+
+        return mrb_fixnum_value(0);
+      }
+
+      mrb_value TextWidget::mrb_width(mrb_state* mrb, mrb_value self) {
+        TextWidget* widget = static_cast<TextWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        if(widget) {
+          return mrb_fixnum_value(widget->Width());
+        }
+
+        return mrb_fixnum_value(0);
+      }
+
+      mrb_value TextWidget::mrb_height(mrb_state* mrb, mrb_value self) {
+        TextWidget* widget = static_cast<TextWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        if(widget) {
+          return mrb_fixnum_value(widget->Height());
+        }
+
+        return mrb_fixnum_value(0);
       }
 
       mrb_value TextWidget::mrb_update(mrb_state* mrb, mrb_value self) {

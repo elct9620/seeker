@@ -28,6 +28,10 @@ namespace Seeker  {
           static mrb_value mrb_set_text(mrb_state* mrb, mrb_value self);
           static mrb_value mrb_set_x(mrb_state* mrb, mrb_value self);
           static mrb_value mrb_set_y(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_x(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_y(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_width(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_height(mrb_state* mrb, mrb_value self);
           static mrb_value mrb_update(mrb_state* mrb, mrb_value self);
 
         private:

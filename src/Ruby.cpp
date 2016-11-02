@@ -27,5 +27,12 @@ namespace Seeker {
 
       instance->LoadScript("../data/main.rb");
     }
+
+    void Ruby::Update(int) {
+      Seeker::Ruby::Engine::Instance()->CaptureException();
+    }
+
+    void Ruby::Render() {
+    }
   }
 }

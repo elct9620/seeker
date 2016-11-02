@@ -32,8 +32,8 @@ namespace Seeker {
       if(!texture) {
         Logger::Debug(SDL_GetError());
       }
-      _TextWidth = surface->w;
-      _TextHeight = surface->h;
+      _width = surface->w;
+      _height = surface->h;
 
       SDL_FreeSurface(surface);
     }
@@ -52,7 +52,7 @@ namespace Seeker {
       drawX += _x;
       drawY += _y;
 
-      Framework::Renderer()->Draw(texture, _TextWidth, _TextHeight, drawX, drawY);
+      Framework::Renderer()->Draw(texture, _width, _height, drawX, drawY);
     }
 
     void TextWidget::SetText(string text) {

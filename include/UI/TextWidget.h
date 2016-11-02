@@ -29,9 +29,6 @@ namespace Seeker {
         Font* font = nullptr;
         SDL_Texture* texture = nullptr;
 
-        int _TextWidth = 0;
-        int _TextHeight = 0;
-
         string _text;
     };
   }

@@ -13,6 +13,8 @@ namespace Seeker {
       public:
         void LoadCore();
         void LoadScript();
+        void Update(int deltTime);
+        void Render();
     };
   }
 }
