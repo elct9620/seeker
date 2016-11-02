@@ -11,7 +11,7 @@ namespace Seeker {
     TextWidget::TextWidget(string text, int x, int y) : Widget(x, y), _text(text) {
       // TODO: Provide custom font options
       // TODO: Prevent direct specify font path
-      font = Resource<Font>::Load("../assets/fonts/OpenSans/OpenSans-Regular.ttf");
+      font = Resource<Font>::Load("../assets/fonts/NotoSansCJK/NotoSansTC-Regular.otf");
       Framework::Renderer()->Prepare<TextWidget>(this);
     }
 

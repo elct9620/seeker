@@ -25,11 +25,14 @@ namespace Seeker {
         void SetVisible(bool visible);
         void SetPosition(int x, int y);
 
+        int SetX(int x);
+        int SetY(int y);
+        int SetZ(int z);
         int X() { return _x; }
         int Y() { return _y; }
         int Z() { return _z; }
         int ZIndex() { return Z(); }
-        int ZIndex(int _z);
+        int ZIndex(int z);
 
         virtual void Update() = 0;
         virtual void Draw() = 0;

@@ -33,12 +33,26 @@ namespace Seeker {
       _y = y;
     }
 
-    int Widget::ZIndex(int z) {
+    int Widget::SetX(int x) {
+      _x = x;
+      return _x;
+    }
+
+    int Widget::SetY(int y) {
+      _y = y;
+      return y;
+    }
+
+    int Widget::SetZ(int z) {
       _z = z;
       if(parent) {
         parent->ReSortChildren();
       }
       return _z;
+    }
+
+    int Widget::ZIndex(int z) {
+      return SetZ(z);
     }
 
     void Widget::ReSortChildren() {
