@@ -21,7 +21,7 @@ namespace Seeker {
         virtual void OnEvent(EventType type, Seeker::Event& event);
 
         virtual void OnKeyDown();
-        virtual void OnMouseDown();
+        virtual void OnMouseDown(MouseEvent& event);
 
         bool Exists(Widget* widget);
 

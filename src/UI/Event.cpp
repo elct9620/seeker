@@ -26,7 +26,7 @@ namespace Seeker {
       switch(type) {
         case EventType::Mouse:
           // TODO: Implement mouse event with data
-          OnMouseDown();
+          OnMouseDown(static_cast<MouseEvent&>(event));
           break;
         case EventType::Key:
           // TODO: Implement key event with data
@@ -37,10 +37,10 @@ namespace Seeker {
       }
     }
 
-    void Event::OnMouseDown() {
+    void Event::OnMouseDown(MouseEvent& event) {
       for(auto it : _widgets) {
         // TODO: Get mouse event data
-        if(it->MouseInBound(0, 0)) {
+        if(it->MouseInBound(event.x, event.y)) {
           it->OnClick();
         }
 
