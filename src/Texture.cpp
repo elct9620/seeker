@@ -27,7 +27,10 @@ namespace Seeker {
     }
 
     texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_QueryTexture(texture, NULL, NULL, &Width, &Height);
+    Width = surface->w;
+    Height = surface->h;
+
+    SDL_FreeSurface(surface);
   }
 
   void Texture::Draw(int x, int y) {

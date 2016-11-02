@@ -23,9 +23,13 @@ namespace Seeker {
       Scene* CurrentScene();
       bool TransitionTo(Scene* nextScene);
 
+      void SetUI(UI::Widget* widget);
+
     private:
       Scene* currentScene = nullptr;
       Scene* prevScene = nullptr;
+
+      UI::Widget* UI = nullptr;
   };
 }
 

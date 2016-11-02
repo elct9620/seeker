@@ -28,6 +28,12 @@ namespace Seeker {
     return displayMode.h;
   }
 
+  float Window::DPI() {
+    float ddpi;
+    SDL_GetDisplayDPI(DISPLAY_INDEX, &ddpi, NULL, NULL);
+    return ddpi;
+  }
+
   void Window::LoadDisplayMode(bool reload) {
     if(!displayModeLoaded || reload) {
       if(SDL_GetCurrentDisplayMode(DISPLAY_INDEX, &displayMode) != 0) {
@@ -44,7 +50,7 @@ namespace Seeker {
 
   bool Window::Create(string title, int _width, int _height, bool hide) {
     uint flags = hide ? 0 : SDL_WINDOW_SHOWN;
-    flags = flags | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_INPUT_GRABBED;
+    flags = flags | SDL_WINDOW_INPUT_GRABBED;
 
     // Ensure get correct window resolution
     LoadDisplayMode(true);

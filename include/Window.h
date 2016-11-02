@@ -22,6 +22,7 @@ namespace Seeker {
       static int DISPLAY_INDEX;
       static int DisplayWidth();
       static int DisplayHeight();
+      static float DPI();
 
       static void LoadDisplayMode(bool reload = false);
 

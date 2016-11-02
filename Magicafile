@@ -19,12 +19,11 @@ build :seeker do
 
   dynamic_library :sdl2
   dynamic_library :SDL2_image
+  dynamic_library :SDL2_ttf
 
   library "stdc++"
-  library "m"
   library "pthread"
   flag "-std=c++11"
-  flag "-g"
 
   dependency :mruby do
     source "https://github.com/mruby/mruby.git"

@@ -36,6 +36,9 @@ namespace Seeker {
         void FreezeObject(mrb_value object);
         void ReleaseObject(mrb_value object);
 
+        void Call(mrb_value object, string methodName, mrb_int argc, mrb_value* argv);
+        void CallWithBlock(mrb_value object, string methodName, mrb_int argc, mrb_value* argv, mrb_value block);
+
         template<class T>
         void DefineClass(string name, void (*callback)(RClass*)) {
             DefineClass<T>(name, callback, mrb->object_class);

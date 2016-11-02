@@ -97,6 +97,14 @@ namespace Seeker {
       mrb_gc_unregister(mrb, object);
     }
 
+    void Engine::Call(mrb_value object, string methodName, mrb_int argc, mrb_value* argv) {
+      mrb_funcall_argv(mrb, object, mrb_intern_cstr(mrb, methodName.c_str()), argc, argv);
+    }
+
+    void Engine::CallWithBlock(mrb_value object, string methodName, mrb_int argc, mrb_value* argv, mrb_value block) {
+      mrb_funcall_with_block(mrb, object, mrb_intern_cstr(mrb, methodName.c_str()), argc, argv, block);
+    }
+
     void Engine::DefineMethod(RClass* klass, string name, mrb_func_t func, mrb_aspec aspec) {
       mrb_define_method(mrb, klass, name.c_str(), func, aspec);
     }

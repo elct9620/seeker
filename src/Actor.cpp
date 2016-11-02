@@ -23,9 +23,9 @@ namespace Seeker {
       drawY = parent->Y();
     }
 
-    drawX += x;
-    drawY += y;
+    drawX += _x;
+    drawY += _y;
 
-    sprite->Draw(x, y);
+    sprite->Draw(drawX, drawY);
   }
 }

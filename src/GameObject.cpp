@@ -8,7 +8,7 @@ namespace Seeker {
 
   vector<GameObject*> children;
 
-  GameObject::GameObject() : x(0), y(0) {
+  GameObject::GameObject() : _x(0), _y(0), _z(0) {
   }
 
   GameObject::~GameObject() {
@@ -39,6 +39,8 @@ namespace Seeker {
 
     child->parent = this;
     children.push_back(child);
+
+    ReSortChildren();
   }
 
   void GameObject::RemoveChild(GameObject* child) {
@@ -51,21 +53,45 @@ namespace Seeker {
     children.erase(it);
   }
 
-  int GameObject::SetX(int _x) {
-    x = _x;
-    return x;
+  void GameObject::ReSortChildren() {
+    std::sort(children.begin(), children.end(), ZOrderCompare);
   }
 
-  int GameObject::SetY(int _y) {
-    y = _y;
-    return y;
+  int GameObject::SetX(int x) {
+    _x = x;
+    return _x;
+  }
+
+  int GameObject::SetY(int y) {
+    _y = y;
+    return _y;
+  }
+
+  int GameObject::SetZ(int z) {
+    _z = z;
+    if(parent) {
+      parent->ReSortChildren();
+    }
+    return _z;
   }
 
   int GameObject::X() {
-    return x;
+    return _x;
   }
 
   int GameObject::Y() {
-    return y;
+    return _y;
+  }
+
+  int GameObject::Z() {
+    return _z;
+  }
+
+  int GameObject::ZIndex() {
+    return Z();
+  }
+
+  int GameObject::ZIndex(int z) {
+    return SetZ(z);
   }
 }

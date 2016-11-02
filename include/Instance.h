@@ -36,7 +36,7 @@ namespace Seeker {
       void Update();
 
       long CurrentTime();
-      float getFPS() { return realFPS; }
+      float GetFPS() { return realFPS; }
 
       virtual void OnEvent(const EventType evnet);
 

@@ -12,6 +12,7 @@ namespace Seeker {
     class RubyObject {
       public:
         RubyObject(RObject* object) : _object(object) {};
+        mrb_value RubyInstance() { return mrb_obj_value(_object); };
 
         virtual ~RubyObject() {
           mrb_value object = mrb_obj_value(_object);
