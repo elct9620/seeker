@@ -1,4 +1,6 @@
 # Seeker
+[![Build Status](https://travis-ci.org/elct9620/seeker.svg?branch=develop)](https://travis-ci.org/elct9620/seeker)
+
 The 2D ADV Game Framework written in C++ and mruby.
 
 ## Requirements
