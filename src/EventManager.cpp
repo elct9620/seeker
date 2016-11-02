@@ -6,9 +6,9 @@
 
 namespace Seeker {
 
-  vector<ISubscriber*> Event::subscribers;
+  vector<ISubscriber*> EventManager::subscribers;
 
-  void Event::Refresh() {
+  void EventManager::Refresh() {
     SDL_Event ev;
     while(SDL_PollEvent(&ev)) {
       switch(ev.type) {
@@ -25,18 +25,18 @@ namespace Seeker {
     }
   }
 
-  void Event::On(ISubscriber* event) {
+  void EventManager::On(ISubscriber* event) {
     if(Exists(event)) return;
     subscribers.push_back(event);
   }
 
-  void Event::Off(ISubscriber* event) {
+  void EventManager::Off(ISubscriber* event) {
     if(Exists(event)) {
       subscribers.erase(std::remove(subscribers.begin(), subscribers.end(), event), subscribers.end());
     }
   }
 
-  bool Event::Exists(ISubscriber* event) {
+  bool EventManager::Exists(ISubscriber* event) {
     for(auto &current : subscribers) {
       if(current == event) {
         return true;
@@ -45,7 +45,7 @@ namespace Seeker {
     return false;
   }
 
-  void Event::Dispatch(const EventType type) {
+  void EventManager::Dispatch(const EventType type) {
     for(auto &current : subscribers) {
       current->OnEvent(type);
     }

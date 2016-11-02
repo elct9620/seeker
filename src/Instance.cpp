@@ -19,7 +19,7 @@ namespace Seeker {
     }
     renderer = window->Renderer();
 
-    Event::On(this);
+    EventManager::On(this);
 
     nextTime = CurrentTime();
   }
@@ -30,7 +30,7 @@ namespace Seeker {
 
   void Instance::Run() {
     while(!stop) {
-      Event::Refresh();
+      EventManager::Refresh();
       Update();
     }
   }

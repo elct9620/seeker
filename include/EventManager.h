@@ -2,8 +2,8 @@
 
 #pragma once
 
-#ifndef EVENT_H_
-#define EVENT_H_
+#ifndef _EVENT_MANAGER_H
+#define _EVENT_MANAGER_H
 
 #include <vector>
 
@@ -16,7 +16,7 @@ using std::vector;
 
 namespace Seeker {
 
-  class Event {
+  class EventManager {
     public:
       static void Refresh();
 
