@@ -18,7 +18,7 @@ namespace Seeker {
       public:
         static Event* Instance();
 
-        virtual void OnEvent(EventType type);
+        virtual void OnEvent(EventType type, Seeker::Event& event);
 
         virtual void OnKeyDown();
         virtual void OnMouseDown();

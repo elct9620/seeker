@@ -13,6 +13,7 @@
 #include "IScript.h"
 
 // Core
+#include "Event.h"
 #include "EventManager.h"
 #include "Errors.h"
 #include "Logger.h"

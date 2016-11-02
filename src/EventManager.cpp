@@ -10,16 +10,18 @@ namespace Seeker {
 
   void EventManager::Refresh() {
     SDL_Event ev;
+    Event emptyEv;
     while(SDL_PollEvent(&ev)) {
       switch(ev.type) {
         case SDL_KEYDOWN:
-          Dispatch(EventType::Key);
+          Dispatch(EventType::Key, emptyEv);
           break;
         case SDL_QUIT:
-          Dispatch(EventType::Quit);
+          Dispatch(EventType::Quit, emptyEv);
           break;
         case SDL_MOUSEBUTTONDOWN:
-          Dispatch(EventType::Mouse);
+          MouseEvent mouseEv = CreateMouseEvent(ev);
+          Dispatch(EventType::Mouse, mouseEv);
           break;
       }
     }
@@ -45,9 +47,28 @@ namespace Seeker {
     return false;
   }
 
-  void EventManager::Dispatch(const EventType type) {
+  void EventManager::Dispatch(const EventType type, Event& event) {
     for(auto &current : subscribers) {
-      current->OnEvent(type);
+      current->OnEvent(type, event);
     }
+  }
+
+  // Event Creator
+  const MouseEvent EventManager::CreateMouseEvent(SDL_Event ev) {
+    MouseEvent::Button btn;
+    switch(ev.button.button) {
+      case SDL_BUTTON_LEFT:
+        btn = MouseEvent::Button::Left;
+        break;
+      case SDL_BUTTON_MIDDLE:
+        btn = MouseEvent::Button::Middle;
+        break;
+      case SDL_BUTTON_RIGHT:
+        btn = MouseEvent::Button::Right;
+        break;
+    }
+    return MouseEvent{
+      ev.motion.x, ev.motion.y, btn
+    };
   }
 }

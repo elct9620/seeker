@@ -22,7 +22,7 @@ namespace Seeker {
     }
 
     // Subscriber
-    void Event::OnEvent(EventType type) {
+    void Event::OnEvent(EventType type, Seeker::Event& event) {
       switch(type) {
         case EventType::Mouse:
           // TODO: Implement mouse event with data

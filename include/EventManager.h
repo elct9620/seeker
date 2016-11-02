@@ -23,7 +23,9 @@ namespace Seeker {
       static void On(ISubscriber* event);
       static void Off(ISubscriber* event);
       static bool Exists(ISubscriber* event);
-      static void Dispatch(const EventType type);
+      static void Dispatch(const EventType type, Event& event);
+
+      static const MouseEvent CreateMouseEvent(SDL_Event event);
 
     private:
       static vector<ISubscriber*> subscribers;

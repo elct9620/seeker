@@ -66,12 +66,16 @@ namespace Seeker {
   }
 
   // ISubscriber implement
-  void Instance::OnEvent(const EventType type) {
+  void Instance::OnEvent(const EventType type, Event& event) {
     switch(type) {
-      case EventType::Key:
       case EventType::Quit:
-      case EventType::Mouse:
         stop = true;
+        break;
+      case EventType::Mouse:
+        if(static_cast<MouseEvent&>(event).button == MouseEvent::Button::Right) {
+          stop = true;
+        }
+      default:
         break;
     }
   }
