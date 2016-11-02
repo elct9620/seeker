@@ -4,6 +4,3 @@
 [submodule "lib/googletest"]
 	path = lib/googletest
 	url = https://github.com/google/googletest.git
-[submodule "assets/fonts/NotoSansCJK"]
-	path = assets/fonts/NotoSansCJK
-	url = https://github.com/googlei18n/noto-cjk.git
