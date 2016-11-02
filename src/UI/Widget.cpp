@@ -55,8 +55,23 @@ namespace Seeker {
       return SetZ(z);
     }
 
+    int Widget::EventWeight() {
+      int weight = 0;
+      if(parent) {
+        weight = parent->EventWeight();
+      }
+      weight += _z;
+      return weight;
+    }
+
     void Widget::ReSortChildren() {
       std::sort(_widgets.begin(), _widgets.end(), ZOrderCompare);
+    }
+
+    bool Widget::MouseInBound(int x, int y) {
+      bool verticalIn = (x > _x && x < (_x + _width));
+      bool horizontalIn = (y > _y && y < (_y + _height));
+      return verticalIn && horizontalIn;
     }
 
     void Widget::_Update() {

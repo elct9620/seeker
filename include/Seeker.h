@@ -24,6 +24,7 @@
 #include "Framework.h"
 
 // UI
+#include "UI/Event.h"
 #include "UI/Widget.h"
 #include "UI/TextWidget.h"
 
