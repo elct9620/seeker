@@ -34,6 +34,7 @@ namespace Seeker {
 
       void Run();
       void Update();
+      void Stop();
 
       long CurrentTime();
       float GetFPS() { return realFPS; }

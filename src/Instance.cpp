@@ -57,6 +57,10 @@ namespace Seeker {
     }
   }
 
+  void Instance::Stop() {
+    stop = true;
+  }
+
   long Instance::CurrentTime() {
     auto now = high_resolution_clock::now();
     auto nowInMillisecond = time_point_cast<milliseconds>(now);
