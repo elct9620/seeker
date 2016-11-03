@@ -9,6 +9,7 @@ namespace Seeker {
       Engine* engine = Engine::Instance();
 
       engine->DefineModuleMethod(klass, "config", &Game::mrb_config, MRB_ARGS_BLOCK());
+      engine->DefineModuleMethod(klass, "exit", &Game::mrb_exit, MRB_ARGS_NONE());
       engine->DefineModuleMethod(klass, "set_scene", &Game::mrb_set_scene, MRB_ARGS_REQ(1));
       engine->DefineModuleMethod(klass, "fps", &Game::mrb_fps, MRB_ARGS_NONE());
       engine->DefineModuleMethod(klass, "ui=", &Game::mrb_set_ui, MRB_ARGS_REQ(1));
@@ -25,6 +26,13 @@ namespace Seeker {
         mrb_value module = mrb_obj_value(klass);
         mrb_funcall_with_block(mrb, module, classEval, 0, NULL, proc);
       }
+
+      return self;
+    }
+
+    mrb_value Game::mrb_exit(mrb_state*, mrb_value self) {
+
+      Framework::Game()->Stop();
 
       return self;
     }

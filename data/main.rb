@@ -9,7 +9,7 @@ end
 
 btn = ButtonWidget.new "close", bg: "../data/close.png"
 btn.click do
-  puts "I am clicked"
+  Game.exit
 end
 
 Game.set_scene scene
