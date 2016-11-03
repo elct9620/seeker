@@ -28,6 +28,7 @@
 #include "UI/Event.h"
 #include "UI/Widget.h"
 #include "UI/TextWidget.h"
+#include "UI/ButtonWidget.h"
 
 // Game - Assets
 #include "Texture.h"
