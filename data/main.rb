@@ -7,7 +7,7 @@ ui.update do
   self.x = 620 - self.width
 end
 
-btn = ButtonWidget.new
+btn = ButtonWidget.new "close", bg: "../data/close.png"
 
 Game.set_scene scene
 Game.ui = btn

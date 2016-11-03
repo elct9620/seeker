@@ -16,22 +16,30 @@ namespace Seeker {
       _label = label;
       _x = x;
       _y = y;
+      _background = nullptr;
 
       if(!bgPath.empty()) {
         _background = Resource<Texture>::Load(bgPath);
+        _width = _background->Width;
+        _height = _background->Height;
       }
 
       Event::Instance()->Register(this);
     }
 
     ButtonWidget::~ButtonWidget() {
-      _background->Destroy();
+      if(_background) {
+        _background->Destroy();
+      }
     }
 
     void ButtonWidget::Update() {
     }
 
     void ButtonWidget::Draw() {
+      if(_background) {
+        _background->Draw(_x, _y);
+      }
     }
 
     void ButtonWidget::OnClick() {

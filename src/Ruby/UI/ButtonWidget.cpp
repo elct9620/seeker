@@ -47,14 +47,15 @@ namespace Seeker {
         mrb_value x, y;
         mrb_value bg = mrb_nil_value(); // TODO: Prevent assign an nil object
         if(givenOptions) {
-          x = mrb_hash_get(mrb, options, mrb_str_new_cstr(mrb, "x"));
-          y = mrb_hash_get(mrb, options, mrb_str_new_cstr(mrb, "y"));
-          bg = mrb_hash_get(mrb, options, mrb_str_new_cstr(mrb, "bg"));
+          x = mrb_hash_get(mrb, options, mrb_check_intern_cstr(mrb, "x"));
+          y = mrb_hash_get(mrb, options, mrb_check_intern_cstr(mrb, "y"));
+          bg = mrb_hash_get(mrb, options, mrb_check_intern_cstr(mrb, "bg"));
         }
 
         mrb_int _x = mrb_fixnum(x);
         mrb_int _y = mrb_fixnum(y);
         string _bg;
+
         if(!mrb_nil_p(bg)) {
           _bg = string(mrb_str_to_cstr(mrb, bg));
         }
