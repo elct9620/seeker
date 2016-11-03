@@ -56,7 +56,7 @@ namespace Seeker {
       mrb_get_args(mrb, "o", &widget);
 
       // TODO: Define shared UI class "Widget"
-      Seeker::UI::Widget* _widget = static_cast<Seeker::UI::Widget*>(mrb_get_datatype(mrb, widget, &UI::TextWidget::Type));
+      Seeker::UI::Widget* _widget = static_cast<Seeker::UI::Widget*>(DATA_PTR(widget));
       if(_widget) {
         Seeker::Framework::Game()->State()->SetUI(_widget);
         Engine::Instance()->FreezeObject(widget);

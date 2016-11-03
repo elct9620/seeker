@@ -51,4 +51,6 @@
 #include "Ruby/RubyObject.h"
 #include "Ruby/Scene.h"
 #include "Ruby/Actor.h"
+
 #include "Ruby/UI/TextWidget.h"
+#include "Ruby/UI/ButtonWidget.h"

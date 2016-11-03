@@ -7,6 +7,8 @@ ui.update do
   self.x = 620 - self.width
 end
 
+btn = ButtonWidget.new
+
 Game.set_scene scene
-Game.ui = ui
+Game.ui = btn
 
