@@ -25,6 +25,7 @@ namespace Seeker {
           static void init(RClass* klass);
           static void mrb_free_widget(mrb_state* mrb, void* ptr);
           static mrb_value mrb_initialize(mrb_state* mrb, mrb_value self);
+          static mrb_value mrb_click(mrb_state* mrb, mrb_value self);
 
         private:
           mrb_value _OnClickCB;

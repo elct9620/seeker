@@ -5,10 +5,6 @@
 namespace Seeker {
   namespace Ruby {
     namespace UI {
-      ButtonWidget::~ButtonWidget() {
-        Engine::Instance()->ReleaseObject(_OnClickCB);
-      }
-      // mrb methods
       mrb_data_type ButtonWidget::Type = {"ButtonWidget", &mrb_free_widget};
 
       void ButtonWidget::mrb_free_widget(mrb_state*, void* ptr) {
@@ -22,6 +18,7 @@ namespace Seeker {
         Engine* engine = Engine::Instance();
 
         engine->DefineMethod(klass, "initialize", &mrb_initialize, MRB_ARGS_OPT(2));
+        engine->DefineMethod(klass, "click", &mrb_click, MRB_ARGS_BLOCK());
       }
 
       mrb_value ButtonWidget::mrb_initialize(mrb_state* mrb, mrb_value self) {
@@ -69,7 +66,28 @@ namespace Seeker {
         return self;
       }
 
+      mrb_value ButtonWidget::mrb_click(mrb_state* mrb, mrb_value self) {
+        ButtonWidget* widget = static_cast<ButtonWidget*>(mrb_get_datatype(mrb, self, &Type));
+
+        mrb_value proc;
+        mrb_get_args(mrb, "&", &proc);
+
+        if(widget) {
+          if(!mrb_nil_p(widget->_OnClickCB)) {
+            Engine::Instance()->ReleaseObject(widget->_OnClickCB);
+          }
+          widget->_OnClickCB = proc;
+          Engine::Instance()->FreezeObject(widget->_OnClickCB);
+        }
+
+        return self;
+      }
+
       // Instance Method
+      ButtonWidget::~ButtonWidget() {
+        Engine::Instance()->ReleaseObject(_OnClickCB);
+      }
+
       void ButtonWidget::Update() {
       }
 

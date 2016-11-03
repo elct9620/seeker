@@ -8,6 +8,9 @@ ui.update do
 end
 
 btn = ButtonWidget.new "close", bg: "../data/close.png"
+btn.click do
+  puts "I am clicked"
+end
 
 Game.set_scene scene
 Game.ui = btn
