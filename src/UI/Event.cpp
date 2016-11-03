@@ -16,9 +16,11 @@ namespace Seeker {
     }
 
     Event::Event() {
+      EventManager::On(this);
     }
 
     Event::~Event() {
+      EventManager::Off(this);
     }
 
     // Subscriber
