@@ -3,9 +3,8 @@
 #include "Seeker.h"
 
 namespace Seeker {
-  Font::Font(string filename) : filename(filename) {
-    // TODO: Support provide dynamic font size
-    font = TTF_OpenFont(filename.c_str(), 16);
+  Font::Font(string filename, int size) : filename(filename), size(size) {
+    font = TTF_OpenFont(filename.c_str(), size);
 
     if(!font) {
       Logger::Error("Load font failed, %s", TTF_GetError());
@@ -27,6 +26,11 @@ namespace Seeker {
   }
 
   void Font::Destroy() {
-    Resource<Font>::Unload(filename);
+    Resource<Font>::Unload(ResourceKey());
+  }
+
+  string Font::ResourceKey() {
+    string sizeInString = std::to_string(size);
+    return string(filename + "@" + sizeInString);
   }
 }

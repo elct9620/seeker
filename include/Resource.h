@@ -18,7 +18,8 @@ namespace Seeker {
   template<class T>
   class Resource {
     public:
-      inline static T* Load(const string &filename) {
+      template<typename ...Args>
+      inline static T* Load(const string &filename, Args... args) {
         static_assert(std::is_base_of<IResource, T>::value, "Load resource should implement IResource interface.");
 
         if(filename.empty()) {
@@ -32,29 +33,35 @@ namespace Seeker {
           return (*it).second;
         }
 
-        T* resource = new T(filename);
+        T* resource = new T(filename, args...);
         resource->IncReference();
 
-        resources.insert(std::pair<string, T*>(filename, resource));
+        string key = resource->ResourceKey();
+        resources.insert(std::pair<string, T*>(key, resource));
 
-        Logger::Info("Resource %s is loaded.", filename.c_str());
+        Logger::Info("Resource %s is loaded.", key.c_str());
 
         return resource;
       }
 
-      inline static bool Unload(const string &filename) {
-        if(filename.empty()) {
-          Logger::Error("The resource name cannot be empty.");
+      inline static bool Unload(T* resource) {
+        static_assert(std::is_base_of<IResource, T>::value, "Unload resource by reference should implement IResource interface.");
+        Unload(resource->ResourceKey());
+      }
+
+      inline static bool Unload(const string &key) {
+        if(key.empty()) {
+          Logger::Error("The resource key cannot be empty.");
           return false;
         }
 
-        auto it = resources.find(filename);
+        auto it = resources.find(key);
         if(it != resources.end()) {
           (*it).second->DecReference();
           if( (*it).second->ReferenceCount() == 0) {
             delete (*it).second;
             resources.erase(it);
-            Logger::Debug("Resource %s is unloaded.", filename.c_str());
+            Logger::Debug("Resource %s is unloaded.", key.c_str());
           }
 
           return true;
