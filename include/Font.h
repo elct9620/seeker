@@ -10,14 +10,17 @@
 namespace Seeker {
   class Font : public IResource {
     public:
-      Font(string path);
+      Font(string path, int size = 16);
       ~Font();
 
       SDL_Surface* Draw(string text);
       void Destroy();
 
+      virtual string ResourceKey();
+
     private:
       string filename;
+      int size = 16;
       TTF_Font *font;
 
   };

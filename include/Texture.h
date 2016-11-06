@@ -24,6 +24,8 @@ namespace Seeker {
       void Draw(int x, int y, int w, int h);
       void Destroy();
 
+      virtual string ResourceKey();
+
     private:
       string filename;
       SDL_Texture* texture = nullptr;
