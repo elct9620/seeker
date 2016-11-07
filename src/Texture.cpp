@@ -4,8 +4,11 @@
 
 namespace Seeker {
   Texture::Texture(string path) : filename(path), texture(nullptr) {
-    Renderer* renderer = Framework::Renderer();
-    renderer->Prepare<Texture>(this);
+    Framework::Renderer()->Prepare<Texture>(this);
+  }
+
+  Texture::Texture(int width, int height) : Width(width), Height(height), texture(nullptr) {
+    Framework::Renderer()->Prepare<Texture>(this);
   }
 
   Texture::~Texture() {
@@ -14,6 +17,18 @@ namespace Seeker {
   }
 
   void Texture::Prepare(SDL_Renderer* renderer) {
+    if(filename.empty()) {
+      texture = CreateTexture(renderer);
+      return;
+    }
+    texture = CreateTextureFromSurface(renderer);
+  }
+
+  SDL_Texture* Texture::CreateTexture(SDL_Renderer* renderer) {
+    return SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, Width, Height);
+  }
+
+  SDL_Texture* Texture::CreateTextureFromSurface(SDL_Renderer* renderer) {
     SDL_Surface* surface = IMG_Load(filename.c_str());
 
     if(!surface) {
@@ -31,6 +46,7 @@ namespace Seeker {
     Height = surface->h;
 
     SDL_FreeSurface(surface);
+    return texture;
   }
 
   void Texture::Draw(int x, int y) {
@@ -47,5 +63,9 @@ namespace Seeker {
 
   string Texture::ResourceKey(string filename) {
     return filename;
+  }
+
+  void Texture::AsRenderTarget(SDL_Renderer* renderer) {
+    SDL_SetRenderTarget(renderer, texture);
   }
 }

@@ -14,6 +14,7 @@ namespace Seeker {
   class Texture : public IResource {
     public:
       Texture(string path);
+      Texture(int width, int height);
       ~Texture();
 
       int Width = 0;
@@ -24,7 +25,13 @@ namespace Seeker {
       void Draw(int x, int y, int w, int h);
       void Destroy();
 
+      void AsRenderTarget(SDL_Renderer* renderer);
+
       static string ResourceKey(string filename);
+
+    protected:
+      SDL_Texture* CreateTextureFromSurface(SDL_Renderer* renderer);
+      SDL_Texture* CreateTexture(SDL_Renderer* renderer);
 
     private:
       string filename;

@@ -31,4 +31,12 @@ namespace Seeker {
   void Renderer::Render() {
     SDL_RenderPresent(renderer);
   }
+
+  void Renderer::SetRenderTarget(Texture* texture) {
+    texture->AsRenderTarget(renderer);
+  }
+
+  void Renderer::ClearRenderTarget() {
+    SDL_SetRenderTarget(renderer, NULL);
+  }
 }
