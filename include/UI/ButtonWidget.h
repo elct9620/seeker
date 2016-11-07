@@ -22,6 +22,7 @@ namespace Seeker {
 
         virtual void Update();
         virtual void Draw();
+        virtual void RefreshTexture();
 
         virtual void OnClick();
 
@@ -29,6 +30,7 @@ namespace Seeker {
         string _label;
 
         Texture* _background = nullptr;
+        Texture* _renderTarget = nullptr;
         SDL_Texture* _fontTexture = nullptr;
         Font* _font;
 

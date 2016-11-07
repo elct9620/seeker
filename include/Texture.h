@@ -14,7 +14,7 @@ namespace Seeker {
   class Texture : public IResource {
     public:
       Texture(string path);
-      Texture(int width, int height);
+      Texture(int width, int height, bool alpha = false);
       ~Texture();
 
       int Width = 0;
@@ -35,6 +35,7 @@ namespace Seeker {
 
     private:
       string filename;
+      bool alpha = false;
       SDL_Texture* texture = nullptr;
   };
 }

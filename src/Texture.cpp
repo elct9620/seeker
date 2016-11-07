@@ -7,8 +7,11 @@ namespace Seeker {
     Framework::Renderer()->Prepare<Texture>(this);
   }
 
-  Texture::Texture(int width, int height) : Width(width), Height(height), texture(nullptr) {
+  Texture::Texture(int width, int height, bool alpha) : Width(width), Height(height), alpha(alpha), texture(nullptr) {
     Framework::Renderer()->Prepare<Texture>(this);
+    if(alpha) {
+      SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+    }
   }
 
   Texture::~Texture() {

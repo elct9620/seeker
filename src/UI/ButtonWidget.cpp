@@ -25,12 +25,16 @@ namespace Seeker {
         // TODO: Specify default width/height
         _width = _background->Width;
         _height = _background->Height;
+
+        _renderTarget = new Texture(_width, _height, true);
       }
 
       if(!label.empty()) {
         _font = Resource<Font>::Load("../assets/fonts/NotoSansCJK/NotoSansTC-Regular.otf", 12);
         Framework::Renderer()->Prepare<ButtonWidget>(this);
       }
+
+      RefreshTexture();
 
       Event::Instance()->Register(this);
     }
@@ -39,6 +43,13 @@ namespace Seeker {
       if(_background) {
         _background->Destroy();
       }
+      if(_font) {
+        _font->Destroy();
+      }
+      if(_fontTexture) {
+        SDL_DestroyTexture(_fontTexture);
+      }
+      delete _renderTarget;
     }
 
     void ButtonWidget::Prepare(SDL_Renderer* renderer) {
@@ -56,6 +67,11 @@ namespace Seeker {
       _fontWidth = surface->w;
       _fontHeight = surface->h;
 
+      if(!_background) {
+        _width = _fontWidth;
+        _height = _fontHeight;
+      }
+
       SDL_FreeSurface(surface);
     }
 
@@ -63,16 +79,25 @@ namespace Seeker {
     }
 
     void ButtonWidget::Draw() {
-      // TODO: Combine to one texture and render it
-      if(_background) {
-        _background->Draw(_x, _y);
+      _renderTarget->Draw(_x, _y);
+    }
+
+    void ButtonWidget::RefreshTexture() {
+      if(!_renderTarget && !_background) {
+        _renderTarget = new Texture(_width, _height, true);
       }
 
+      Framework::Renderer()->SetRenderTarget(_renderTarget);
+      Framework::Renderer()->Clear(true);
+      if(_background) {
+        _background->Draw(0, 0);
+      }
       if(_fontTexture) {
-        int fontX = (_width / 2) - (_fontWidth / 2) + _x;
-        int fontY = (_height / 2) - (_fontHeight / 2) + _y;
+        int fontX = (_width / 2) - (_fontWidth / 2);
+        int fontY = (_height / 2) - (_fontHeight / 2);
         Framework::Renderer()->Draw(_fontTexture, _fontWidth, _fontHeight, fontX, fontY);
       }
+      Framework::Renderer()->ClearRenderTarget();
     }
 
     void ButtonWidget::OnClick() {

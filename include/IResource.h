@@ -14,6 +14,7 @@ namespace Seeker {
     template<class T> friend class Resource;
 
     public:
+      virtual ~IResource() {};
       virtual void Destroy() = 0;
 
     private:

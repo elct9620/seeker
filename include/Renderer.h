@@ -23,7 +23,7 @@ namespace Seeker {
       };
       void Draw(SDL_Texture* texture, int width, int height, int x, int y);
       void Render();
-      void Clear();
+      void Clear(bool alpha = false);
 
       void SetRenderTarget(Texture* texture);
       void ClearRenderTarget();
