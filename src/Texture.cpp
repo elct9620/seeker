@@ -42,10 +42,10 @@ namespace Seeker {
   }
 
   void Texture::Destroy() {
-    Resource<Texture>::Unload(ResourceKey());
+    Resource<Texture>::Unload(ResourceKey(filename));
   }
 
-  string Texture::ResourceKey() {
+  string Texture::ResourceKey(string filename) {
     return filename;
   }
 }

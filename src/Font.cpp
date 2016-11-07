@@ -26,10 +26,10 @@ namespace Seeker {
   }
 
   void Font::Destroy() {
-    Resource<Font>::Unload(ResourceKey());
+    Resource<Font>::Unload(ResourceKey(filename, size));
   }
 
-  string Font::ResourceKey() {
+  string Font::ResourceKey(string filename, int size) {
     string sizeInString = std::to_string(size);
     return string(filename + "@" + sizeInString);
   }

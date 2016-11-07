@@ -18,6 +18,8 @@ namespace Seeker {
         ButtonWidget(string label, int x, int y, string backgroundPath);
         virtual ~ButtonWidget();
 
+        virtual void Prepare(SDL_Renderer* renderer);
+
         virtual void Update();
         virtual void Draw();
 
@@ -25,7 +27,13 @@ namespace Seeker {
 
       protected:
         string _label;
-        Texture* _background;
+
+        Texture* _background = nullptr;
+        SDL_Texture* _fontTexture = nullptr;
+        Font* _font;
+
+        int _fontWidth = 0;
+        int _fontHeight = 0;
     };
   }
 }

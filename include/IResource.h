@@ -15,7 +15,6 @@ namespace Seeker {
 
     public:
       virtual void Destroy() = 0;
-      virtual string ResourceKey() = 0;
 
     private:
 

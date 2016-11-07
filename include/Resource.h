@@ -27,7 +27,8 @@ namespace Seeker {
           return nullptr;
         }
 
-        auto it = resources.find(filename); // NOTE: Find why cannot use unordered_map<string, T*>::iterator
+        string key = T::ResourceKey(filename, args...);
+        auto it = resources.find(key); // NOTE: Find why cannot use unordered_map<string, T*>::iterator
         if(it != resources.end()) {
           (*it).second->IncReference();
           return (*it).second;
@@ -36,17 +37,11 @@ namespace Seeker {
         T* resource = new T(filename, args...);
         resource->IncReference();
 
-        string key = resource->ResourceKey();
         resources.insert(std::pair<string, T*>(key, resource));
 
         Logger::Info("Resource %s is loaded.", key.c_str());
 
         return resource;
-      }
-
-      inline static bool Unload(T* resource) {
-        static_assert(std::is_base_of<IResource, T>::value, "Unload resource by reference should implement IResource interface.");
-        Unload(resource->ResourceKey());
       }
 
       inline static bool Unload(const string &key) {

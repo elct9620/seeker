@@ -24,7 +24,7 @@ namespace Seeker {
       void Draw(int x, int y, int w, int h);
       void Destroy();
 
-      virtual string ResourceKey();
+      static string ResourceKey(string filename);
 
     private:
       string filename;

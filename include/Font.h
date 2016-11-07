@@ -16,7 +16,7 @@ namespace Seeker {
       SDL_Surface* Draw(string text);
       void Destroy();
 
-      virtual string ResourceKey();
+      static string ResourceKey(string filename, int size = 16);
 
     private:
       string filename;
