@@ -14,6 +14,7 @@
 
 // Core
 #include "Event.h"
+#include "EventManager.h"
 #include "Errors.h"
 #include "Logger.h"
 #include "Resource.h"
@@ -24,8 +25,10 @@
 #include "Framework.h"
 
 // UI
+#include "UI/Event.h"
 #include "UI/Widget.h"
 #include "UI/TextWidget.h"
+#include "UI/ButtonWidget.h"
 
 // Game - Assets
 #include "Texture.h"
@@ -48,4 +51,6 @@
 #include "Ruby/RubyObject.h"
 #include "Ruby/Scene.h"
 #include "Ruby/Actor.h"
+
 #include "Ruby/UI/TextWidget.h"
+#include "Ruby/UI/ButtonWidget.h"

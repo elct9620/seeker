@@ -7,6 +7,11 @@ ui.update do
   self.x = 620 - self.width
 end
 
+btn = ButtonWidget.new "關閉", bg: "../data/close.png", x: 10, y: 10
+btn.click do
+  Game.exit
+end
+
 Game.set_scene scene
-Game.ui = ui
+Game.ui = btn
 

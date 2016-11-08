@@ -19,7 +19,7 @@ namespace Seeker {
     }
     renderer = window->Renderer();
 
-    Event::On(this);
+    EventManager::On(this);
 
     nextTime = CurrentTime();
   }
@@ -30,7 +30,7 @@ namespace Seeker {
 
   void Instance::Run() {
     while(!stop) {
-      Event::Refresh();
+      EventManager::Refresh();
       Update();
     }
   }
@@ -57,6 +57,10 @@ namespace Seeker {
     }
   }
 
+  void Instance::Stop() {
+    stop = true;
+  }
+
   long Instance::CurrentTime() {
     auto now = high_resolution_clock::now();
     auto nowInMillisecond = time_point_cast<milliseconds>(now);
@@ -66,12 +70,16 @@ namespace Seeker {
   }
 
   // ISubscriber implement
-  void Instance::OnEvent(const EventType type) {
+  void Instance::OnEvent(const EventType type, Event& event) {
     switch(type) {
-      case EventType::Key:
       case EventType::Quit:
-      case EventType::Mouse:
         stop = true;
+        break;
+      case EventType::Mouse:
+        if(static_cast<MouseEvent&>(event).button == MouseEvent::Button::Right) {
+          stop = true;
+        }
+      default:
         break;
     }
   }

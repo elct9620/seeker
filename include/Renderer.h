@@ -9,6 +9,8 @@
 
 namespace Seeker {
   class Sprite;
+  class Texture;
+
   class Renderer {
     public:
       Renderer(SDL_Window* window);
@@ -21,7 +23,10 @@ namespace Seeker {
       };
       void Draw(SDL_Texture* texture, int width, int height, int x, int y);
       void Render();
-      void Clear();
+      void Clear(bool alpha = false);
+
+      void SetRenderTarget(Texture* texture);
+      void ClearRenderTarget();
 
     private:
       SDL_Renderer* renderer = nullptr;

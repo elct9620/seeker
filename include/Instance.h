@@ -34,11 +34,12 @@ namespace Seeker {
 
       void Run();
       void Update();
+      void Stop();
 
       long CurrentTime();
       float GetFPS() { return realFPS; }
 
-      virtual void OnEvent(const EventType evnet);
+      virtual void OnEvent(const EventType type, Event& event);
 
       GameState* State();
       GameState* SetState(GameState* _state);

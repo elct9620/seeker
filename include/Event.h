@@ -2,31 +2,31 @@
 
 #pragma once
 
-#ifndef EVENT_H_
-#define EVENT_H_
-
-#include <vector>
-
 #include "Seeker.h"
 
-#include "EventType.h"
-#include "ISubscriber.h"
-
-using std::vector;
+#ifndef _EVENT_H
+#define _EVENT_H
 
 namespace Seeker {
-
   class Event {
+  };
+
+  // Mouse Event
+  class MouseEvent : public Event {
     public:
-      static void Refresh();
+      enum Button {
+        Left,
+        Middle,
+        Right
+      };
 
-      static void On(ISubscriber* event);
-      static void Off(ISubscriber* event);
-      static bool Exists(ISubscriber* event);
-      static void Dispatch(const EventType type);
+      MouseEvent(int x, int y, Button which)
+        : x(x), y(y), button(which) {};
 
-    private:
-      static vector<ISubscriber*> subscribers;
+      int x = 0;
+      int y = 0;
+      int wheel = 0;
+      Button button;
   };
 }
 

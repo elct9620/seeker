@@ -34,12 +34,22 @@ namespace Seeker {
         int ZIndex() { return Z(); }
         int ZIndex(int z);
 
+        int EventWeight();
+
         int Width() { return _width; }
         int Height() { return _height; }
 
         virtual void Update() = 0;
         virtual void Draw() = 0;
         virtual void Destroy() {};
+
+        // Events
+        virtual void OnHover() {};
+        virtual void OnClick() {};
+        virtual void OnKeyDown() {};
+
+        virtual bool MouseInBound(int x, int y);
+        virtual bool BlockEvent() { return _blockEvent; }
 
         static bool ZOrderCompare(Widget* a, Widget* b) {
           return a->ZIndex() > b->ZIndex();
@@ -51,6 +61,7 @@ namespace Seeker {
         int _z = 0;
         int _width = 0;
         int _height = 0;
+        bool _blockEvent = false;
         bool visible = true;
 
         Widget* parent = nullptr;
